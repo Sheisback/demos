@@ -1,3 +1,5 @@
+twitter: @_akayn
+
 # Windows Kernel Exploitation.
 Static & dynamic analysis, exploits & vuln reasearch. <br>
 Mitigations bypass's <br>
