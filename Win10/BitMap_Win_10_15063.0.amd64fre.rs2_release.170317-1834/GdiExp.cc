@@ -29,6 +29,7 @@
 	 GetBitmapBits
 	 ArbitraryRead.
 	
+	ref: https://www.coresecurity.com/system/files/publications/2016/10/Abusing-GDI-Reloaded-ekoparty-2016_0.pdf
 	
 	we need to leak lpszMenuName using HMValidateHandle, that is allocated on the same pool region
 	as the bitmap object, in order to later use in an arbitrary overwrite bug.
