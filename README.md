@@ -23,6 +23,7 @@ kd & dev:<br>
 * kernelLeaks: <html><a href="https://github.com/akayn/demos/blob/master/Primitives/HMValidateBitmap.cc">leak bitmap bAddr with HMValidateHandle</a></html><br>
 
 Mitigations Bypass:<br>
+<html><a href="https://github.com/akayn/demos/tree/master/Win10">Click Here!</a></html><br>
 * [RS3-Compatible] ROP Based SMEP Bypass including Gadgets & full debugging info: <html><a href="https://github.com/akayn/demos/blob/master/Win10/SmepByPassWin10x64build.16281Rs3/SmepBypassX64Win10RS3.c">SmepBypassX64Win10RS3.c</a></html><br>
 * [<= RS2-Compatible] BitMap Arbitrary OverWrite: <html><a href="https://github.com/akayn/demos/blob/master/Win10/BitMap_Win_10_15063.0.amd64fre.rs2_release.170317-1834/GdiExp.cc">GdiExp.cc</a></html><br>
 * [!] NOTE: the above is not stable & will work 1/10 in the good case...
