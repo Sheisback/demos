@@ -2,7 +2,7 @@
 /*
 	GdiExp.cc
 	
-	this module make's use of the gdi objects SetBitmapBits & GetBitmapBits in order
+	this module make's use of the gdi objects & the function: SetBitmapBits & GetBitmapBits in order
 	to overwrite the current process token (security descriptor) with the System's
 	Token. this compromises the system becouse then the thread can do as he wants on the target machine.
 	
