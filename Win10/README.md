@@ -1,11 +1,12 @@
 # Currently i offer two SMEP bypass's
 # The First is based on a ROP Chain & can be exploited with ease by a StackOverFlow bug. (RS3 Compatible)
 <html><a href="https://github.com/akayn/demos/blob/master/Win10/SmepByPassWin10x64build.16281Rs3/SmepBypassX64Win10RS3.c">SMEP ByPass</a></html>.<br>
+
+
 # Second is an Arbitrary OverWrite Primitive using gdi Objects (<=RS2 Compatible)
 <html><a href="https://github.com/akayn/demos/blob/master/Win10/BitMap_Win_10_15063.0.amd64fre.rs2_release.170317-1834/GdiExp.cc">gdiexp</a></html>.<br>
 
-# SMEP PoC & Summery:
-# Proof Of Concept:
+
 		
 # SMEP bypass on Win10x64 RS3 16281
 ![](poc/QuickPoc.gif)
