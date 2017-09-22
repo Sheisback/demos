@@ -5,7 +5,9 @@ twitter: @_akayn
 Static & dynamic analysis, exploits & vuln reasearch. <br>
 Mitigations bypass's <br>
 
-# Contents:
+# Contents
+
+# Introduction:
 HEVD-Vanilla-Bug-Class's:<br>
 Exploits & Vuln Note's in order to reproduce & reuse.<br>
 * <html><a href="https://github.com/akayn/demos/tree/master/HEVD-Vanilla-Bug-Class's">HEVD-Vanilla-Bug-Class's</a></html><br>
@@ -29,9 +31,14 @@ Mitigations Bypass:<br>
 * [!] NOTE: the above is not stable & will work 1/3 in the good case...
 	i will fix in the future.
 
+# Case Studies
 Re & exploits:<br>
 * Study Case's:<br>
-	[+] TODO<br>...<br>
+	RCE:<br>
+	[+] <html><a href="https://github.com/akayn/demos/tree/master/TestCases/MS17-010">MS17-010</a></html><br>
+	[^] Under Construction<br>
+	Other Bug Classes:<br>
+	...<br>
 	...<br><br>
 
 # External Resources:
