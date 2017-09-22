@@ -38,6 +38,7 @@ Re & exploits:<br>
 	[+] <html><a href="https://github.com/akayn/demos/tree/master/TestCases/MS17-010">MS17-010</a></html><br>
 	[^] Under Construction<br>
 	Other Bug Classes:<br>
+	TODO<br>
 	...<br>
 	...<br><br>
 
