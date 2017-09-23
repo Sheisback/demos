@@ -29,7 +29,11 @@ so the main idea in rop is to make the execution flow throw a kernel executable 
 # enough talk lets debug!!!
 assuming that you have set up the environment as stated above, and you have a working machine, then open an administrator command, and type as follow:
 ![](/Tutorials/SMEPDEBUG/load.PNG)
-next up (assuming that you have a debugger connected) run the sample exe that i have provided, you should get a break point and this output should go on the debugger:
+b4 running anything hit break on the debugger (open debug window and click break), next open view -> registers.
+scoll all the way down and the resault should be:
+![](/Tutorials/SMEPDEBUG/break1.PNG)
+![](/Tutorials/SMEPDEBUG/break2.PNG)
+next up type g and hit enter the machine should be running as normal, run the sample exe that i have provided, you should get a break point and this output should go on the debugger:
 
 
 
