@@ -1,4 +1,4 @@
-# Return Oriented Programming Tutorial
+# Return Oriented Programming Tutorial 
 Hi in this tutorial we will go throw a very basic way of creating a ROP (Return Oriented Programming) Chain in order to bypass SMEP and get kernel mode execution on latest windows installation despite microsoft mitigation's.
 # Setup:
 This tutorial is meant to be an active tutorial meaning that its best you will download the binary provided for the tutorial and experiment on your own with the main idea's presented.<br>
