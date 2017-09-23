@@ -30,6 +30,9 @@ Mitigations Bypass:<br>
 * [<= RS2-Compatible] BitMap Arbitrary OverWrite: <html><a href="https://github.com/akayn/demos/blob/master/Win10/BitMap_Win_10_15063.0.amd64fre.rs2_release.170317-1834/GdiExp.cc">GdiExp.cc</a></html><br>
 * [!] NOTE: the above is not stable & will work 1/3 in the good case...
 	i will fix in the future.
+	
+# tutorial:
+* Rop tutorial: <html><a href="https://github.com/akayn/demos/tree/master/Tutorials">Click Here!</a></html><br>
 
 # Case Studies
 Re & exploits:<br>
