@@ -4,7 +4,7 @@ Hi in this tutorial we will go throw a very basic way of creating a ROP (Return 
 This tutorial is meant to be an active tutorial meaning that its best you will download the binary provided for the tutorial and experiment on your own with the main idea's presented.<br>
 So this is what you will need in order to run the full tutorial by your own:<br>
 HEVD: <html><a href="https://github.com/hacksysteam/HackSysExtremeVulnerableDriver/releases">download from here<a></html>.<br>
-Windows 10 RS3 (link will be added soon).<br>
+Windows 10 RS3 <html><a href="http://bit.ly/2y16Ezu">Here</a></html>.<br>
 WinDbg & Symbols: * <html><a href="https://developer.microsoft.com/en-us/windows/hardware/windows-driver-kit">kd</a></html>.<br>
 * <html><a href="https://developer.microsoft.com/en-us/windows/hardware/download-symbols">Symbols</a></html>.<br>
 Hyper-V: * <html><a href="https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v">How To unable hyper-v</a></html>.<br>
