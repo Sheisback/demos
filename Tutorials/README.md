@@ -102,7 +102,7 @@ ok, but how can we jump to that address? open up the registers again and copy th
 kd> u nt!IofCallDriver+0x59<br>
 as follows: place it in rip (in view registers..)<br>
 ![](/Tutorials/SMEPDEBUG/brr.PNG)
-now hit g again. back in box you should have a command running as local system.<br>
+<br>now hit g again. back in box you should have a command running as local system.<br>
 ![](/Tutorials/SMEPDEBUG/Capture9.PNG)
 So this is the end of the tutorial, i hope it will be usefull, now you know a bit more about ROP, and got some basic tools to build your own rop chain. my example code can be found here: <html><a href="https://github.com/akayn/demos/blob/master/Win10/SmepByPassWin10x64build.16281Rs3/SmepBypassX64Win10RS3.c">C0de</a></html>.<br>
 and i challenge you to fix the return address programmatically!<br>
