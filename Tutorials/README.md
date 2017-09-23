@@ -9,7 +9,7 @@ WinDbg & Symbols: * <html><a href="https://developer.microsoft.com/en-us/windows
 * <html><a href="https://developer.microsoft.com/en-us/windows/hardware/download-symbols">Symbols</a></html>.<br>
 Hyper-V: * <html><a href="https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v">How To unable hyper-v</a></html>.<br>
 Setup File sharing beetwin the machine and the host:* <html><a href="https://technet.microsoft.com/en-us/library/ee256061(v=ws.10).aspx">Setup File Sharing.</a></html>.<br> 
-My Debug Binary: * <html><a href="https://github.com/akayn/demos/blob/master/Tutorials/SMEPDEBUG/RopDebug.exe?raw=true">download link.</a></html>.<br> 
+My Debug Binary: * <html><a href="https://github.com/akayn/demos/blob/master/Tutorials/SMEPDEBUG/ROPDEBUG.exe?raw=true">download link.</a></html>.<br> 
 # Introduction:
 Return Oriented Programming (in the computer security context) is a technique used to bypass certain defence mechanisms, like DEP (Data execution Prevention) & SMEP. if you would like to read more about smep you can check out the link at the main README.md file of this project. the main charicteristic of this method is that instead of running pure shell code directlly from a user supplied buffer we instead use small snipets of code called gadgets.<br>
 say for example i want to place 0x1FA5 in rsp, useally i will simply write in my shellcode:<br>
@@ -75,6 +75,38 @@ you may ask yourself, why is cr4 register changed and how is it that we do not g
 	Chain.KiEnableXSave = Ntos + 0x434a33;
 
 ```
+meaning that we have sent the vuln driver a stack overflow buffer, but instead of supplying our shell code we have given the driver the buffer above that is first composed of:<br>
+Pop Rcx  <-- kernel mode address<br> 
+Retn<br>
+0x506f8<br>
+Mov Cr4, Rcx<br>
+Retn<br>
+(ShellCodeAddress)<br>
+So basically we have "jump" to our shellcode from other kernel mode address's so we did not got the bsod, simply cuz we have given the kernel a kernl-mode address so we passed the check, next up we flipped the bit on the cr4 register value to trick the system that smep is not supported on the firmware.<br>
+we can see that by running kv command.
+![](/Tutorials/SMEPDEBUG/Capture2.PNG)
+you can see the kernel mode address on the stack call and can see the execution flow, as well as the nop's we have placed in our buffer.
+hit g again and you should see the below outcome:<br>
+![](/Tutorials/SMEPDEBUG/br.PNG)
+as you can see we have hit access violation, this is becouse in this demo i did not fix the return address pointer, so we can do this together, hit r on the debugger:<br>
+![](/Tutorials/SMEPDEBUG/br2.PNG)
+<br>as you can see the stack is a mess & the registers as well, the return address try's to read a pointer from rax, that is pointing to zero address, so we got access violation.<br>
+so like we had to "jump" to our shell code to avoid SMEP, we need to jump back to a reasonable state, but how can we know what is a good address to jump back to? when we looked at the stack b4 we could see the execution flow,<br>
+So 0x00007fffb29013aa the lowest address called the ioctl then we got to our shellcode from the overflow (the nop's), a good thing to do would be to make a return to one of our original call's on the stack to resume execution.
+if we take a look at 0x00007fffb29013aa we can see its marked as UREV user executable,
+![](/Tutorials/SMEPDEBUG/br3.PNG)
+so if we will jump to that address we will be in the same situation as b4 (bsod) so we need to find another place on the stack to jump to. lets see about nt!IofCallDriver+0x59 that is on the stack as well, we can even see what code is contained at this location running the below command:
+![](/Tutorials/SMEPDEBUG/brb.PNG)
+So we can see that this function simply returns back to the caller and is also KREV kernel exec. so it will be a good choise. while i was finding gadgets i was doing exactly the same, looking for KREV address that contain good code for me like mov cr4, rcx. with the 'u' command on the kd. <br>
+ok, but how can we jump to that address? open up the registers again and copy the first instruction address in the output of<br>
+kd> u nt!IofCallDriver+0x59<br>
+as follows: place it in rip (in view registers..)<br>
+![](/Tutorials/SMEPDEBUG/brr.PNG)
+now hit g again. back in box you should have a command running as local system.<br>
+![](/Tutorials/SMEPDEBUG/Capture9.PNG)
+So this is the end of the tutorial, i hope it will be usefull, now you know a bit more about ROP, and got some basic tools to build your own rop chain. my example code can be found here: <html>
+
+
 
 
 
