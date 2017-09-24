@@ -1,0 +1,1873 @@
+
+Microsoft (R) Windows Debugger Version 10.0.15063.0 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Waiting for pipe \\.\pipe\dbg
+Waiting to reconnect...
+Connected to Windows 7 7601 x86 compatible target at (Sun Sep 24 12:33:53.548 2017 (UTC - 7:00)), ptr64 FALSE
+Kernel Debugger connection established.
+Symbol search path is: srv*
+Executable search path is: 
+Windows 7 Kernel Version 7601 MP (1 procs) Free x86 compatible
+Built by: 7601.23677.x86fre.win7sp1_ldr.170209-0600
+Machine Name:
+Kernel base = 0x82619000 PsLoadedModuleList = 0x82765e30
+System Uptime: not available
+Break instruction exception - code 80000003 (first chance)
+*******************************************************************************
+*                                                                             *
+*   You are seeing this message because you pressed either                    *
+*       CTRL+C (if you run console kernel debugger) or,                       *
+*       CTRL+BREAK (if you run GUI kernel debugger),                          *
+*   on your debugger machine's keyboard.                                      *
+*                                                                             *
+*                   THIS IS NOT A BUG OR A SYSTEM CRASH                       *
+*                                                                             *
+* If you did not intend to break into the debugger, press the "g" key, then   *
+* press the "Enter" key now.  This message might immediately reappear.  If it *
+* does, press "g" and "Enter" again.                                          *
+*                                                                             *
+*******************************************************************************
+nt!RtlpBreakWithStatusInstruction:
+826949d8 cc              int     3
+kd> bp srv!SrvOs2FeaToNt+0x53
+kd> u srv!SrvOs2FeaToNt+0x53
+srv!SrvOs2FeaToNt+0x53:
+8fe22140 0fb74606        movzx   eax,word ptr [esi+6]
+8fe22144 8d441803        lea     eax,[eax+ebx+3]
+8fe22148 83e0fc          and     eax,0FFFFFFFCh
+8fe2214b 83c418          add     esp,18h
+8fe2214e 8bc8            mov     ecx,eax
+8fe22150 2bce            sub     ecx,esi
+8fe22152 5f              pop     edi
+8fe22153 890e            mov     dword ptr [esi],ecx
+kd> g
+Break instruction exception - code 80000003 (first chance)
+*******************************************************************************
+*                                                                             *
+*   You are seeing this message because you pressed either                    *
+*       CTRL+C (if you run console kernel debugger) or,                       *
+*       CTRL+BREAK (if you run GUI kernel debugger),                          *
+*   on your debugger machine's keyboard.                                      *
+*                                                                             *
+*                   THIS IS NOT A BUG OR A SYSTEM CRASH                       *
+*                                                                             *
+* If you did not intend to break into the debugger, press the "g" key, then   *
+* press the "Enter" key now.  This message might immediately reappear.  If it *
+* does, press "g" and "Enter" again.                                          *
+*                                                                             *
+*******************************************************************************
+nt!RtlpBreakWithStatusInstruction:
+826949d8 cc              int     3
+kd> uf srv!SrvOs2FeaToNt+0x53
+srv!SrvOs2FeaToNt:
+8fe220ed 8bff            mov     edi,edi
+8fe220ef 55              push    ebp
+8fe220f0 8bec            mov     ebp,esp
+8fe220f2 53              push    ebx
+8fe220f3 56              push    esi
+8fe220f4 8b7508          mov     esi,dword ptr [ebp+8]
+8fe220f7 57              push    edi
+8fe220f8 8b7d0c          mov     edi,dword ptr [ebp+0Ch]
+8fe220fb 8a07            mov     al,byte ptr [edi]
+8fe220fd 884604          mov     byte ptr [esi+4],al
+8fe22100 8a4701          mov     al,byte ptr [edi+1]
+8fe22103 884605          mov     byte ptr [esi+5],al
+8fe22106 668b4702        mov     ax,word ptr [edi+2]
+8fe2210a 66894606        mov     word ptr [esi+6],ax
+8fe2210e 0fb64701        movzx   eax,byte ptr [edi+1]
+8fe22112 50              push    eax
+8fe22113 8d4704          lea     eax,[edi+4]
+8fe22116 50              push    eax
+8fe22117 8d5e08          lea     ebx,[esi+8]
+8fe2211a 53              push    ebx
+8fe2211b ff15e410e18f    call    dword ptr [srv!_imp__memmove (8fe110e4)]
+8fe22121 0fb64605        movzx   eax,byte ptr [esi+5]
+8fe22125 03d8            add     ebx,eax
+8fe22127 c60300          mov     byte ptr [ebx],0
+8fe2212a 0fb74606        movzx   eax,word ptr [esi+6]
+8fe2212e 50              push    eax
+8fe2212f 0fb64605        movzx   eax,byte ptr [esi+5]
+8fe22133 8d443805        lea     eax,[eax+edi+5]
+8fe22137 50              push    eax
+8fe22138 43              inc     ebx
+8fe22139 53              push    ebx
+8fe2213a ff15e410e18f    call    dword ptr [srv!_imp__memmove (8fe110e4)]
+8fe22140 0fb74606        movzx   eax,word ptr [esi+6]
+8fe22144 8d441803        lea     eax,[eax+ebx+3]
+8fe22148 83e0fc          and     eax,0FFFFFFFCh
+8fe2214b 83c418          add     esp,18h
+8fe2214e 8bc8            mov     ecx,eax
+8fe22150 2bce            sub     ecx,esi
+8fe22152 5f              pop     edi
+8fe22153 890e            mov     dword ptr [esi],ecx
+8fe22155 5e              pop     esi
+8fe22156 5b              pop     ebx
+8fe22157 5d              pop     ebp
+8fe22158 c20800          ret     8
+kd> uf srv!SrvOs2FeaListToNt+0x9e
+srv!SrvOs2FeaListToNt:
+8fe22425 8bff            mov     edi,edi
+8fe22427 55              push    ebp
+8fe22428 8bec            mov     ebp,esp
+8fe2242a 51              push    ecx
+8fe2242b 8365fc00        and     dword ptr [ebp-4],0
+8fe2242f 56              push    esi
+8fe22430 57              push    edi
+8fe22431 8b7d08          mov     edi,dword ptr [ebp+8]
+8fe22434 57              push    edi
+8fe22435 e830ffffff      call    srv!SrvOs2FeaListSizeToNt (8fe2236a)
+8fe2243a 8b7510          mov     esi,dword ptr [ebp+10h]
+8fe2243d 8906            mov     dword ptr [esi],eax
+8fe2243f 85c0            test    eax,eax
+8fe22441 7510            jne     srv!SrvOs2FeaListToNt+0x2e (8fe22453)  Branch
+
+srv!SrvOs2FeaListToNt+0x1e:
+8fe22443 8b4d14          mov     ecx,dword ptr [ebp+14h]
+8fe22446 668901          mov     word ptr [ecx],ax
+8fe22449 b8fff098c0      mov     eax,0C098F0FFh
+8fe2244e e9c0000000      jmp     srv!SrvOs2FeaListToNt+0xee (8fe22513)  Branch
+
+srv!SrvOs2FeaListToNt+0x2e:
+8fe22453 6a15            push    15h
+8fe22455 5a              pop     edx
+8fe22456 8bc8            mov     ecx,eax
+8fe22458 e88126feff      call    srv!SrvAllocateNonPagedPool (8fe04ade)
+8fe2245d 8b4d0c          mov     ecx,dword ptr [ebp+0Ch]
+8fe22460 8901            mov     dword ptr [ecx],eax
+8fe22462 85c0            test    eax,eax
+8fe22464 753d            jne     srv!SrvOs2FeaListToNt+0x7e (8fe224a3)  Branch
+
+srv!SrvOs2FeaListToNt+0x41:
+8fe22466 a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe2246b 80781d02        cmp     byte ptr [eax+1Dh],2
+8fe2246f 722b            jb      srv!SrvOs2FeaListToNt+0x77 (8fe2249c)  Branch
+
+srv!SrvOs2FeaListToNt+0x4c:
+8fe22471 f6402001        test    byte ptr [eax+20h],1
+8fe22475 7425            je      srv!SrvOs2FeaListToNt+0x77 (8fe2249c)  Branch
+
+srv!SrvOs2FeaListToNt+0x52:
+8fe22477 ff157013e18f    call    dword ptr [srv!_imp__KeGetCurrentIrql (8fe11370)]
+8fe2247d 3c02            cmp     al,2
+8fe2247f 731b            jae     srv!SrvOs2FeaListToNt+0x77 (8fe2249c)  Branch
+
+srv!SrvOs2FeaListToNt+0x5c:
+8fe22481 6a00            push    0
+8fe22483 ff36            push    dword ptr [esi]
+8fe22485 68fc60e18f      push    offset srv! ?? ::NNGAKEGL::`string' (8fe160fc)
+8fe2248a e8b9d9feff      call    srv!DbgPrint (8fe0fe48)
+8fe2248f 68b258e18f      push    offset srv! ?? ::NNGAKEGL::`string' (8fe158b2)
+8fe22494 e8afd9feff      call    srv!DbgPrint (8fe0fe48)
+8fe22499 83c410          add     esp,10h
+
+srv!SrvOs2FeaListToNt+0x77:
+8fe2249c b8050200c0      mov     eax,0C0000205h
+8fe224a1 eb70            jmp     srv!SrvOs2FeaListToNt+0xee (8fe22513)  Branch
+
+srv!SrvOs2FeaListToNt+0x7e:
+8fe224a3 8b0f            mov     ecx,dword ptr [edi]
+8fe224a5 53              push    ebx
+8fe224a6 8d5c39fb        lea     ebx,[ecx+edi-5]
+8fe224aa 8d7704          lea     esi,[edi+4]
+8fe224ad 3bf3            cmp     esi,ebx
+8fe224af 7727            ja      srv!SrvOs2FeaListToNt+0xb3 (8fe224d8)  Branch
+
+srv!SrvOs2FeaListToNt+0x8c:
+8fe224b1 f6067f          test    byte ptr [esi],7Fh
+8fe224b4 753c            jne     srv!SrvOs2FeaListToNt+0xcd (8fe224f2)  Branch
+
+srv!SrvOs2FeaListToNt+0x91:
+8fe224b6 56              push    esi
+8fe224b7 50              push    eax
+8fe224b8 894508          mov     dword ptr [ebp+8],eax
+8fe224bb 8975fc          mov     dword ptr [ebp-4],esi
+8fe224be e82afcffff      call    srv!SrvOs2FeaToNt (8fe220ed)
+8fe224c3 0fb65601        movzx   edx,byte ptr [esi+1]
+8fe224c7 0fb74e02        movzx   ecx,word ptr [esi+2]
+8fe224cb 03d6            add     edx,esi
+8fe224cd 8d740a05        lea     esi,[edx+ecx+5]
+8fe224d1 3bf3            cmp     esi,ebx
+8fe224d3 76dc            jbe     srv!SrvOs2FeaListToNt+0x8c (8fe224b1)  Branch
+
+srv!SrvOs2FeaListToNt+0xb0:
+8fe224d5 8b4508          mov     eax,dword ptr [ebp+8]
+
+srv!SrvOs2FeaListToNt+0xb3:
+8fe224d8 8b0f            mov     ecx,dword ptr [edi]
+8fe224da 03cf            add     ecx,edi
+8fe224dc 3bf1            cmp     esi,ecx
+8fe224de 742d            je      srv!SrvOs2FeaListToNt+0xe8 (8fe2250d)  Branch
+
+srv!SrvOs2FeaListToNt+0xbb:
+8fe224e0 8b45fc          mov     eax,dword ptr [ebp-4]
+8fe224e3 8b4d14          mov     ecx,dword ptr [ebp+14h]
+8fe224e6 2bc7            sub     eax,edi
+8fe224e8 668901          mov     word ptr [ecx],ax
+8fe224eb be010000c0      mov     esi,0C0000001h
+8fe224f0 eb0d            jmp     srv!SrvOs2FeaListToNt+0xda (8fe224ff)  Branch
+
+srv!SrvOs2FeaListToNt+0xcd:
+8fe224f2 8b4514          mov     eax,dword ptr [ebp+14h]
+8fe224f5 2bf7            sub     esi,edi
+8fe224f7 668930          mov     word ptr [eax],si
+8fe224fa be0d0000c0      mov     esi,0C000000Dh
+
+srv!SrvOs2FeaListToNt+0xda:
+8fe224ff 8b450c          mov     eax,dword ptr [ebp+0Ch]
+8fe22502 8b08            mov     ecx,dword ptr [eax]
+8fe22504 e87f25feff      call    srv!SrvFreeNonPagedPool (8fe04a88)
+8fe22509 8bc6            mov     eax,esi
+8fe2250b eb05            jmp     srv!SrvOs2FeaListToNt+0xed (8fe22512)  Branch
+
+srv!SrvOs2FeaListToNt+0xe8:
+8fe2250d 832000          and     dword ptr [eax],0
+8fe22510 33c0            xor     eax,eax
+
+srv!SrvOs2FeaListToNt+0xed:
+8fe22512 5b              pop     ebx
+
+srv!SrvOs2FeaListToNt+0xee:
+8fe22513 5f              pop     edi
+8fe22514 5e              pop     esi
+8fe22515 c9              leave
+8fe22516 c21000          ret     10h
+kd> uf srv!SrvSmbOpen2+0x93
+srv!SrvSmbOpen2:
+8fe3b5ba 8bff            mov     edi,edi
+8fe3b5bc 55              push    ebp
+8fe3b5bd 8bec            mov     ebp,esp
+8fe3b5bf 83ec14          sub     esp,14h
+8fe3b5c2 8365fc00        and     dword ptr [ebp-4],0
+8fe3b5c6 8365f800        and     dword ptr [ebp-8],0
+8fe3b5ca 53              push    ebx
+8fe3b5cb 8b5d08          mov     ebx,dword ptr [ebp+8]
+8fe3b5ce f6836801000001  test    byte ptr [ebx+168h],1
+8fe3b5d5 56              push    esi
+8fe3b5d6 57              push    edi
+8fe3b5d7 7507            jne     srv!SrvSmbOpen2+0x26 (8fe3b5e0)  Branch
+
+srv!SrvSmbOpen2+0x1f:
+8fe3b5d9 c683a101000035  mov     byte ptr [ebx+1A1h],35h
+
+srv!SrvSmbOpen2+0x26:
+8fe3b5e0 833d0838e18f01  cmp     dword ptr [srv!SrvWmiEnableLevel (8fe13808)],1
+8fe3b5e7 7206            jb      srv!SrvSmbOpen2+0x35 (8fe3b5ef)  Branch
+
+srv!SrvSmbOpen2+0x2f:
+8fe3b5e9 53              push    ebx
+8fe3b5ea e8b6e0fcff      call    srv!SrvWmiStartContextExt (8fe096a5)
+
+srv!SrvSmbOpen2+0x35:
+8fe3b5ef 8bb3a0000000    mov     esi,dword ptr [ebx+0A0h]
+8fe3b5f5 837e581d        cmp     dword ptr [esi+58h],1Dh
+8fe3b5f9 8b4644          mov     eax,dword ptr [esi+44h]
+8fe3b5fc 8b7e40          mov     edi,dword ptr [esi+40h]
+8fe3b5ff 8945ec          mov     dword ptr [ebp-14h],eax
+8fe3b602 0f82b8010000    jb      srv!SrvSmbOpen2+0x206 (8fe3b7c0)  Branch
+
+srv!SrvSmbOpen2+0x4e:
+8fe3b608 837e601e        cmp     dword ptr [esi+60h],1Eh
+8fe3b60c 0f82ae010000    jb      srv!SrvSmbOpen2+0x206 (8fe3b7c0)  Branch
+
+srv!SrvSmbOpen2+0x58:
+8fe3b612 8365fc00        and     dword ptr [ebp-4],0
+8fe3b616 8b4e64          mov     ecx,dword ptr [esi+64h]
+8fe3b619 8b4648          mov     eax,dword ptr [esi+48h]
+8fe3b61c 8945f0          mov     dword ptr [ebp-10h],eax
+8fe3b61f 83f908          cmp     ecx,8
+8fe3b622 0f8615010000    jbe     srv!SrvSmbOpen2+0x183 (8fe3b73d)  Branch
+
+srv!SrvSmbOpen2+0x6e:
+8fe3b628 8b10            mov     edx,dword ptr [eax]
+8fe3b62a 83fa08          cmp     edx,8
+8fe3b62d 0f860a010000    jbe     srv!SrvSmbOpen2+0x183 (8fe3b73d)  Branch
+
+srv!SrvSmbOpen2+0x79:
+8fe3b633 3bd1            cmp     edx,ecx
+8fe3b635 0f8702010000    ja      srv!SrvSmbOpen2+0x183 (8fe3b73d)  Branch
+
+srv!SrvSmbOpen2+0x81:
+8fe3b63b 8d4df8          lea     ecx,[ebp-8]
+8fe3b63e 51              push    ecx
+8fe3b63f 8d4df4          lea     ecx,[ebp-0Ch]
+8fe3b642 51              push    ecx
+8fe3b643 8d4d08          lea     ecx,[ebp+8]
+8fe3b646 51              push    ecx
+8fe3b647 50              push    eax
+8fe3b648 e8d86dfeff      call    srv!SrvOs2FeaListToNt (8fe22425)
+8fe3b64d 85c0            test    eax,eax
+8fe3b64f 7d12            jge     srv!SrvSmbOpen2+0xa9 (8fe3b663)  Branch
+
+srv!SrvSmbOpen2+0x97:
+8fe3b651 682472e18f      push    offset srv! ?? ::NNGAKEGL::`string' (8fe17224)
+8fe3b656 68bd040000      push    4BDh
+8fe3b65b 6a01            push    1
+8fe3b65d 50              push    eax
+8fe3b65e e92c010000      jmp     srv!SrvSmbOpen2+0x1d5 (8fe3b78f)  Branch
+
+srv!SrvSmbOpen2+0xa9:
+8fe3b663 0fb707          movzx   eax,word ptr [edi]
+8fe3b666 0fb74f02        movzx   ecx,word ptr [edi+2]
+8fe3b66a a804            test    al,4
+8fe3b66c 7405            je      srv!SrvSmbOpen2+0xb9 (8fe3b673)  Branch
+
+srv!SrvSmbOpen2+0xb4:
+8fe3b66e 33c0            xor     eax,eax
+8fe3b670 40              inc     eax
+8fe3b671 eb0c            jmp     srv!SrvSmbOpen2+0xc5 (8fe3b67f)  Branch
+
+srv!SrvSmbOpen2+0xb9:
+8fe3b673 a802            test    al,2
+8fe3b675 6a00            push    0
+8fe3b677 58              pop     eax
+8fe3b678 0f94c0          sete    al
+8fe3b67b 8d440002        lea     eax,[eax+eax+2]
+
+srv!SrvSmbOpen2+0xc5:
+8fe3b67f 8b5658          mov     edx,dword ptr [esi+58h]
+8fe3b682 6860ade38f      push    offset srv!RestartOpen2 (8fe3ad60)
+8fe3b687 50              push    eax
+8fe3b688 8d45fc          lea     eax,[ebp-4]
+8fe3b68b 50              push    eax
+8fe3b68c ff75f4          push    dword ptr [ebp-0Ch]
+8fe3b68f 8b4640          mov     eax,dword ptr [esi+40h]
+8fe3b692 ff7508          push    dword ptr [ebp+8]
+8fe3b695 8d4410ff        lea     eax,[eax+edx-1]
+8fe3b699 50              push    eax
+8fe3b69a 8d471c          lea     eax,[edi+1Ch]
+8fe3b69d 50              push    eax
+8fe3b69e ff770e          push    dword ptr [edi+0Eh]
+8fe3b6a1 0fb7470c        movzx   eax,word ptr [edi+0Ch]
+8fe3b6a5 50              push    eax
+8fe3b6a6 0fb74706        movzx   eax,word ptr [edi+6]
+8fe3b6aa 50              push    eax
+8fe3b6ab 51              push    ecx
+8fe3b6ac 53              push    ebx
+8fe3b6ad e861d3feff      call    srv!SrvCreateFile (8fe28a13)
+8fe3b6b2 3d08010000      cmp     eax,108h
+8fe3b6b7 7530            jne     srv!SrvSmbOpen2+0x12f (8fe3b6e9)  Branch
+
+srv!SrvSmbOpen2+0xff:
+8fe3b6b9 8b4508          mov     eax,dword ptr [ebp+8]
+8fe3b6bc 8983d4000000    mov     dword ptr [ebx+0D4h],eax
+8fe3b6c2 8b45fc          mov     eax,dword ptr [ebp-4]
+8fe3b6c5 8983d8000000    mov     dword ptr [ebx+0D8h],eax
+8fe3b6cb 833d0838e18f01  cmp     dword ptr [srv!SrvWmiEnableLevel (8fe13808)],1
+8fe3b6d2 720d            jb      srv!SrvSmbOpen2+0x127 (8fe3b6e1)  Branch
+
+srv!SrvSmbOpen2+0x11a:
+8fe3b6d4 33c0            xor     eax,eax
+8fe3b6d6 81c358010000    add     ebx,158h
+8fe3b6dc 40              inc     eax
+8fe3b6dd f00fc103        lock xadd dword ptr [ebx],eax
+
+srv!SrvSmbOpen2+0x127:
+8fe3b6e1 6a03            push    3
+8fe3b6e3 5e              pop     esi
+8fe3b6e4 e94a010000      jmp     srv!SrvSmbOpen2+0x279 (8fe3b833)  Branch
+
+srv!SrvSmbOpen2+0x12f:
+8fe3b6e9 80bbe000000000  cmp     byte ptr [ebx+0E0h],0
+8fe3b6f0 8b4d08          mov     ecx,dword ptr [ebp+8]
+8fe3b6f3 742b            je      srv!SrvSmbOpen2+0x166 (8fe3b720)  Branch
+
+srv!SrvSmbOpen2+0x13b:
+8fe3b6f5 e88e93fcff      call    srv!SrvFreeNonPagedPool (8fe04a88)
+8fe3b6fa c743185332e48f  mov     dword ptr [ebx+18h],offset srv!ExecuteTransaction (8fe43253)
+8fe3b701 833d0838e18f01  cmp     dword ptr [srv!SrvWmiEnableLevel (8fe13808)],1
+8fe3b708 720d            jb      srv!SrvSmbOpen2+0x15d (8fe3b717)  Branch
+
+srv!SrvSmbOpen2+0x150:
+8fe3b70a 33c9            xor     ecx,ecx
+8fe3b70c 8d8358010000    lea     eax,[ebx+158h]
+8fe3b712 41              inc     ecx
+8fe3b713 f00fc108        lock xadd dword ptr [eax],ecx
+
+srv!SrvSmbOpen2+0x15d:
+8fe3b717 8bcb            mov     ecx,ebx
+8fe3b719 e8ba42fdff      call    srv!SrvQueueWorkToBlockingThread (8fe0f9d8)
+8fe3b71e ebc1            jmp     srv!SrvSmbOpen2+0x127 (8fe3b6e1)  Branch
+
+srv!SrvSmbOpen2+0x166:
+8fe3b720 898bd4000000    mov     dword ptr [ebx+0D4h],ecx
+8fe3b726 8b4dfc          mov     ecx,dword ptr [ebp-4]
+8fe3b729 50              push    eax
+8fe3b72a 53              push    ebx
+8fe3b72b 898bd8000000    mov     dword ptr [ebx+0D8h],ecx
+8fe3b731 e86de9ffff      call    srv!GenerateOpen2Response (8fe3a0a3)
+8fe3b736 8bf0            mov     esi,eax
+8fe3b738 e9e7000000      jmp     srv!SrvSmbOpen2+0x26a (8fe3b824)  Branch
+
+srv!SrvSmbOpen2+0x183:
+8fe3b73d a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe3b742 80781d02        cmp     byte ptr [eax+1Dh],2
+8fe3b746 7236            jb      srv!SrvSmbOpen2+0x1c4 (8fe3b77e)  Branch
+
+srv!SrvSmbOpen2+0x18e:
+8fe3b748 f6402001        test    byte ptr [eax+20h],1
+8fe3b74c 7430            je      srv!SrvSmbOpen2+0x1c4 (8fe3b77e)  Branch
+
+srv!SrvSmbOpen2+0x194:
+8fe3b74e ff157013e18f    call    dword ptr [srv!_imp__KeGetCurrentIrql (8fe11370)]
+8fe3b754 3c02            cmp     al,2
+8fe3b756 7326            jae     srv!SrvSmbOpen2+0x1c4 (8fe3b77e)  Branch
+
+srv!SrvSmbOpen2+0x19e:
+8fe3b758 a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe3b75d 3d0030e18f      cmp     eax,offset srv!WPP_GLOBAL_Control (8fe13000)
+8fe3b762 741a            je      srv!SrvSmbOpen2+0x1c4 (8fe3b77e)  Branch
+
+srv!SrvSmbOpen2+0x1aa:
+8fe3b764 ff7664          push    dword ptr [esi+64h]
+8fe3b767 8b4df0          mov     ecx,dword ptr [ebp-10h]
+8fe3b76a ff31            push    dword ptr [ecx]
+8fe3b76c 68b416e18f      push    offset srv!`string'+0x60 (8fe116b4)
+8fe3b771 6a16            push    16h
+8fe3b773 ff7014          push    dword ptr [eax+14h]
+8fe3b776 ff7010          push    dword ptr [eax+10h]
+8fe3b779 e893ecfcff      call    srv!WPP_SF_dd (8fe0a411)
+
+srv!SrvSmbOpen2+0x1c4:
+8fe3b77e 682472e18f      push    offset srv! ?? ::NNGAKEGL::`string' (8fe17224)
+8fe3b783 68ac040000      push    4ACh
+8fe3b788 6a01            push    1
+8fe3b78a 68fff098c0      push    0C098F0FFh
+
+srv!SrvSmbOpen2+0x1d5:
+8fe3b78f 53              push    ebx
+8fe3b790 e83ac60000      call    srv!_SrvSetSmbError2 (8fe47dcf)
+8fe3b795 8b55ec          mov     edx,dword ptr [ebp-14h]
+8fe3b798 33c0            xor     eax,eax
+8fe3b79a 6a06            push    6
+8fe3b79c 59              pop     ecx
+8fe3b79d 8bfa            mov     edi,edx
+8fe3b79f f3ab            rep stos dword ptr es:[edi]
+8fe3b7a1 668b45f8        mov     ax,word ptr [ebp-8]
+8fe3b7a5 66894218        mov     word ptr [edx+18h],ax
+8fe3b7a9 33c0            xor     eax,eax
+8fe3b7ab 89421a          mov     dword ptr [edx+1Ah],eax
+8fe3b7ae 894650          mov     dword ptr [esi+50h],eax
+8fe3b7b1 c746581e000000  mov     dword ptr [esi+58h],1Eh
+8fe3b7b8 894664          mov     dword ptr [esi+64h],eax
+8fe3b7bb 33f6            xor     esi,esi
+8fe3b7bd 46              inc     esi
+8fe3b7be eb64            jmp     srv!SrvSmbOpen2+0x26a (8fe3b824)  Branch
+
+srv!SrvSmbOpen2+0x206:
+8fe3b7c0 a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe3b7c5 80781d02        cmp     byte ptr [eax+1Dh],2
+8fe3b7c9 7234            jb      srv!SrvSmbOpen2+0x245 (8fe3b7ff)  Branch
+
+srv!SrvSmbOpen2+0x211:
+8fe3b7cb f6402001        test    byte ptr [eax+20h],1
+8fe3b7cf 742e            je      srv!SrvSmbOpen2+0x245 (8fe3b7ff)  Branch
+
+srv!SrvSmbOpen2+0x217:
+8fe3b7d1 ff157013e18f    call    dword ptr [srv!_imp__KeGetCurrentIrql (8fe11370)]
+8fe3b7d7 3c02            cmp     al,2
+8fe3b7d9 7324            jae     srv!SrvSmbOpen2+0x245 (8fe3b7ff)  Branch
+
+srv!SrvSmbOpen2+0x221:
+8fe3b7db a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe3b7e0 3d0030e18f      cmp     eax,offset srv!WPP_GLOBAL_Control (8fe13000)
+8fe3b7e5 7418            je      srv!SrvSmbOpen2+0x245 (8fe3b7ff)  Branch
+
+srv!SrvSmbOpen2+0x22d:
+8fe3b7e7 ff7660          push    dword ptr [esi+60h]
+8fe3b7ea ff7658          push    dword ptr [esi+58h]
+8fe3b7ed 68b416e18f      push    offset srv!`string'+0x60 (8fe116b4)
+8fe3b7f2 6a15            push    15h
+8fe3b7f4 ff7014          push    dword ptr [eax+14h]
+8fe3b7f7 ff7010          push    dword ptr [eax+10h]
+8fe3b7fa e812ecfcff      call    srv!WPP_SF_dd (8fe0a411)
+
+srv!SrvSmbOpen2+0x245:
+8fe3b7ff 688c040000      push    48Ch
+8fe3b804 53              push    ebx
+8fe3b805 e86e71feff      call    srv!SrvLogInvalidSmbDirect (8fe22978)
+8fe3b80a 682472e18f      push    offset srv! ?? ::NNGAKEGL::`string' (8fe17224)
+8fe3b80f 6890040000      push    490h
+8fe3b814 6a01            push    1
+8fe3b816 68012098c0      push    0C0982001h
+8fe3b81b 53              push    ebx
+8fe3b81c e8aec50000      call    srv!_SrvSetSmbError2 (8fe47dcf)
+8fe3b821 6a02            push    2
+8fe3b823 5e              pop     esi
+
+srv!SrvSmbOpen2+0x26a:
+8fe3b824 833d0838e18f01  cmp     dword ptr [srv!SrvWmiEnableLevel (8fe13808)],1
+8fe3b82b 7206            jb      srv!SrvSmbOpen2+0x279 (8fe3b833)  Branch
+
+srv!SrvSmbOpen2+0x273:
+8fe3b82d 53              push    ebx
+8fe3b82e e894e5fcff      call    srv!SrvWmiEndContextExt (8fe09dc7)
+
+srv!SrvSmbOpen2+0x279:
+8fe3b833 5f              pop     edi
+8fe3b834 8bc6            mov     eax,esi
+8fe3b836 5e              pop     esi
+8fe3b837 5b              pop     ebx
+8fe3b838 c9              leave
+8fe3b839 c20400          ret     4
+kd> uf srv!ExecuteTransaction+0x101
+srv!ExecuteTransaction:
+8fe43253 8bff            mov     edi,edi
+8fe43255 53              push    ebx
+8fe43256 56              push    esi
+8fe43257 8bf1            mov     esi,ecx
+8fe43259 8a868c000000    mov     al,byte ptr [esi+8Ch]
+8fe4325f 57              push    edi
+8fe43260 8bbea0000000    mov     edi,dword ptr [esi+0A0h]
+8fe43266 884720          mov     byte ptr [edi+20h],al
+8fe43269 8a868c000000    mov     al,byte ptr [esi+8Ch]
+8fe4326f 6a02            push    2
+8fe43271 5b              pop     ebx
+8fe43272 3c25            cmp     al,25h
+8fe43274 7404            je      srv!ExecuteTransaction+0x27 (8fe4327a)  Branch
+
+srv!ExecuteTransaction+0x23:
+8fe43276 3c26            cmp     al,26h
+8fe43278 753f            jne     srv!ExecuteTransaction+0x66 (8fe432b9)  Branch
+
+srv!ExecuteTransaction+0x27:
+8fe4327a 80bf9500000000  cmp     byte ptr [edi+95h],0
+8fe43281 7436            je      srv!ExecuteTransaction+0x66 (8fe432b9)  Branch
+
+srv!ExecuteTransaction+0x30:
+8fe43283 807e1500        cmp     byte ptr [esi+15h],0
+8fe43287 7530            jne     srv!ExecuteTransaction+0x66 (8fe432b9)  Branch
+
+srv!ExecuteTransaction+0x36:
+8fe43289 b201            mov     dl,1
+8fe4328b c746185332e48f  mov     dword ptr [esi+18h],offset srv!ExecuteTransaction (8fe43253)
+8fe43292 e8c1c7fcff      call    srv!SrvQueueWorkToLpcThread (8fe0fa58)
+8fe43297 85c0            test    eax,eax
+8fe43299 0f8d1d040000    jge     srv!ExecuteTransaction+0x469 (8fe436bc)  Branch
+
+srv!ExecuteTransaction+0x4c:
+8fe4329f 683c78e18f      push    offset srv! ?? ::NNGAKEGL::`string' (8fe1783c)
+8fe432a4 689a000000      push    9Ah
+8fe432a9 6a00            push    0
+8fe432ab 50              push    eax
+8fe432ac 56              push    esi
+8fe432ad e81d4b0000      call    srv!_SrvSetSmbError2 (8fe47dcf)
+8fe432b2 6a02            push    2
+8fe432b4 e905040000      jmp     srv!ExecuteTransaction+0x46b (8fe436be)  Branch
+
+srv!ExecuteTransaction+0x66:
+8fe432b9 8b5678          mov     edx,dword ptr [esi+78h]
+8fe432bc 8b4e7c          mov     ecx,dword ptr [esi+7Ch]
+8fe432bf 3ca0            cmp     al,0A0h
+8fe432c1 7409            je      srv!ExecuteTransaction+0x79 (8fe432cc)  Branch
+
+srv!ExecuteTransaction+0x70:
+8fe432c3 3ca1            cmp     al,0A1h
+8fe432c5 7405            je      srv!ExecuteTransaction+0x79 (8fe432cc)  Branch
+
+srv!ExecuteTransaction+0x74:
+8fe432c7 83c115          add     ecx,15h
+8fe432ca eb03            jmp     srv!ExecuteTransaction+0x7c (8fe432cf)  Branch
+
+srv!ExecuteTransaction+0x79:
+8fe432cc 83c125          add     ecx,25h
+
+srv!ExecuteTransaction+0x7c:
+8fe432cf 837f4400        cmp     dword ptr [edi+44h],0
+8fe432d3 894f3c          mov     dword ptr [edi+3Ch],ecx
+8fe432d6 7511            jne     srv!ExecuteTransaction+0x96 (8fe432e9)  Branch
+
+srv!ExecuteTransaction+0x85:
+8fe432d8 8b4754          mov     eax,dword ptr [edi+54h]
+8fe432db 2bc2            sub     eax,edx
+8fe432dd 8d440803        lea     eax,[eax+ecx+3]
+8fe432e1 83e0fc          and     eax,0FFFFFFFCh
+8fe432e4 03c2            add     eax,edx
+8fe432e6 894744          mov     dword ptr [edi+44h],eax
+
+srv!ExecuteTransaction+0x96:
+8fe432e9 837f4c00        cmp     dword ptr [edi+4Ch],0
+8fe432ed 7514            jne     srv!ExecuteTransaction+0xb0 (8fe43303)  Branch
+
+srv!ExecuteTransaction+0x9c:
+8fe432ef 8b4760          mov     eax,dword ptr [edi+60h]
+8fe432f2 8b4f44          mov     ecx,dword ptr [edi+44h]
+8fe432f5 2bc2            sub     eax,edx
+8fe432f7 8d440803        lea     eax,[eax+ecx+3]
+8fe432fb 83e0fc          and     eax,0FFFFFFFCh
+8fe432fe 03c2            add     eax,edx
+8fe43300 89474c          mov     dword ptr [edi+4Ch],eax
+
+srv!ExecuteTransaction+0xb0:
+8fe43303 8a868c000000    mov     al,byte ptr [esi+8Ch]
+8fe43309 3c25            cmp     al,25h
+8fe4330b 0f84e1010000    je      srv!ExecuteTransaction+0x29f (8fe434f2)  Branch
+
+srv!ExecuteTransaction+0xbe:
+8fe43311 3c26            cmp     al,26h
+8fe43313 0f84d9010000    je      srv!ExecuteTransaction+0x29f (8fe434f2)  Branch
+
+srv!ExecuteTransaction+0xc6:
+8fe43319 3ca0            cmp     al,0A0h
+8fe4331b 0f8414010000    je      srv!ExecuteTransaction+0x1e2 (8fe43435)  Branch
+
+srv!ExecuteTransaction+0xce:
+8fe43321 3ca1            cmp     al,0A1h
+8fe43323 0f840c010000    je      srv!ExecuteTransaction+0x1e2 (8fe43435)  Branch
+
+srv!ExecuteTransaction+0xd6:
+8fe43329 3c32            cmp     al,32h
+8fe4332b 7408            je      srv!ExecuteTransaction+0xe2 (8fe43335)  Branch
+
+srv!ExecuteTransaction+0xda:
+8fe4332d 3c33            cmp     al,33h
+8fe4332f 0f8580030000    jne     srv!ExecuteTransaction+0x462 (8fe436b5)  Branch
+
+srv!ExecuteTransaction+0xe2:
+8fe43335 837f5002        cmp     dword ptr [edi+50h],2
+8fe43339 732a            jae     srv!ExecuteTransaction+0x112 (8fe43365)  Branch
+
+srv!ExecuteTransaction+0xe8:
+8fe4333b 683c78e18f      push    offset srv! ?? ::NNGAKEGL::`string' (8fe1783c)
+8fe43340 68a3010000      push    1A3h
+8fe43345 6a00            push    0
+8fe43347 68012098c0      push    0C0982001h
+8fe4334c 56              push    esi
+8fe4334d e87d4a0000      call    srv!_SrvSetSmbError2 (8fe47dcf)
+8fe43352 6a02            push    2
+8fe43354 5b              pop     ebx
+8fe43355 68a6010000      push    1A6h
+
+srv!ExecuteTransaction+0x107:
+8fe4335a 56              push    esi
+8fe4335b e818f6fdff      call    srv!SrvLogInvalidSmbDirect (8fe22978)
+8fe43360 e950030000      jmp     srv!ExecuteTransaction+0x462 (8fe436b5)  Branch
+
+srv!ExecuteTransaction+0x112:
+8fe43365 8b4738          mov     eax,dword ptr [edi+38h]
+8fe43368 0fb700          movzx   eax,word ptr [eax]
+8fe4336b 6683f811        cmp     ax,11h
+8fe4336f 7763            ja      srv!ExecuteTransaction+0x181 (8fe433d4)  Branch
+
+srv!ExecuteTransaction+0x11e:
+8fe43371 0fb7c0          movzx   eax,ax
+8fe43374 56              push    esi
+8fe43375 ff1485e834e18f  call    dword ptr srv!SrvTransaction2DispatchTable (8fe134e8)[eax*4]
+8fe4337c 8bd8            mov     ebx,eax
+8fe4337e a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe43383 80781d02        cmp     byte ptr [eax+1Dh],2
+8fe43387 0f8223030000    jb      srv!ExecuteTransaction+0x45d (8fe436b0)  Branch
+
+srv!ExecuteTransaction+0x13a:
+8fe4338d f6402001        test    byte ptr [eax+20h],1
+8fe43391 0f8419030000    je      srv!ExecuteTransaction+0x45d (8fe436b0)  Branch
+
+srv!ExecuteTransaction+0x144:
+8fe43397 ff157013e18f    call    dword ptr [srv!_imp__KeGetCurrentIrql (8fe11370)]
+8fe4339d 3c02            cmp     al,2
+8fe4339f 0f830b030000    jae     srv!ExecuteTransaction+0x45d (8fe436b0)  Branch
+
+srv!ExecuteTransaction+0x152:
+8fe433a5 85db            test    ebx,ebx
+8fe433a7 0f8403030000    je      srv!ExecuteTransaction+0x45d (8fe436b0)  Branch
+
+srv!ExecuteTransaction+0x15a:
+8fe433ad a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe433b2 3d0030e18f      cmp     eax,offset srv!WPP_GLOBAL_Control (8fe13000)
+8fe433b7 0f84f3020000    je      srv!ExecuteTransaction+0x45d (8fe436b0)  Branch
+
+srv!ExecuteTransaction+0x16a:
+8fe433bd 681417e18f      push    offset srv!`string'+0xc0 (8fe11714)
+8fe433c2 6a0c            push    0Ch
+
+srv!ExecuteTransaction+0x171:
+8fe433c4 ff7014          push    dword ptr [eax+14h]
+8fe433c7 ff7010          push    dword ptr [eax+10h]
+8fe433ca e8f13efcff      call    srv!WPP_SF_ (8fe072c0)
+8fe433cf e9dc020000      jmp     srv!ExecuteTransaction+0x45d (8fe436b0)  Branch
+
+srv!ExecuteTransaction+0x181:
+8fe433d4 a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe433d9 80781d02        cmp     byte ptr [eax+1Dh],2
+8fe433dd 7235            jb      srv!ExecuteTransaction+0x1c1 (8fe43414)  Branch
+
+srv!ExecuteTransaction+0x18c:
+8fe433df f6402001        test    byte ptr [eax+20h],1
+8fe433e3 742f            je      srv!ExecuteTransaction+0x1c1 (8fe43414)  Branch
+
+srv!ExecuteTransaction+0x192:
+8fe433e5 ff157013e18f    call    dword ptr [srv!_imp__KeGetCurrentIrql (8fe11370)]
+8fe433eb 3c02            cmp     al,2
+8fe433ed 7325            jae     srv!ExecuteTransaction+0x1c1 (8fe43414)  Branch
+
+srv!ExecuteTransaction+0x19c:
+8fe433ef a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe433f4 3d0030e18f      cmp     eax,offset srv!WPP_GLOBAL_Control (8fe13000)
+8fe433f9 7419            je      srv!ExecuteTransaction+0x1c1 (8fe43414)  Branch
+
+srv!ExecuteTransaction+0x1a8:
+8fe433fb 8b4f38          mov     ecx,dword ptr [edi+38h]
+8fe433fe 0fb709          movzx   ecx,word ptr [ecx]
+8fe43401 51              push    ecx
+8fe43402 681417e18f      push    offset srv!`string'+0xc0 (8fe11714)
+8fe43407 6a0d            push    0Dh
+8fe43409 ff7014          push    dword ptr [eax+14h]
+8fe4340c ff7010          push    dword ptr [eax+10h]
+8fe4340f e84f47fcff      call    srv!WPP_SF_d (8fe07b63)
+
+srv!ExecuteTransaction+0x1c1:
+8fe43414 68ca010000      push    1CAh
+8fe43419 56              push    esi
+8fe4341a e859f5fdff      call    srv!SrvLogInvalidSmbDirect (8fe22978)
+8fe4341f 683c78e18f      push    offset srv! ?? ::NNGAKEGL::`string' (8fe1783c)
+8fe43424 68cc010000      push    1CCh
+
+srv!ExecuteTransaction+0x1d6:
+8fe43429 6a00            push    0
+8fe4342b 68012098c0      push    0C0982001h
+8fe43430 e972020000      jmp     srv!ExecuteTransaction+0x454 (8fe436a7)  Branch
+
+srv!ExecuteTransaction+0x1e2:
+8fe43435 0fb74772        movzx   eax,word ptr [edi+72h]
+8fe43439 8d48ff          lea     ecx,[eax-1]
+8fe4343c 6683f908        cmp     cx,8
+8fe43440 7758            ja      srv!ExecuteTransaction+0x247 (8fe4349a)  Branch
+
+srv!ExecuteTransaction+0x1ef:
+8fe43442 0fb7c0          movzx   eax,ax
+8fe43445 56              push    esi
+8fe43446 ff14853035e18f  call    dword ptr srv!SrvNtTransactionDispatchTable (8fe13530)[eax*4]
+8fe4344d 8bd8            mov     ebx,eax
+8fe4344f a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe43454 80781d02        cmp     byte ptr [eax+1Dh],2
+8fe43458 0f8252020000    jb      srv!ExecuteTransaction+0x45d (8fe436b0)  Branch
+
+srv!ExecuteTransaction+0x20b:
+8fe4345e f6402001        test    byte ptr [eax+20h],1
+8fe43462 0f8448020000    je      srv!ExecuteTransaction+0x45d (8fe436b0)  Branch
+
+srv!ExecuteTransaction+0x215:
+8fe43468 ff157013e18f    call    dword ptr [srv!_imp__KeGetCurrentIrql (8fe11370)]
+8fe4346e 3c02            cmp     al,2
+8fe43470 0f833a020000    jae     srv!ExecuteTransaction+0x45d (8fe436b0)  Branch
+
+srv!ExecuteTransaction+0x223:
+8fe43476 85db            test    ebx,ebx
+8fe43478 0f8432020000    je      srv!ExecuteTransaction+0x45d (8fe436b0)  Branch
+
+srv!ExecuteTransaction+0x22b:
+8fe4347e a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe43483 3d0030e18f      cmp     eax,offset srv!WPP_GLOBAL_Control (8fe13000)
+8fe43488 0f8422020000    je      srv!ExecuteTransaction+0x45d (8fe436b0)  Branch
+
+srv!ExecuteTransaction+0x23b:
+8fe4348e 681417e18f      push    offset srv!`string'+0xc0 (8fe11714)
+8fe43493 6a0a            push    0Ah
+8fe43495 e92affffff      jmp     srv!ExecuteTransaction+0x171 (8fe433c4)  Branch
+
+srv!ExecuteTransaction+0x247:
+8fe4349a a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe4349f 80781d02        cmp     byte ptr [eax+1Dh],2
+8fe434a3 7233            jb      srv!ExecuteTransaction+0x285 (8fe434d8)  Branch
+
+srv!ExecuteTransaction+0x252:
+8fe434a5 f6402001        test    byte ptr [eax+20h],1
+8fe434a9 742d            je      srv!ExecuteTransaction+0x285 (8fe434d8)  Branch
+
+srv!ExecuteTransaction+0x258:
+8fe434ab ff157013e18f    call    dword ptr [srv!_imp__KeGetCurrentIrql (8fe11370)]
+8fe434b1 3c02            cmp     al,2
+8fe434b3 7323            jae     srv!ExecuteTransaction+0x285 (8fe434d8)  Branch
+
+srv!ExecuteTransaction+0x262:
+8fe434b5 a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe434ba 3d0030e18f      cmp     eax,offset srv!WPP_GLOBAL_Control (8fe13000)
+8fe434bf 7417            je      srv!ExecuteTransaction+0x285 (8fe434d8)  Branch
+
+srv!ExecuteTransaction+0x26e:
+8fe434c1 0fb74f72        movzx   ecx,word ptr [edi+72h]
+8fe434c5 51              push    ecx
+8fe434c6 681417e18f      push    offset srv!`string'+0xc0 (8fe11714)
+8fe434cb 6a0b            push    0Bh
+8fe434cd ff7014          push    dword ptr [eax+14h]
+8fe434d0 ff7010          push    dword ptr [eax+10h]
+8fe434d3 e88b46fcff      call    srv!WPP_SF_d (8fe07b63)
+
+srv!ExecuteTransaction+0x285:
+8fe434d8 6894010000      push    194h
+8fe434dd 56              push    esi
+8fe434de e895f4fdff      call    srv!SrvLogInvalidSmbDirect (8fe22978)
+8fe434e3 683c78e18f      push    offset srv! ?? ::NNGAKEGL::`string' (8fe1783c)
+8fe434e8 6896010000      push    196h
+8fe434ed e937ffffff      jmp     srv!ExecuteTransaction+0x1d6 (8fe43429)  Branch
+
+srv!ExecuteTransaction+0x29f:
+8fe434f2 80bf9500000000  cmp     byte ptr [edi+95h],0
+8fe434f9 7435            je      srv!ExecuteTransaction+0x2dd (8fe43530)  Branch
+
+srv!ExecuteTransaction+0x2a8:
+8fe434fb 837f5c02        cmp     dword ptr [edi+5Ch],2
+8fe434ff 7324            jae     srv!ExecuteTransaction+0x2d2 (8fe43525)  Branch
+
+srv!ExecuteTransaction+0x2ae:
+8fe43501 683c78e18f      push    offset srv! ?? ::NNGAKEGL::`string' (8fe1783c)
+8fe43506 68e2000000      push    0E2h
+8fe4350b 6a00            push    0
+8fe4350d 68012098c0      push    0C0982001h
+8fe43512 56              push    esi
+8fe43513 e8b7480000      call    srv!_SrvSetSmbError2 (8fe47dcf)
+8fe43518 6a02            push    2
+8fe4351a 5b              pop     ebx
+8fe4351b 68e5000000      push    0E5h
+8fe43520 e935feffff      jmp     srv!ExecuteTransaction+0x107 (8fe4335a)  Branch
+
+srv!ExecuteTransaction+0x2d2:
+8fe43525 56              push    esi
+8fe43526 e8fa4e0000      call    srv!SrvXsRequest (8fe48425)
+8fe4352b e962010000      jmp     srv!ExecuteTransaction+0x43f (8fe43692)  Branch
+
+srv!ExecuteTransaction+0x2dd:
+8fe43530 80bf9400000000  cmp     byte ptr [edi+94h],0
+8fe43537 0f8437010000    je      srv!ExecuteTransaction+0x421 (8fe43674)  Branch
+
+srv!ExecuteTransaction+0x2ea:
+8fe4353d 837f5002        cmp     dword ptr [edi+50h],2
+8fe43541 7324            jae     srv!ExecuteTransaction+0x314 (8fe43567)  Branch
+
+srv!ExecuteTransaction+0x2f0:
+8fe43543 683c78e18f      push    offset srv! ?? ::NNGAKEGL::`string' (8fe1783c)
+8fe43548 68f1000000      push    0F1h
+8fe4354d 6a00            push    0
+8fe4354f 68012098c0      push    0C0982001h
+8fe43554 56              push    esi
+8fe43555 e875480000      call    srv!_SrvSetSmbError2 (8fe47dcf)
+8fe4355a 6a02            push    2
+8fe4355c 5b              pop     ebx
+8fe4355d 68f4000000      push    0F4h
+8fe43562 e9f3fdffff      jmp     srv!ExecuteTransaction+0x107 (8fe4335a)  Branch
+
+srv!ExecuteTransaction+0x314:
+8fe43567 f6465401        test    byte ptr [esi+54h],1
+8fe4356b 8b4738          mov     eax,dword ptr [edi+38h]
+8fe4356e 0fb738          movzx   edi,word ptr [eax]
+8fe43571 754c            jne     srv!ExecuteTransaction+0x36c (8fe435bf)  Branch
+
+srv!ExecuteTransaction+0x320:
+8fe43573 6683ff54        cmp     di,54h
+8fe43577 7412            je      srv!ExecuteTransaction+0x338 (8fe4358b)  Branch
+
+srv!ExecuteTransaction+0x326:
+8fe43579 6683ff26        cmp     di,26h
+8fe4357d 740c            je      srv!ExecuteTransaction+0x338 (8fe4358b)  Branch
+
+srv!ExecuteTransaction+0x32c:
+8fe4357f 6683ff53        cmp     di,53h
+8fe43583 7406            je      srv!ExecuteTransaction+0x338 (8fe4358b)  Branch
+
+srv!ExecuteTransaction+0x332:
+8fe43585 6683ff31        cmp     di,31h
+8fe43589 7534            jne     srv!ExecuteTransaction+0x36c (8fe435bf)  Branch
+
+srv!ExecuteTransaction+0x338:
+8fe4358b e8a7a7fcff      call    srv!SrvReceiveBufferShortage (8fe0dd37)
+8fe43590 84c0            test    al,al
+8fe43592 7427            je      srv!ExecuteTransaction+0x368 (8fe435bb)  Branch
+
+srv!ExecuteTransaction+0x341:
+8fe43594 a15c3fe18f      mov     eax,dword ptr [srv!pSrvStatistics (8fe13f5c)]
+8fe43599 ff403c          inc     dword ptr [eax+3Ch]
+8fe4359c 683c78e18f      push    offset srv! ?? ::NNGAKEGL::`string' (8fe1783c)
+8fe435a1 6810010000      push    110h
+8fe435a6 6a00            push    0
+8fe435a8 68050200c0      push    0C0000205h
+
+srv!ExecuteTransaction+0x35a:
+8fe435ad 56              push    esi
+8fe435ae e81c480000      call    srv!_SrvSetSmbError2 (8fe47dcf)
+8fe435b3 6a02            push    2
+8fe435b5 5b              pop     ebx
+8fe435b6 e9fa000000      jmp     srv!ExecuteTransaction+0x462 (8fe436b5)  Branch
+
+srv!ExecuteTransaction+0x368:
+8fe435bb 834e5401        or      dword ptr [esi+54h],1
+
+srv!ExecuteTransaction+0x36c:
+8fe435bf 0fb7c7          movzx   eax,di
+8fe435c2 83f826          cmp     eax,26h
+8fe435c5 7f59            jg      srv!ExecuteTransaction+0x3cd (8fe43620)  Branch
+
+srv!ExecuteTransaction+0x374:
+8fe435c7 744f            je      srv!ExecuteTransaction+0x3c5 (8fe43618)  Branch
+
+srv!ExecuteTransaction+0x376:
+8fe435c9 48              dec     eax
+8fe435ca 7444            je      srv!ExecuteTransaction+0x3bd (8fe43610)  Branch
+
+srv!ExecuteTransaction+0x379:
+8fe435cc 83e810          sub     eax,10h
+8fe435cf 742c            je      srv!ExecuteTransaction+0x3aa (8fe435fd)  Branch
+
+srv!ExecuteTransaction+0x37e:
+8fe435d1 83e810          sub     eax,10h
+8fe435d4 741c            je      srv!ExecuteTransaction+0x39f (8fe435f2)  Branch
+
+srv!ExecuteTransaction+0x383:
+8fe435d6 48              dec     eax
+8fe435d7 740e            je      srv!ExecuteTransaction+0x394 (8fe435e7)  Branch
+
+srv!ExecuteTransaction+0x386:
+8fe435d9 48              dec     eax
+8fe435da 7554            jne     srv!ExecuteTransaction+0x3dd (8fe43630)  Branch
+
+srv!ExecuteTransaction+0x389:
+8fe435dc 56              push    esi
+8fe435dd e84b74feff      call    srv!SrvPeekNamedPipe (8fe2aa2d)
+8fe435e2 e9ab000000      jmp     srv!ExecuteTransaction+0x43f (8fe43692)  Branch
+
+srv!ExecuteTransaction+0x394:
+8fe435e7 56              push    esi
+8fe435e8 e8a166feff      call    srv!SrvQueryInformationNamedPipe (8fe29c8e)
+8fe435ed e9a0000000      jmp     srv!ExecuteTransaction+0x43f (8fe43692)  Branch
+
+srv!ExecuteTransaction+0x39f:
+8fe435f2 56              push    esi
+8fe435f3 e84d64feff      call    srv!SrvQueryStateNamedPipe (8fe29a45)
+8fe435f8 e995000000      jmp     srv!ExecuteTransaction+0x43f (8fe43692)  Branch
+
+srv!ExecuteTransaction+0x3aa:
+8fe435fd 683c78e18f      push    offset srv! ?? ::NNGAKEGL::`string' (8fe1783c)
+8fe43602 6842010000      push    142h
+8fe43607 6a00            push    0
+8fe43609 680d0000c0      push    0C000000Dh
+8fe4360e eb9d            jmp     srv!ExecuteTransaction+0x35a (8fe435ad)  Branch
+
+srv!ExecuteTransaction+0x3bd:
+8fe43610 56              push    esi
+8fe43611 e86e69feff      call    srv!SrvSetStateNamedPipe (8fe29f84)
+8fe43616 eb7a            jmp     srv!ExecuteTransaction+0x43f (8fe43692)  Branch
+
+srv!ExecuteTransaction+0x3c5:
+8fe43618 56              push    esi
+8fe43619 e82b75feff      call    srv!SrvTransactNamedPipe (8fe2ab49)
+8fe4361e eb72            jmp     srv!ExecuteTransaction+0x43f (8fe43692)  Branch
+
+srv!ExecuteTransaction+0x3cd:
+8fe43620 83e836          sub     eax,36h
+8fe43623 7447            je      srv!ExecuteTransaction+0x419 (8fe4366c)  Branch
+
+srv!ExecuteTransaction+0x3d2:
+8fe43625 48              dec     eax
+8fe43626 743c            je      srv!ExecuteTransaction+0x411 (8fe43664)  Branch
+
+srv!ExecuteTransaction+0x3d5:
+8fe43628 83e81c          sub     eax,1Ch
+8fe4362b 742f            je      srv!ExecuteTransaction+0x409 (8fe4365c)  Branch
+
+srv!ExecuteTransaction+0x3da:
+8fe4362d 48              dec     eax
+8fe4362e 7424            je      srv!ExecuteTransaction+0x401 (8fe43654)  Branch
+
+srv!ExecuteTransaction+0x3dd:
+8fe43630 683c78e18f      push    offset srv! ?? ::NNGAKEGL::`string' (8fe1783c)
+8fe43635 684f010000      push    14Fh
+8fe4363a 6a00            push    0
+8fe4363c 68012098c0      push    0C0982001h
+8fe43641 56              push    esi
+8fe43642 e888470000      call    srv!_SrvSetSmbError2 (8fe47dcf)
+8fe43647 6a02            push    2
+8fe43649 5b              pop     ebx
+8fe4364a 6852010000      push    152h
+8fe4364f e906fdffff      jmp     srv!ExecuteTransaction+0x107 (8fe4335a)  Branch
+
+srv!ExecuteTransaction+0x401:
+8fe43654 56              push    esi
+8fe43655 e8966ffeff      call    srv!SrvCallNamedPipe (8fe2a5f0)
+8fe4365a eb36            jmp     srv!ExecuteTransaction+0x43f (8fe43692)  Branch
+
+srv!ExecuteTransaction+0x409:
+8fe4365c 56              push    esi
+8fe4365d e8b972feff      call    srv!SrvWaitNamedPipe (8fe2a91b)
+8fe43662 eb2e            jmp     srv!ExecuteTransaction+0x43f (8fe43692)  Branch
+
+srv!ExecuteTransaction+0x411:
+8fe43664 56              push    esi
+8fe43665 e84276feff      call    srv!SrvWriteNamedPipe (8fe2acac)
+8fe4366a eb26            jmp     srv!ExecuteTransaction+0x43f (8fe43692)  Branch
+
+srv!ExecuteTransaction+0x419:
+8fe4366c 56              push    esi
+8fe4366d e81d78feff      call    srv!SrvReadNamedPipe (8fe2ae8f)
+8fe43672 eb1e            jmp     srv!ExecuteTransaction+0x43f (8fe43692)  Branch
+
+srv!ExecuteTransaction+0x421:
+8fe43674 6a09            push    9
+8fe43676 ff359435e18f    push    dword ptr [srv!StrSlashMailslot (8fe13594)]
+8fe4367c ff7728          push    dword ptr [edi+28h]
+8fe4367f ff159412e18f    call    dword ptr [srv!_imp___wcsnicmp (8fe11294)]
+8fe43685 83c40c          add     esp,0Ch
+8fe43688 85c0            test    eax,eax
+8fe4368a 750a            jne     srv!ExecuteTransaction+0x443 (8fe43696)  Branch
+
+srv!ExecuteTransaction+0x439:
+8fe4368c 56              push    esi
+8fe4368d e840f9ffff      call    srv!MailslotTransaction (8fe42fd2)
+
+srv!ExecuteTransaction+0x43f:
+8fe43692 8bd8            mov     ebx,eax
+8fe43694 eb1a            jmp     srv!ExecuteTransaction+0x45d (8fe436b0)  Branch
+
+srv!ExecuteTransaction+0x443:
+8fe43696 683c78e18f      push    offset srv! ?? ::NNGAKEGL::`string' (8fe1783c)
+8fe4369b 6868010000      push    168h
+8fe436a0 6a00            push    0
+8fe436a2 68020000c0      push    0C0000002h
+
+srv!ExecuteTransaction+0x454:
+8fe436a7 56              push    esi
+8fe436a8 e822470000      call    srv!_SrvSetSmbError2 (8fe47dcf)
+8fe436ad 6a02            push    2
+8fe436af 5b              pop     ebx
+
+srv!ExecuteTransaction+0x45d:
+8fe436b0 83fb03          cmp     ebx,3
+8fe436b3 7407            je      srv!ExecuteTransaction+0x469 (8fe436bc)  Branch
+
+srv!ExecuteTransaction+0x462:
+8fe436b5 53              push    ebx
+8fe436b6 56              push    esi
+8fe436b7 e899f3ffff      call    srv!SrvCompleteExecuteTransaction (8fe42a55)
+
+srv!ExecuteTransaction+0x469:
+8fe436bc 6a03            push    3
+
+srv!ExecuteTransaction+0x46b:
+8fe436be 58              pop     eax
+8fe436bf 5f              pop     edi
+8fe436c0 5e              pop     esi
+8fe436c1 5b              pop     ebx
+8fe436c2 c3              ret
+kd> uf srv!SrvSmbTransactionSecondary+0x2c5
+srv!SrvSmbTransactionSecondary:
+8fe441b0 8bff            mov     edi,edi
+8fe441b2 55              push    ebp
+8fe441b3 8bec            mov     ebp,esp
+8fe441b5 83ec24          sub     esp,24h
+8fe441b8 a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe441bd 80781d02        cmp     byte ptr [eax+1Dh],2
+8fe441c1 53              push    ebx
+8fe441c2 8bd9            mov     ebx,ecx
+8fe441c4 56              push    esi
+8fe441c5 8b7370          mov     esi,dword ptr [ebx+70h]
+8fe441c8 57              push    edi
+8fe441c9 8b7b74          mov     edi,dword ptr [ebx+74h]
+8fe441cc 8975e8          mov     dword ptr [ebp-18h],esi
+8fe441cf 7242            jb      srv!SrvSmbTransactionSecondary+0x63 (8fe44213)  Branch
+
+srv!SrvSmbTransactionSecondary+0x21:
+8fe441d1 f6402001        test    byte ptr [eax+20h],1
+8fe441d5 743c            je      srv!SrvSmbTransactionSecondary+0x63 (8fe44213)  Branch
+
+srv!SrvSmbTransactionSecondary+0x27:
+8fe441d7 ff157013e18f    call    dword ptr [srv!_imp__KeGetCurrentIrql (8fe11370)]
+8fe441dd 3c02            cmp     al,2
+8fe441df 7332            jae     srv!SrvSmbTransactionSecondary+0x63 (8fe44213)  Branch
+
+srv!SrvSmbTransactionSecondary+0x31:
+8fe441e1 a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe441e6 3d0030e18f      cmp     eax,offset srv!WPP_GLOBAL_Control (8fe13000)
+8fe441eb 7426            je      srv!SrvSmbTransactionSecondary+0x63 (8fe44213)  Branch
+
+srv!SrvSmbTransactionSecondary+0x3d:
+8fe441ed 80bb8c00000026  cmp     byte ptr [ebx+8Ch],26h
+8fe441f4 b95c74e18f      mov     ecx,offset srv! ?? ::NNGAKEGL::`string' (8fe1745c)
+8fe441f9 7405            je      srv!SrvSmbTransactionSecondary+0x50 (8fe44200)  Branch
+
+srv!SrvSmbTransactionSecondary+0x4b:
+8fe441fb b9b078e18f      mov     ecx,offset srv! ?? ::NNGAKEGL::`string' (8fe178b0)
+
+srv!SrvSmbTransactionSecondary+0x50:
+8fe44200 51              push    ecx
+8fe44201 681417e18f      push    offset srv!`string'+0xc0 (8fe11714)
+8fe44206 6a2b            push    2Bh
+8fe44208 ff7014          push    dword ptr [eax+14h]
+8fe4420b ff7010          push    dword ptr [eax+10h]
+8fe4420e e86947fcff      call    srv!WPP_SF_s (8fe0897c)
+
+srv!SrvSmbTransactionSecondary+0x63:
+8fe44213 8b434c          mov     eax,dword ptr [ebx+4Ch]
+8fe44216 6a00            push    0
+8fe44218 56              push    esi
+8fe44219 50              push    eax
+8fe4421a 8945f4          mov     dword ptr [ebp-0Ch],eax
+8fe4421d e867e3ffff      call    srv!SrvFindTransaction (8fe42589)
+8fe44222 8bf0            mov     esi,eax
+8fe44224 85f6            test    esi,esi
+8fe44226 7541            jne     srv!SrvSmbTransactionSecondary+0xb9 (8fe44269)  Branch
+
+srv!SrvSmbTransactionSecondary+0x78:
+8fe44228 a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe4422d 80781d02        cmp     byte ptr [eax+1Dh],2
+8fe44231 722e            jb      srv!SrvSmbTransactionSecondary+0xb1 (8fe44261)  Branch
+
+srv!SrvSmbTransactionSecondary+0x83:
+8fe44233 f6402001        test    byte ptr [eax+20h],1
+8fe44237 7428            je      srv!SrvSmbTransactionSecondary+0xb1 (8fe44261)  Branch
+
+srv!SrvSmbTransactionSecondary+0x89:
+8fe44239 ff157013e18f    call    dword ptr [srv!_imp__KeGetCurrentIrql (8fe11370)]
+8fe4423f 3c02            cmp     al,2
+8fe44241 731e            jae     srv!SrvSmbTransactionSecondary+0xb1 (8fe44261)  Branch
+
+srv!SrvSmbTransactionSecondary+0x93:
+8fe44243 a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe44248 3d0030e18f      cmp     eax,offset srv!WPP_GLOBAL_Control (8fe13000)
+8fe4424d 7412            je      srv!SrvSmbTransactionSecondary+0xb1 (8fe44261)  Branch
+
+srv!SrvSmbTransactionSecondary+0x9f:
+8fe4424f 681417e18f      push    offset srv!`string'+0xc0 (8fe11714)
+8fe44254 6a2c            push    2Ch
+8fe44256 ff7014          push    dword ptr [eax+14h]
+8fe44259 ff7010          push    dword ptr [eax+10h]
+8fe4425c e85f30fcff      call    srv!WPP_SF_ (8fe072c0)
+
+srv!SrvSmbTransactionSecondary+0xb1:
+8fe44261 6a02            push    2
+8fe44263 58              pop     eax
+8fe44264 e941030000      jmp     srv!SrvSmbTransactionSecondary+0x3fa (8fe445aa)  Branch
+
+srv!SrvSmbTransactionSecondary+0xb9:
+8fe44269 8b4610          mov     eax,dword ptr [esi+10h]
+8fe4426c 80b89a00000000  cmp     byte ptr [eax+9Ah],0
+8fe44273 7416            je      srv!SrvSmbTransactionSecondary+0xdb (8fe4428b)  Branch
+
+srv!SrvSmbTransactionSecondary+0xc5:
+8fe44275 683c78e18f      push    offset srv! ?? ::NNGAKEGL::`string' (8fe1783c)
+8fe4427a 68240a0000      push    0A24h
+8fe4427f 6a00            push    0
+8fe44281 685c0300c0      push    0C000035Ch
+8fe44286 e916030000      jmp     srv!SrvSmbTransactionSecondary+0x3f1 (8fe445a1)  Branch
+
+srv!SrvSmbTransactionSecondary+0xdb:
+8fe4428b 0fb75709        movzx   edx,word ptr [edi+9]
+8fe4428f 0fb74f07        movzx   ecx,word ptr [edi+7]
+8fe44293 0fb74705        movzx   eax,word ptr [edi+5]
+8fe44297 8955ec          mov     dword ptr [ebp-14h],edx
+8fe4429a 0fb7570d        movzx   edx,word ptr [edi+0Dh]
+8fe4429e 8955f0          mov     dword ptr [ebp-10h],edx
+8fe442a1 0fb7570b        movzx   edx,word ptr [edi+0Bh]
+8fe442a5 0fb77f0f        movzx   edi,word ptr [edi+0Fh]
+8fe442a9 897de4          mov     dword ptr [ebp-1Ch],edi
+8fe442ac 8b7b68          mov     edi,dword ptr [ebx+68h]
+8fe442af 8b7f10          mov     edi,dword ptr [edi+10h]
+8fe442b2 894de0          mov     dword ptr [ebp-20h],ecx
+8fe442b5 03c8            add     ecx,eax
+8fe442b7 8945f8          mov     dword ptr [ebp-8],eax
+8fe442ba 8955fc          mov     dword ptr [ebp-4],edx
+8fe442bd 897ddc          mov     dword ptr [ebp-24h],edi
+8fe442c0 3bcf            cmp     ecx,edi
+8fe442c2 0f875f020000    ja      srv!SrvSmbTransactionSecondary+0x377 (8fe44527)  Branch
+
+srv!SrvSmbTransactionSecondary+0x118:
+8fe442c8 8b4df0          mov     ecx,dword ptr [ebp-10h]
+8fe442cb 03ca            add     ecx,edx
+8fe442cd 3bcf            cmp     ecx,edi
+8fe442cf 0f8752020000    ja      srv!SrvSmbTransactionSecondary+0x377 (8fe44527)  Branch
+
+srv!SrvSmbTransactionSecondary+0x125:
+8fe442d5 8b4dec          mov     ecx,dword ptr [ebp-14h]
+8fe442d8 03c8            add     ecx,eax
+8fe442da 3b4e5c          cmp     ecx,dword ptr [esi+5Ch]
+8fe442dd 0f8744020000    ja      srv!SrvSmbTransactionSecondary+0x377 (8fe44527)  Branch
+
+srv!SrvSmbTransactionSecondary+0x133:
+8fe442e3 8b45e4          mov     eax,dword ptr [ebp-1Ch]
+8fe442e6 03c2            add     eax,edx
+8fe442e8 3b4668          cmp     eax,dword ptr [esi+68h]
+8fe442eb 0f8736020000    ja      srv!SrvSmbTransactionSecondary+0x377 (8fe44527)  Branch
+
+srv!SrvSmbTransactionSecondary+0x141:
+8fe442f1 8b7df4          mov     edi,dword ptr [ebp-0Ch]
+8fe442f4 81c79c010000    add     edi,19Ch
+8fe442fa 6a01            push    1
+8fe442fc 57              push    edi
+8fe442fd 897df4          mov     dword ptr [ebp-0Ch],edi
+8fe44300 ff154413e18f    call    dword ptr [srv!_imp__ExAcquireResourceExclusiveLite (8fe11344)]
+8fe44306 80be9700000001  cmp     byte ptr [esi+97h],1
+8fe4430d 7556            jne     srv!SrvSmbTransactionSecondary+0x1b5 (8fe44365)  Branch
+
+srv!SrvSmbTransactionSecondary+0x15f:
+8fe4430f 8bcf            mov     ecx,edi
+8fe44311 ff15f812e18f    call    dword ptr [srv!_imp_ExReleaseResourceLite (8fe112f8)]
+8fe44317 a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe4431c 80781d02        cmp     byte ptr [eax+1Dh],2
+8fe44320 0f8264020000    jb      srv!SrvSmbTransactionSecondary+0x3da (8fe4458a)  Branch
+
+srv!SrvSmbTransactionSecondary+0x176:
+8fe44326 f6402001        test    byte ptr [eax+20h],1
+8fe4432a 0f845a020000    je      srv!SrvSmbTransactionSecondary+0x3da (8fe4458a)  Branch
+
+srv!SrvSmbTransactionSecondary+0x180:
+8fe44330 ff157013e18f    call    dword ptr [srv!_imp__KeGetCurrentIrql (8fe11370)]
+8fe44336 3c02            cmp     al,2
+8fe44338 0f834c020000    jae     srv!SrvSmbTransactionSecondary+0x3da (8fe4458a)  Branch
+
+srv!SrvSmbTransactionSecondary+0x18e:
+8fe4433e a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe44343 3d0030e18f      cmp     eax,offset srv!WPP_GLOBAL_Control (8fe13000)
+8fe44348 0f843c020000    je      srv!SrvSmbTransactionSecondary+0x3da (8fe4458a)  Branch
+
+srv!SrvSmbTransactionSecondary+0x19e:
+8fe4434e 681417e18f      push    offset srv!`string'+0xc0 (8fe11714)
+8fe44353 6a2f            push    2Fh
+
+srv!SrvSmbTransactionSecondary+0x1a5:
+8fe44355 ff7014          push    dword ptr [eax+14h]
+8fe44358 ff7010          push    dword ptr [eax+10h]
+8fe4435b e8602ffcff      call    srv!WPP_SF_ (8fe072c0)
+8fe44360 e925020000      jmp     srv!SrvSmbTransactionSecondary+0x3da (8fe4458a)  Branch
+
+srv!SrvSmbTransactionSecondary+0x1b5:
+8fe44365 8b4668          mov     eax,dword ptr [esi+68h]
+8fe44368 2b4664          sub     eax,dword ptr [esi+64h]
+8fe4436b 3945fc          cmp     dword ptr [ebp-4],eax
+8fe4436e 0f8770010000    ja      srv!SrvSmbTransactionSecondary+0x334 (8fe444e4)  Branch
+
+srv!SrvSmbTransactionSecondary+0x1c4:
+8fe44374 8b465c          mov     eax,dword ptr [esi+5Ch]
+8fe44377 2b4658          sub     eax,dword ptr [esi+58h]
+8fe4437a 3945f8          cmp     dword ptr [ebp-8],eax
+8fe4437d 0f8761010000    ja      srv!SrvSmbTransactionSecondary+0x334 (8fe444e4)  Branch
+
+srv!SrvSmbTransactionSecondary+0x1d3:
+8fe44383 837df800        cmp     dword ptr [ebp-8],0
+8fe44387 8b3de410e18f    mov     edi,dword ptr [srv!_imp__memmove (8fe110e4)]
+8fe4438d 7418            je      srv!SrvSmbTransactionSecondary+0x1f7 (8fe443a7)  Branch
+
+srv!SrvSmbTransactionSecondary+0x1df:
+8fe4438f 8b4de8          mov     ecx,dword ptr [ebp-18h]
+8fe44392 ff75f8          push    dword ptr [ebp-8]
+8fe44395 8b45e0          mov     eax,dword ptr [ebp-20h]
+8fe44398 03c1            add     eax,ecx
+8fe4439a 50              push    eax
+8fe4439b 8b4640          mov     eax,dword ptr [esi+40h]
+8fe4439e 0345ec          add     eax,dword ptr [ebp-14h]
+8fe443a1 50              push    eax
+8fe443a2 ffd7            call    edi
+8fe443a4 83c40c          add     esp,0Ch
+
+srv!SrvSmbTransactionSecondary+0x1f7:
+8fe443a7 837dfc00        cmp     dword ptr [ebp-4],0
+8fe443ab 7418            je      srv!SrvSmbTransactionSecondary+0x215 (8fe443c5)  Branch
+
+srv!SrvSmbTransactionSecondary+0x1fd:
+8fe443ad 8b4de8          mov     ecx,dword ptr [ebp-18h]
+8fe443b0 ff75fc          push    dword ptr [ebp-4]
+8fe443b3 8b45f0          mov     eax,dword ptr [ebp-10h]
+8fe443b6 03c1            add     eax,ecx
+8fe443b8 50              push    eax
+8fe443b9 8b4648          mov     eax,dword ptr [esi+48h]
+8fe443bc 0345e4          add     eax,dword ptr [ebp-1Ch]
+8fe443bf 50              push    eax
+8fe443c0 ffd7            call    edi
+8fe443c2 83c40c          add     esp,0Ch
+
+srv!SrvSmbTransactionSecondary+0x215:
+8fe443c5 807e0102        cmp     byte ptr [esi+1],2
+8fe443c9 744d            je      srv!SrvSmbTransactionSecondary+0x268 (8fe44418)  Branch
+
+srv!SrvSmbTransactionSecondary+0x21b:
+8fe443cb 8b4df4          mov     ecx,dword ptr [ebp-0Ch]
+8fe443ce ff15f812e18f    call    dword ptr [srv!_imp_ExReleaseResourceLite (8fe112f8)]
+8fe443d4 a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe443d9 80781d02        cmp     byte ptr [eax+1Dh],2
+8fe443dd 722e            jb      srv!SrvSmbTransactionSecondary+0x25d (8fe4440d)  Branch
+
+srv!SrvSmbTransactionSecondary+0x22f:
+8fe443df f6402001        test    byte ptr [eax+20h],1
+8fe443e3 7428            je      srv!SrvSmbTransactionSecondary+0x25d (8fe4440d)  Branch
+
+srv!SrvSmbTransactionSecondary+0x235:
+8fe443e5 ff157013e18f    call    dword ptr [srv!_imp__KeGetCurrentIrql (8fe11370)]
+8fe443eb 3c02            cmp     al,2
+8fe443ed 731e            jae     srv!SrvSmbTransactionSecondary+0x25d (8fe4440d)  Branch
+
+srv!SrvSmbTransactionSecondary+0x23f:
+8fe443ef a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe443f4 3d0030e18f      cmp     eax,offset srv!WPP_GLOBAL_Control (8fe13000)
+8fe443f9 7412            je      srv!SrvSmbTransactionSecondary+0x25d (8fe4440d)  Branch
+
+srv!SrvSmbTransactionSecondary+0x24b:
+8fe443fb 681417e18f      push    offset srv!`string'+0xc0 (8fe11714)
+8fe44400 6a31            push    31h
+
+srv!SrvSmbTransactionSecondary+0x252:
+8fe44402 ff7014          push    dword ptr [eax+14h]
+8fe44405 ff7010          push    dword ptr [eax+10h]
+8fe44408 e8b32efcff      call    srv!WPP_SF_ (8fe072c0)
+
+srv!SrvSmbTransactionSecondary+0x25d:
+8fe4440d 56              push    esi
+8fe4440e e81accfdff      call    srv!SrvDereferenceTransaction (8fe2102d)
+8fe44413 e949feffff      jmp     srv!SrvSmbTransactionSecondary+0xb1 (8fe44261)  Branch
+
+srv!SrvSmbTransactionSecondary+0x268:
+8fe44418 8b45f8          mov     eax,dword ptr [ebp-8]
+8fe4441b 014658          add     dword ptr [esi+58h],eax
+8fe4441e 8b45fc          mov     eax,dword ptr [ebp-4]
+8fe44421 014664          add     dword ptr [esi+64h],eax
+8fe44424 8b4664          mov     eax,dword ptr [esi+64h]
+8fe44427 8b4e58          mov     ecx,dword ptr [esi+58h]
+8fe4442a 3b4668          cmp     eax,dword ptr [esi+68h]
+8fe4442d 7569            jne     srv!SrvSmbTransactionSecondary+0x2e8 (8fe44498)  Branch
+
+srv!SrvSmbTransactionSecondary+0x27f:
+8fe4442f 3b4e5c          cmp     ecx,dword ptr [esi+5Ch]
+8fe44432 7564            jne     srv!SrvSmbTransactionSecondary+0x2e8 (8fe44498)  Branch
+
+srv!SrvSmbTransactionSecondary+0x284:
+8fe44434 8b4610          mov     eax,dword ptr [esi+10h]
+8fe44437 89433c          mov     dword ptr [ebx+3Ch],eax
+8fe4443a 8b4610          mov     eax,dword ptr [esi+10h]
+8fe4443d 8b4008          mov     eax,dword ptr [eax+8]
+8fe44440 33c9            xor     ecx,ecx
+8fe44442 83c004          add     eax,4
+8fe44445 41              inc     ecx
+8fe44446 f00fc108        lock xadd dword ptr [eax],ecx
+8fe4444a 8b433c          mov     eax,dword ptr [ebx+3Ch]
+8fe4444d 8b8080000000    mov     eax,dword ptr [eax+80h]
+8fe44453 85c0            test    eax,eax
+8fe44455 7409            je      srv!SrvSmbTransactionSecondary+0x2b0 (8fe44460)  Branch
+
+srv!SrvSmbTransactionSecondary+0x2a7:
+8fe44457 50              push    eax
+8fe44458 894344          mov     dword ptr [ebx+44h],eax
+8fe4445b e822b6fdff      call    srv!SrvReferenceSecurityContext (8fe1fa82)
+
+srv!SrvSmbTransactionSecondary+0x2b0:
+8fe44460 8b4614          mov     eax,dword ptr [esi+14h]
+8fe44463 894340          mov     dword ptr [ebx+40h],eax
+8fe44466 8b4614          mov     eax,dword ptr [esi+14h]
+8fe44469 8b4008          mov     eax,dword ptr [eax+8]
+8fe4446c 33c9            xor     ecx,ecx
+8fe4446e 83c004          add     eax,4
+8fe44471 41              inc     ecx
+8fe44472 f00fc108        lock xadd dword ptr [eax],ecx
+8fe44476 8b4df4          mov     ecx,dword ptr [ebp-0Ch]
+8fe44479 c6869700000001  mov     byte ptr [esi+97h],1
+8fe44480 ff15f812e18f    call    dword ptr [srv!_imp_ExReleaseResourceLite (8fe112f8)]
+8fe44486 8bcb            mov     ecx,ebx
+8fe44488 89b3a0000000    mov     dword ptr [ebx+0A0h],esi
+8fe4448e e8c0edffff      call    srv!ExecuteTransaction (8fe43253)
+8fe44493 e912010000      jmp     srv!SrvSmbTransactionSecondary+0x3fa (8fe445aa)  Branch
+
+srv!SrvSmbTransactionSecondary+0x2e8:
+8fe44498 8b4df4          mov     ecx,dword ptr [ebp-0Ch]
+8fe4449b ff15f812e18f    call    dword ptr [srv!_imp_ExReleaseResourceLite (8fe112f8)]
+8fe444a1 a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe444a6 80781d02        cmp     byte ptr [eax+1Dh],2
+8fe444aa 0f825dffffff    jb      srv!SrvSmbTransactionSecondary+0x25d (8fe4440d)  Branch
+
+srv!SrvSmbTransactionSecondary+0x300:
+8fe444b0 f6402001        test    byte ptr [eax+20h],1
+8fe444b4 0f8453ffffff    je      srv!SrvSmbTransactionSecondary+0x25d (8fe4440d)  Branch
+
+srv!SrvSmbTransactionSecondary+0x30a:
+8fe444ba ff157013e18f    call    dword ptr [srv!_imp__KeGetCurrentIrql (8fe11370)]
+8fe444c0 3c02            cmp     al,2
+8fe444c2 0f8345ffffff    jae     srv!SrvSmbTransactionSecondary+0x25d (8fe4440d)  Branch
+
+srv!SrvSmbTransactionSecondary+0x318:
+8fe444c8 a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe444cd 3d0030e18f      cmp     eax,offset srv!WPP_GLOBAL_Control (8fe13000)
+8fe444d2 0f8435ffffff    je      srv!SrvSmbTransactionSecondary+0x25d (8fe4440d)  Branch
+
+srv!SrvSmbTransactionSecondary+0x328:
+8fe444d8 681417e18f      push    offset srv!`string'+0xc0 (8fe11714)
+8fe444dd 6a32            push    32h
+8fe444df e91effffff      jmp     srv!SrvSmbTransactionSecondary+0x252 (8fe44402)  Branch
+
+srv!SrvSmbTransactionSecondary+0x334:
+8fe444e4 8bcf            mov     ecx,edi
+8fe444e6 ff15f812e18f    call    dword ptr [srv!_imp_ExReleaseResourceLite (8fe112f8)]
+8fe444ec a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe444f1 80781d02        cmp     byte ptr [eax+1Dh],2
+8fe444f5 0f828f000000    jb      srv!SrvSmbTransactionSecondary+0x3da (8fe4458a)  Branch
+
+srv!SrvSmbTransactionSecondary+0x34b:
+8fe444fb f6402001        test    byte ptr [eax+20h],1
+8fe444ff 0f8485000000    je      srv!SrvSmbTransactionSecondary+0x3da (8fe4458a)  Branch
+
+srv!SrvSmbTransactionSecondary+0x355:
+8fe44505 ff157013e18f    call    dword ptr [srv!_imp__KeGetCurrentIrql (8fe11370)]
+8fe4450b 3c02            cmp     al,2
+8fe4450d 737b            jae     srv!SrvSmbTransactionSecondary+0x3da (8fe4458a)  Branch
+
+srv!SrvSmbTransactionSecondary+0x35f:
+8fe4450f a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe44514 3d0030e18f      cmp     eax,offset srv!WPP_GLOBAL_Control (8fe13000)
+8fe44519 746f            je      srv!SrvSmbTransactionSecondary+0x3da (8fe4458a)  Branch
+
+srv!SrvSmbTransactionSecondary+0x36b:
+8fe4451b 681417e18f      push    offset srv!`string'+0xc0 (8fe11714)
+8fe44520 6a30            push    30h
+8fe44522 e92efeffff      jmp     srv!SrvSmbTransactionSecondary+0x1a5 (8fe44355)  Branch
+
+srv!SrvSmbTransactionSecondary+0x377:
+8fe44527 a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe4452c 80781d02        cmp     byte ptr [eax+1Dh],2
+8fe44530 7258            jb      srv!SrvSmbTransactionSecondary+0x3da (8fe4458a)  Branch
+
+srv!SrvSmbTransactionSecondary+0x382:
+8fe44532 f6402001        test    byte ptr [eax+20h],1
+8fe44536 7452            je      srv!SrvSmbTransactionSecondary+0x3da (8fe4458a)  Branch
+
+srv!SrvSmbTransactionSecondary+0x388:
+8fe44538 ff157013e18f    call    dword ptr [srv!_imp__KeGetCurrentIrql (8fe11370)]
+8fe4453e 3c02            cmp     al,2
+8fe44540 7348            jae     srv!SrvSmbTransactionSecondary+0x3da (8fe4458a)  Branch
+
+srv!SrvSmbTransactionSecondary+0x392:
+8fe44542 a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe44547 3d0030e18f      cmp     eax,offset srv!WPP_GLOBAL_Control (8fe13000)
+8fe4454c 743c            je      srv!SrvSmbTransactionSecondary+0x3da (8fe4458a)  Branch
+
+srv!SrvSmbTransactionSecondary+0x39e:
+8fe4454e ff75fc          push    dword ptr [ebp-4]
+8fe44551 bf1417e18f      mov     edi,offset srv!`string'+0xc0 (8fe11714)
+8fe44556 ff75f0          push    dword ptr [ebp-10h]
+8fe44559 ff75f8          push    dword ptr [ebp-8]
+8fe4455c ff75e0          push    dword ptr [ebp-20h]
+8fe4455f 57              push    edi
+8fe44560 6a2d            push    2Dh
+8fe44562 ff7014          push    dword ptr [eax+14h]
+8fe44565 ff7010          push    dword ptr [eax+10h]
+8fe44568 e8c867fcff      call    srv!WPP_SF_llll (8fe0ad35)
+8fe4456d a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe44572 3d0030e18f      cmp     eax,offset srv!WPP_GLOBAL_Control (8fe13000)
+8fe44577 7411            je      srv!SrvSmbTransactionSecondary+0x3da (8fe4458a)  Branch
+
+srv!SrvSmbTransactionSecondary+0x3c9:
+8fe44579 ff75dc          push    dword ptr [ebp-24h]
+8fe4457c 57              push    edi
+8fe4457d 6a2e            push    2Eh
+8fe4457f ff7014          push    dword ptr [eax+14h]
+8fe44582 ff7010          push    dword ptr [eax+10h]
+8fe44585 e8d935fcff      call    srv!WPP_SF_d (8fe07b63)
+
+srv!SrvSmbTransactionSecondary+0x3da:
+8fe4458a 56              push    esi
+8fe4458b e89dcafdff      call    srv!SrvDereferenceTransaction (8fe2102d)
+8fe44590 683c78e18f      push    offset srv! ?? ::NNGAKEGL::`string' (8fe1783c)
+8fe44595 68ef0a0000      push    0AEFh
+8fe4459a 6a00            push    0
+8fe4459c 68012098c0      push    0C0982001h
+
+srv!SrvSmbTransactionSecondary+0x3f1:
+8fe445a1 53              push    ebx
+8fe445a2 e828380000      call    srv!_SrvSetSmbError2 (8fe47dcf)
+8fe445a7 33c0            xor     eax,eax
+8fe445a9 40              inc     eax
+
+srv!SrvSmbTransactionSecondary+0x3fa:
+8fe445aa 5f              pop     edi
+8fe445ab 5e              pop     esi
+8fe445ac 5b              pop     ebx
+8fe445ad c9              leave
+8fe445ae c3              ret
+kd> uf srv!SrvProcessSmb+0x187
+srv!SrvProcessSmb:
+8fe0d38e 8bff            mov     edi,edi
+8fe0d390 55              push    ebp
+8fe0d391 8bec            mov     ebp,esp
+8fe0d393 83ec14          sub     esp,14h
+8fe0d396 56              push    esi
+8fe0d397 8bf1            mov     esi,ecx
+8fe0d399 8b464c          mov     eax,dword ptr [esi+4Ch]
+8fe0d39c 80786e00        cmp     byte ptr [eax+6Eh],0
+8fe0d3a0 7505            jne     srv!SrvProcessSmb+0x19 (8fe0d3a7)  Branch
+
+srv!SrvProcessSmb+0x14:
+8fe0d3a2 e8a3970100      call    srv!SrvInitializeConnection (8fe26b4a)
+
+srv!SrvProcessSmb+0x19:
+8fe0d3a7 837e5001        cmp     dword ptr [esi+50h],1
+8fe0d3ab 7538            jne     srv!SrvProcessSmb+0x57 (8fe0d3e5)  Branch
+
+srv!SrvProcessSmb+0x1f:
+8fe0d3ad 8b464c          mov     eax,dword ptr [esi+4Ch]
+8fe0d3b0 80786f00        cmp     byte ptr [eax+6Fh],0
+8fe0d3b4 742f            je      srv!SrvProcessSmb+0x57 (8fe0d3e5)  Branch
+
+srv!SrvProcessSmb+0x28:
+8fe0d3b6 8bce            mov     ecx,esi
+8fe0d3b8 e80a92ffff      call    srv!SrvCheckSmbSecuritySignature (8fe065c7)
+8fe0d3bd 84c0            test    al,al
+8fe0d3bf 7524            jne     srv!SrvProcessSmb+0x57 (8fe0d3e5)  Branch
+
+srv!SrvProcessSmb+0x33:
+8fe0d3c1 68b60ae18f      push    offset srv! ?? ::FNODOBFM::`string' (8fe10ab6)
+8fe0d3c6 68df000000      push    0DFh
+8fe0d3cb 6a00            push    0
+8fe0d3cd 68220000c0      push    0C0000022h
+8fe0d3d2 56              push    esi
+8fe0d3d3 e8f7a90300      call    srv!_SrvSetSmbError2 (8fe47dcf)
+8fe0d3d8 6a01            push    1
+8fe0d3da 56              push    esi
+8fe0d3db e863ffffff      call    srv!SrvEndSmbProcessing (8fe0d343)
+8fe0d3e0 e9a5010000      jmp     srv!SrvProcessSmb+0x1fc (8fe0d58a)  Branch
+
+srv!SrvProcessSmb+0x57:
+8fe0d3e5 837e5001        cmp     dword ptr [esi+50h],1
+8fe0d3e9 53              push    ebx
+8fe0d3ea 57              push    edi
+8fe0d3eb bfd416e18f      mov     edi,offset srv!`string'+0x80 (8fe116d4)
+8fe0d3f0 bb0030e18f      mov     ebx,offset srv!WPP_GLOBAL_Control (8fe13000)
+8fe0d3f5 0f8594000000    jne     srv!SrvProcessSmb+0x101 (8fe0d48f)  Branch
+
+srv!SrvProcessSmb+0x6d:
+8fe0d3fb a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe0d400 f6402008        test    byte ptr [eax+20h],8
+8fe0d404 0f8485000000    je      srv!SrvProcessSmb+0x101 (8fe0d48f)  Branch
+
+srv!SrvProcessSmb+0x7c:
+8fe0d40a 8b4670          mov     eax,dword ptr [esi+70h]
+8fe0d40d 0fb7481c        movzx   ecx,word ptr [eax+1Ch]
+8fe0d411 894df8          mov     dword ptr [ebp-8],ecx
+8fe0d414 0fb74818        movzx   ecx,word ptr [eax+18h]
+8fe0d418 894df0          mov     dword ptr [ebp-10h],ecx
+8fe0d41b 0fb7481e        movzx   ecx,word ptr [eax+1Eh]
+8fe0d41f 894dfc          mov     dword ptr [ebp-4],ecx
+8fe0d422 0fb7481a        movzx   ecx,word ptr [eax+1Ah]
+8fe0d426 660fb64004      movzx   ax,byte ptr [eax+4]
+8fe0d42b 0fb7c0          movzx   eax,ax
+8fe0d42e 8945ec          mov     dword ptr [ebp-14h],eax
+8fe0d431 a10010e18f      mov     eax,dword ptr [srv!_imp__KeTickCount (8fe11000)]
+8fe0d436 894df4          mov     dword ptr [ebp-0Ch],ecx
+8fe0d439 eb02            jmp     srv!SrvProcessSmb+0xaf (8fe0d43d)  Branch
+
+srv!SrvProcessSmb+0xad:
+8fe0d43b f390            pause
+
+srv!SrvProcessSmb+0xaf:
+8fe0d43d 8b5004          mov     edx,dword ptr [eax+4]
+8fe0d440 8b08            mov     ecx,dword ptr [eax]
+8fe0d442 8b5808          mov     ebx,dword ptr [eax+8]
+8fe0d445 3bd3            cmp     edx,ebx
+8fe0d447 75f2            jne     srv!SrvProcessSmb+0xad (8fe0d43b)  Branch
+
+srv!SrvProcessSmb+0xbb:
+8fe0d449 a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe0d44e bb0030e18f      mov     ebx,offset srv!WPP_GLOBAL_Control (8fe13000)
+8fe0d453 3bc3            cmp     eax,ebx
+8fe0d455 7438            je      srv!SrvProcessSmb+0x101 (8fe0d48f)  Branch
+
+srv!SrvProcessSmb+0xc9:
+8fe0d457 0fb755fc        movzx   edx,word ptr [ebp-4]
+8fe0d45b 52              push    edx
+8fe0d45c 0fb755f8        movzx   edx,word ptr [ebp-8]
+8fe0d460 52              push    edx
+8fe0d461 0fb755f4        movzx   edx,word ptr [ebp-0Ch]
+8fe0d465 52              push    edx
+8fe0d466 0fb755f0        movzx   edx,word ptr [ebp-10h]
+8fe0d46a 52              push    edx
+8fe0d46b 0fb755ec        movzx   edx,word ptr [ebp-14h]
+8fe0d46f 52              push    edx
+8fe0d470 8b5668          mov     edx,dword ptr [esi+68h]
+8fe0d473 56              push    esi
+8fe0d474 ffb680000000    push    dword ptr [esi+80h]
+8fe0d47a ff7670          push    dword ptr [esi+70h]
+8fe0d47d ff7210          push    dword ptr [edx+10h]
+8fe0d480 51              push    ecx
+8fe0d481 57              push    edi
+8fe0d482 6a0e            push    0Eh
+8fe0d484 ff7014          push    dword ptr [eax+14h]
+8fe0d487 ff7010          push    dword ptr [eax+10h]
+8fe0d48a e858feffff      call    srv!WPP_SF_ddqqqDDDDD (8fe0d2e7)
+
+srv!SrvProcessSmb+0x101:
+8fe0d48f 660fb68e8c000000 movzx   cx,byte ptr [esi+8Ch]
+8fe0d497 66a18c31e18f    mov     ax,word ptr [srv!SessionInvalidateCommand (8fe1318c)]
+8fe0d49d 663bc8          cmp     cx,ax
+8fe0d4a0 740a            je      srv!SrvProcessSmb+0x11e (8fe0d4ac)  Branch
+
+srv!SrvProcessSmb+0x114:
+8fe0d4a2 b900ff0000      mov     ecx,0FF00h
+8fe0d4a7 663bc1          cmp     ax,cx
+8fe0d4aa 7552            jne     srv!SrvProcessSmb+0x170 (8fe0d4fe)  Branch
+
+srv!SrvProcessSmb+0x11e:
+8fe0d4ac 0fb705d038e18f  movzx   eax,word ptr [srv!SessionInvalidateIndex (8fe138d0)]
+8fe0d4b3 0fb70d9031e18f  movzx   ecx,word ptr [srv!SessionInvalidateMod (8fe13190)]
+8fe0d4ba 99              cdq
+8fe0d4bb f7f9            idiv    eax,ecx
+8fe0d4bd 66ff05d038e18f  inc     word ptr [srv!SessionInvalidateIndex (8fe138d0)]
+8fe0d4c4 85d2            test    edx,edx
+8fe0d4c6 7536            jne     srv!SrvProcessSmb+0x170 (8fe0d4fe)  Branch
+
+srv!SrvProcessSmb+0x13a:
+8fe0d4c8 8b4670          mov     eax,dword ptr [esi+70h]
+8fe0d4cb 0fb7401c        movzx   eax,word ptr [eax+1Ch]
+8fe0d4cf 50              push    eax
+8fe0d4d0 56              push    esi
+8fe0d4d1 e86f350300      call    srv!SrvVerifyUid (8fe40a45)
+8fe0d4d6 8b463c          mov     eax,dword ptr [esi+3Ch]
+8fe0d4d9 85c0            test    eax,eax
+8fe0d4db 7421            je      srv!SrvProcessSmb+0x170 (8fe0d4fe)  Branch
+
+srv!SrvProcessSmb+0x14f:
+8fe0d4dd c6809a00000001  mov     byte ptr [eax+9Ah],1
+8fe0d4e4 a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe0d4e9 3bc3            cmp     eax,ebx
+8fe0d4eb 7411            je      srv!SrvProcessSmb+0x170 (8fe0d4fe)  Branch
+
+srv!SrvProcessSmb+0x15f:
+8fe0d4ed ff763c          push    dword ptr [esi+3Ch]
+8fe0d4f0 57              push    edi
+8fe0d4f1 6a0f            push    0Fh
+8fe0d4f3 ff7014          push    dword ptr [eax+14h]
+8fe0d4f6 ff7010          push    dword ptr [eax+10h]
+8fe0d4f9 e865a6ffff      call    srv!WPP_SF_d (8fe07b63)
+
+srv!SrvProcessSmb+0x170:
+8fe0d4fe 0fb6868c000000  movzx   eax,byte ptr [esi+8Ch]
+8fe0d505 0fb6802032e18f  movzx   eax,byte ptr srv!SrvSmbIndexTable (8fe13220)[eax]
+8fe0d50c 8bce            mov     ecx,esi
+8fe0d50e ff14852033e18f  call    dword ptr srv!SrvSmbDispatchTable (8fe13320)[eax*4]
+8fe0d515 83f803          cmp     eax,3
+8fe0d518 746e            je      srv!SrvProcessSmb+0x1fa (8fe0d588)  Branch
+
+srv!SrvProcessSmb+0x18c:
+8fe0d51a 85c0            test    eax,eax
+8fe0d51c 756f            jne     srv!SrvProcessSmb+0x1ff (8fe0d58d)  Branch
+
+srv!SrvProcessSmb+0x190:
+8fe0d51e 8bce            mov     ecx,esi
+8fe0d520 e8c30f0000      call    srv!SrvValidateSmb (8fe0e4e8)
+8fe0d525 84c0            test    al,al
+8fe0d527 0f8562ffffff    jne     srv!SrvProcessSmb+0x101 (8fe0d48f)  Branch
+
+srv!SrvProcessSmb+0x19f:
+8fe0d52d a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe0d532 80781d02        cmp     byte ptr [eax+1Dh],2
+8fe0d536 7248            jb      srv!SrvProcessSmb+0x1f2 (8fe0d580)  Branch
+
+srv!SrvProcessSmb+0x1aa:
+8fe0d538 f6402001        test    byte ptr [eax+20h],1
+8fe0d53c 7442            je      srv!SrvProcessSmb+0x1f2 (8fe0d580)  Branch
+
+srv!SrvProcessSmb+0x1b0:
+8fe0d53e ff157013e18f    call    dword ptr [srv!_imp__KeGetCurrentIrql (8fe11370)]
+8fe0d544 3c02            cmp     al,2
+8fe0d546 7338            jae     srv!SrvProcessSmb+0x1f2 (8fe0d580)  Branch
+
+srv!SrvProcessSmb+0x1ba:
+8fe0d548 a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe0d54d 3bc3            cmp     eax,ebx
+8fe0d54f 742f            je      srv!SrvProcessSmb+0x1f2 (8fe0d580)  Branch
+
+srv!SrvProcessSmb+0x1c3:
+8fe0d551 57              push    edi
+8fe0d552 6a15            push    15h
+8fe0d554 ff7014          push    dword ptr [eax+14h]
+8fe0d557 ff7010          push    dword ptr [eax+10h]
+8fe0d55a e8619dffff      call    srv!WPP_SF_ (8fe072c0)
+8fe0d55f a10030e18f      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (8fe13000)]
+8fe0d564 3bc3            cmp     eax,ebx
+8fe0d566 7418            je      srv!SrvProcessSmb+0x1f2 (8fe0d580)  Branch
+
+srv!SrvProcessSmb+0x1da:
+8fe0d568 8b4e4c          mov     ecx,dword ptr [esi+4Ch]
+8fe0d56b 81c10c020000    add     ecx,20Ch
+8fe0d571 51              push    ecx
+8fe0d572 57              push    edi
+8fe0d573 6a16            push    16h
+8fe0d575 ff7014          push    dword ptr [eax+14h]
+8fe0d578 ff7010          push    dword ptr [eax+10h]
+8fe0d57b e8d6dfffff      call    srv!WPP_SF_z (8fe0b556)
+
+srv!SrvProcessSmb+0x1f2:
+8fe0d580 6a01            push    1
+
+srv!SrvProcessSmb+0x1f4:
+8fe0d582 56              push    esi
+8fe0d583 e8bbfdffff      call    srv!SrvEndSmbProcessing (8fe0d343)
+
+srv!SrvProcessSmb+0x1fa:
+8fe0d588 5f              pop     edi
+8fe0d589 5b              pop     ebx
+
+srv!SrvProcessSmb+0x1fc:
+8fe0d58a 5e              pop     esi
+8fe0d58b c9              leave
+8fe0d58c c3              ret
+
+srv!SrvProcessSmb+0x1ff:
+8fe0d58d 50              push    eax
+8fe0d58e ebf2            jmp     srv!SrvProcessSmb+0x1f4 (8fe0d582)  Branch
+kd> uf srv!WorkerThread+0x15c
+srv!WorkerThread:
+8fe1c7a2 8bff            mov     edi,edi
+8fe1c7a4 55              push    ebp
+8fe1c7a5 8bec            mov     ebp,esp
+8fe1c7a7 83ec14          sub     esp,14h
+8fe1c7aa 53              push    ebx
+8fe1c7ab 56              push    esi
+8fe1c7ac 8b7508          mov     esi,dword ptr [ebp+8]
+8fe1c7af 33c0            xor     eax,eax
+8fe1c7b1 57              push    edi
+8fe1c7b2 8945f4          mov     dword ptr [ebp-0Ch],eax
+8fe1c7b5 8945f8          mov     dword ptr [ebp-8],eax
+8fe1c7b8 3b35a03ee18f    cmp     esi,dword ptr [srv!SrvBlockingWorkQueues (8fe13ea0)]
+8fe1c7be 720c            jb      srv!WorkerThread+0x2a (8fe1c7cc)  Branch
+
+srv!WorkerThread+0x1e:
+8fe1c7c0 c6450b01        mov     byte ptr [ebp+0Bh],1
+8fe1c7c4 3b35a43ee18f    cmp     esi,dword ptr [srv!eSrvBlockingWorkQueues (8fe13ea4)]
+8fe1c7ca 7203            jb      srv!WorkerThread+0x2d (8fe1c7cf)  Branch
+
+srv!WorkerThread+0x2a:
+8fe1c7cc 88450b          mov     byte ptr [ebp+0Bh],al
+
+srv!WorkerThread+0x2d:
+8fe1c7cf 8b3d3010e18f    mov     edi,dword ptr [srv!_imp__KeGetCurrentThread (8fe11030)]
+8fe1c7d5 81fe483ae18f    cmp     esi,offset srv!SrvLpcWorkQueue (8fe13a48)
+8fe1c7db 0f9445ff        sete    byte ptr [ebp-1]
+8fe1c7df 8945f0          mov     dword ptr [ebp-10h],eax
+8fe1c7e2 398604010000    cmp     dword ptr [esi+104h],eax
+8fe1c7e8 7508            jne     srv!WorkerThread+0x50 (8fe1c7f2)  Branch
+
+srv!WorkerThread+0x48:
+8fe1c7ea ffd7            call    edi
+8fe1c7ec 898604010000    mov     dword ptr [esi+104h],eax
+
+srv!WorkerThread+0x50:
+8fe1c7f2 ff357c39e18f    push    dword ptr [srv!SrvThreadPriority (8fe1397c)]
+8fe1c7f8 56              push    esi
+8fe1c7f9 e827010000      call    srv!InitializeWorkerThread (8fe1c925)
+8fe1c7fe ffd7            call    edi
+8fe1c800 398604010000    cmp     dword ptr [esi+104h],eax
+8fe1c806 7406            je      srv!WorkerThread+0x6c (8fe1c80e)  Branch
+
+srv!WorkerThread+0x66:
+8fe1c808 8d4630          lea     eax,[esi+30h]
+8fe1c80b 8945f0          mov     dword ptr [ebp-10h],eax
+
+srv!WorkerThread+0x6c:
+8fe1c80e 8d5e38          lea     ebx,[esi+38h]
+
+srv!WorkerThread+0x6f:
+8fe1c811 0fb606          movzx   eax,byte ptr [esi]
+8fe1c814 ff75f0          push    dword ptr [ebp-10h]
+8fe1c817 50              push    eax
+8fe1c818 8d4604          lea     eax,[esi+4]
+8fe1c81b 50              push    eax
+8fe1c81c ff15ec12e18f    call    dword ptr [srv!_imp__KeRemoveQueue (8fe112ec)]
+8fe1c822 8bf8            mov     edi,eax
+8fe1c824 81ff02010000    cmp     edi,102h
+8fe1c82a 752e            jne     srv!WorkerThread+0xb8 (8fe1c85a)  Branch
+
+srv!WorkerThread+0x8a:
+8fe1c82c 33c9            xor     ecx,ecx
+8fe1c82e 33c0            xor     eax,eax
+8fe1c830 41              inc     ecx
+8fe1c831 8bd3            mov     edx,ebx
+8fe1c833 40              inc     eax
+8fe1c834 f00fb10a        lock cmpxchg dword ptr [edx],ecx
+8fe1c838 83f801          cmp     eax,1
+8fe1c83b 74d4            je      srv!WorkerThread+0x6f (8fe1c811)  Branch
+
+srv!WorkerThread+0x9b:
+8fe1c83d 8bc3            mov     eax,ebx
+8fe1c83f 83c9ff          or      ecx,0FFFFFFFFh
+8fe1c842 f00fc108        lock xadd dword ptr [eax],ecx
+8fe1c846 8d86f8000000    lea     eax,[esi+0F8h]
+8fe1c84c 83c9ff          or      ecx,0FFFFFFFFh
+8fe1c84f f00fc108        lock xadd dword ptr [eax],ecx
+8fe1c853 33c9            xor     ecx,ecx
+8fe1c855 e80d33ffff      call    srv!SrvTerminateWorkerThread (8fe0fb67)
+
+srv!WorkerThread+0xb8:
+8fe1c85a 83c8ff          or      eax,0FFFFFFFFh
+8fe1c85d f00fc103        lock xadd dword ptr [ebx],eax
+8fe1c861 751d            jne     srv!WorkerThread+0xde (8fe1c880)  Branch
+
+srv!WorkerThread+0xc1:
+8fe1c863 803d8d3ce18f00  cmp     byte ptr [srv!SrvFspTransitioning (8fe13c8d)],0
+8fe1c86a 7514            jne     srv!WorkerThread+0xde (8fe1c880)  Branch
+
+srv!WorkerThread+0xca:
+8fe1c86c 8b86f8000000    mov     eax,dword ptr [esi+0F8h]
+8fe1c872 3b86fc000000    cmp     eax,dword ptr [esi+0FCh]
+8fe1c878 7306            jae     srv!WorkerThread+0xde (8fe1c880)  Branch
+
+srv!WorkerThread+0xd8:
+8fe1c87a 56              push    esi
+8fe1c87b e845feffff      call    srv!CreateQueueThread (8fe1c6c5)
+
+srv!WorkerThread+0xde:
+8fe1c880 83c7f8          add     edi,0FFFFFFF8h
+8fe1c883 ff45f8          inc     dword ptr [ebp-8]
+8fe1c886 837df810        cmp     dword ptr [ebp-8],10h
+8fe1c88a 751f            jne     srv!WorkerThread+0x109 (8fe1c8ab)  Branch
+
+srv!WorkerThread+0xea:
+8fe1c88c 8365f800        and     dword ptr [ebp-8],0
+8fe1c890 a10010e18f      mov     eax,dword ptr [srv!_imp__KeTickCount (8fe11000)]
+8fe1c895 eb02            jmp     srv!WorkerThread+0xf7 (8fe1c899)  Branch
+
+srv!WorkerThread+0xf5:
+8fe1c897 f390            pause
+
+srv!WorkerThread+0xf7:
+8fe1c899 8b5004          mov     edx,dword ptr [eax+4]
+8fe1c89c 8b08            mov     ecx,dword ptr [eax]
+8fe1c89e 8b5808          mov     ebx,dword ptr [eax+8]
+8fe1c8a1 3bd3            cmp     edx,ebx
+8fe1c8a3 75f2            jne     srv!WorkerThread+0xf5 (8fe1c897)  Branch
+
+srv!WorkerThread+0x103:
+8fe1c8a5 898ed8010000    mov     dword ptr [esi+1D8h],ecx
+
+srv!WorkerThread+0x109:
+8fe1c8ab ff45f4          inc     dword ptr [ebp-0Ch]
+8fe1c8ae 837df410        cmp     dword ptr [ebp-0Ch],10h
+8fe1c8b2 740e            je      srv!WorkerThread+0x120 (8fe1c8c2)  Branch
+
+srv!WorkerThread+0x112:
+8fe1c8b4 8b86d0010000    mov     eax,dword ptr [esi+1D0h]
+8fe1c8ba 3b86e0010000    cmp     eax,dword ptr [esi+1E0h]
+8fe1c8c0 7539            jne     srv!WorkerThread+0x159 (8fe1c8fb)  Branch
+
+srv!WorkerThread+0x120:
+8fe1c8c2 8b9ed8010000    mov     ebx,dword ptr [esi+1D8h]
+8fe1c8c8 8b86d0010000    mov     eax,dword ptr [esi+1D0h]
+8fe1c8ce 8365f400        and     dword ptr [ebp-0Ch],0
+8fe1c8d2 2b5f10          sub     ebx,dword ptr [edi+10h]
+8fe1c8d5 3b86e0010000    cmp     eax,dword ptr [esi+1E0h]
+8fe1c8db 750c            jne     srv!WorkerThread+0x147 (8fe1c8e9)  Branch
+
+srv!WorkerThread+0x13b:
+8fe1c8dd 6a01            push    1
+8fe1c8df 68804de18f      push    offset srv!SrvIdleLogic (8fe14d80)
+8fe1c8e4 e87039ffff      call    srv!SrvLibMarkServerAsNotIdle (8fe10259)
+
+srv!WorkerThread+0x147:
+8fe1c8e9 ff86d0010000    inc     dword ptr [esi+1D0h]
+8fe1c8ef 8d86c8010000    lea     eax,[esi+1C8h]
+8fe1c8f5 0118            add     dword ptr [eax],ebx
+8fe1c8f7 83500400        adc     dword ptr [eax+4],0
+
+srv!WorkerThread+0x159:
+8fe1c8fb 8a450b          mov     al,byte ptr [ebp+0Bh]
+8fe1c8fe 884714          mov     byte ptr [edi+14h],al
+8fe1c901 8a45ff          mov     al,byte ptr [ebp-1]
+8fe1c904 8bcf            mov     ecx,edi
+8fe1c906 897dec          mov     dword ptr [ebp-14h],edi
+8fe1c909 884715          mov     byte ptr [edi+15h],al
+8fe1c90c ff5718          call    dword ptr [edi+18h]
+8fe1c90f 8d5e38          lea     ebx,[esi+38h]
+8fe1c912 33c9            xor     ecx,ecx
+8fe1c914 8bc3            mov     eax,ebx
+8fe1c916 41              inc     ecx
+8fe1c917 f00fc108        lock xadd dword ptr [eax],ecx
+8fe1c91b e9f1feffff      jmp     srv!WorkerThread+0x6f (8fe1c811)  Branch

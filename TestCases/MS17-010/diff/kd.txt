@@ -1,0 +1,2266 @@
+
+Microsoft (R) Windows Debugger Version 10.0.15063.0 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Waiting for pipe \\.\pipe\dbg
+Waiting to reconnect...
+Connected to Windows 7 7601 x86 compatible target at (Thu Sep 21 15:54:39.630 2017 (UTC - 7:00)), ptr64 FALSE
+Kernel Debugger connection established.
+Symbol search path is: srv*
+Executable search path is: 
+Windows 7 Kernel Version 7601 MP (1 procs) Free x86 compatible
+Built by: 7601.17514.x86fre.win7sp1_rtm.101119-1850
+Machine Name:
+Kernel base = 0x82644000 PsLoadedModuleList = 0x8278e850
+System Uptime: not available
+
+*** Fatal System Error: 0x00000050
+                       (0x96CE6000,0x00000000,0x8267DB90,0x00000000)
+
+Break instruction exception - code 80000003 (first chance)
+
+A fatal system error has occurred.
+Debugger entered on first try; Bugcheck callbacks have not been invoked.
+
+A fatal system error has occurred.
+
+Connected to Windows 7 7601 x86 compatible target at (Thu Sep 21 16:52:21.235 2017 (UTC - 7:00)), ptr64 FALSE
+Loading Kernel Symbols
+...............................................................
+.................................................
+
+Press ctrl-c (cdb, kd, ntsd) or ctrl-break (windbg) to abort symbol loads that take too long.
+Run !sym noisy before .reload to track down problems loading symbols.
+
+...............
+....
+Loading User Symbols
+
+Loading unloaded module list
+......Unable to enumerate user-mode unloaded modules, Win32 error 0n30
+*******************************************************************************
+*                                                                             *
+*                        Bugcheck Analysis                                    *
+*                                                                             *
+*******************************************************************************
+
+Use !analyze -v to get detailed debugging information.
+
+BugCheck 50, {96ce6000, 0, 8267db90, 0}
+
+Probably caused by : srv.sys ( srv!SrvOs2FeaToNt+53 )
+
+Followup:     MachineOwner
+---------
+
+nt!RtlpBreakWithStatusInstruction:
+826bf110 cc              int     3
+kd> !analyze -v
+*******************************************************************************
+*                                                                             *
+*                        Bugcheck Analysis                                    *
+*                                                                             *
+*******************************************************************************
+
+PAGE_FAULT_IN_NONPAGED_AREA (50)
+Invalid system memory was referenced.  This cannot be protected by try-except.
+Typically the address is just plain bad or it is pointing at freed memory.
+Arguments:
+Arg1: 96ce6000, memory referenced.
+Arg2: 00000000, value 0 = read operation, 1 = write operation.
+Arg3: 8267db90, If non-zero, the instruction address which referenced the bad memory
+	address.
+Arg4: 00000000, (reserved)
+
+Debugging Details:
+------------------
+
+
+DUMP_CLASS: 1
+
+DUMP_QUALIFIER: 0
+
+BUILD_VERSION_STRING:  7601.17514.x86fre.win7sp1_rtm.101119-1850
+
+DUMP_TYPE:  0
+
+BUGCHECK_P1: ffffffff96ce6000
+
+BUGCHECK_P2: 0
+
+BUGCHECK_P3: ffffffff8267db90
+
+BUGCHECK_P4: 0
+
+READ_ADDRESS:  96ce6000 Paged pool
+
+FAULTING_IP: 
+nt!memmove+90
+8267db90 f3a5            rep movs dword ptr es:[edi],dword ptr [esi]
+
+MM_INTERNAL_CODE:  0
+
+CPU_COUNT: 1
+
+CPU_MHZ: 6a0
+
+CPU_VENDOR:  GenuineIntel
+
+CPU_FAMILY: 6
+
+CPU_MODEL: 3a
+
+CPU_STEPPING: 9
+
+CPU_MICROCODE: 6,3a,9,0 (F,M,S,R)  SIG: FFFFFFFF'00000000 (cache) FFFFFFFF'00000000 (init)
+
+DEFAULT_BUCKET_ID:  WIN7_DRIVER_FAULT
+
+BUGCHECK_STR:  0x50
+
+PROCESS_NAME:  System
+
+CURRENT_IRQL:  2
+
+ANALYSIS_SESSION_HOST:  DESKTOP-LRP1ELD
+
+ANALYSIS_SESSION_TIME:  09-21-2017 16:52:50.0310
+
+ANALYSIS_VERSION: 10.0.15063.0 amd64fre
+
+TRAP_FRAME:  8cd33ab4 -- (.trap 0xffffffff8cd33ab4)
+ErrCode = 00000000
+eax=00000042 ebx=83fc901d ecx=00001f3a edx=00000001 esi=96ce6000 edi=83fcdf34
+eip=8267db90 esp=8cd33b28 ebp=8cd33b30 iopl=0         nv up ei pl nz na po nc
+cs=0008  ss=0010  ds=0023  es=0023  fs=0030  gs=0000             efl=00010202
+nt!memmove+0x90:
+8267db90 f3a5            rep movs dword ptr es:[edi],dword ptr [esi]
+Resetting default scope
+
+LAST_CONTROL_TRANSFER:  from 82723083 to 826bf110
+
+STACK_TEXT:  
+8cd335fc 82723083 00000003 47f72d84 00000065 nt!RtlpBreakWithStatusInstruction
+8cd3364c 82723b81 00000003 85781688 00001b48 nt!KiBugCheckDebugBreak+0x1c
+8cd33a10 826d241b 00000050 96ce6000 00000000 nt!KeBugCheck2+0x68b
+8cd33a9c 826853d8 00000000 96ce6000 00000000 nt!MmAccessFault+0x106
+8cd33a9c 8267db90 00000000 96ce6000 00000000 nt!KiTrap0E+0xdc
+8cd33b30 93a3027e 83fc901d 96ce10e9 0000cc00 nt!memmove+0x90
+8cd33b5c 93a30603 83fc9014 96ce10e4 83f73008 srv!SrvOs2FeaToNt+0x53
+8cd33b7c 93a49602 83fc9014 8cd33bbc 8cd33ba8 srv!SrvOs2FeaListToNt+0x9e
+8cd33bb4 93a51149 83fbd008 8267db00 96cd5008 srv!SrvSmbOpen2+0x93
+8cd33bc8 93a521b8 93a1f6ec 83f73008 93a21000 srv!ExecuteTransaction+0x101
+8cd33c00 93a1b496 83f73008 85781058 85781020 srv!SrvSmbTransactionSecondary+0x2c5
+8cd33c28 93a2a922 00000000 85781688 00000000 srv!SrvProcessSmb+0x187
+8cd33c50 8284df5e 00781020 47f72758 00000000 srv!WorkerThread+0x15c
+8cd33c90 826f5219 93a2a7c6 85781020 00000000 nt!PspSystemThreadStartup+0x9e
+00000000 00000000 00000000 00000000 00000000 nt!KiThreadStartup+0x19
+
+
+STACK_COMMAND:  kb
+
+THREAD_SHA1_HASH_MOD_FUNC:  a9a8a5399299b8ebff890a7643f1e60a855071d2
+
+THREAD_SHA1_HASH_MOD_FUNC_OFFSET:  72c38b8bbeeb3a062f92b9ccac0806d4fd5fafd4
+
+THREAD_SHA1_HASH_MOD:  ac1a5d1a39094b9b6459217748c8fe13b5876638
+
+FOLLOWUP_IP: 
+srv!SrvOs2FeaToNt+53
+93a3027e 0fb74606        movzx   eax,word ptr [esi+6]
+
+FAULT_INSTR_CODE:  646b70f
+
+SYMBOL_STACK_INDEX:  6
+
+SYMBOL_NAME:  srv!SrvOs2FeaToNt+53
+
+FOLLOWUP_NAME:  MachineOwner
+
+MODULE_NAME: srv
+
+IMAGE_NAME:  srv.sys
+
+DEBUG_FLR_IMAGE_TIMESTAMP:  4ce78aa9
+
+FAILURE_BUCKET_ID:  0x50_srv!SrvOs2FeaToNt+53
+
+BUCKET_ID:  0x50_srv!SrvOs2FeaToNt+53
+
+PRIMARY_PROBLEM_CLASS:  0x50_srv!SrvOs2FeaToNt+53
+
+TARGET_TIME:  2017-09-21T23:52:20.000Z
+
+OSBUILD:  7601
+
+OSSERVICEPACK:  1000
+
+SERVICEPACK_NUMBER: 0
+
+OS_REVISION: 0
+
+SUITE_MASK:  272
+
+PRODUCT_TYPE:  1
+
+OSPLATFORM_TYPE:  x86
+
+OSNAME:  Windows 7
+
+OSEDITION:  Windows 7 WinNt (Service Pack 1) TerminalServer SingleUserTS
+
+OS_LOCALE:  
+
+USER_LCID:  0
+
+OSBUILD_TIMESTAMP:  2010-11-20 00:42:49
+
+BUILDDATESTAMP_STR:  101119-1850
+
+BUILDLAB_STR:  win7sp1_rtm
+
+BUILDOSVER_STR:  6.1.7601.17514.x86fre.win7sp1_rtm.101119-1850
+
+ANALYSIS_SESSION_ELAPSED_TIME:  81b
+
+ANALYSIS_SOURCE:  KM
+
+FAILURE_ID_HASH_STRING:  km:0x50_srv!srvos2featont+53
+
+FAILURE_ID_HASH:  {f71acc46-b439-a0c9-4a90-99bdfd57cdf4}
+
+Followup:     MachineOwner
+---------
+
+kd> kv
+ # ChildEBP RetAddr  Args to Child              
+00 8cd335fc 82723083 00000003 47f72d84 00000065 nt!RtlpBreakWithStatusInstruction (FPO: [1,0,0])
+01 8cd3364c 82723b81 00000003 85781688 00001b48 nt!KiBugCheckDebugBreak+0x1c
+02 8cd33a10 826d241b 00000050 96ce6000 00000000 nt!KeBugCheck2+0x68b
+03 8cd33a9c 826853d8 00000000 96ce6000 00000000 nt!MmAccessFault+0x106
+04 8cd33a9c 8267db90 00000000 96ce6000 00000000 nt!KiTrap0E+0xdc (FPO: [0,0] TrapFrame @ 8cd33ab4)
+05 8cd33b30 93a3027e 83fc901d 96ce10e9 0000cc00 nt!memmove+0x90
+06 8cd33b5c 93a30603 83fc9014 96ce10e4 83f73008 srv!SrvOs2FeaToNt+0x53 (FPO: [Non-Fpo])
+07 8cd33b7c 93a49602 83fc9014 8cd33bbc 8cd33ba8 srv!SrvOs2FeaListToNt+0x9e (FPO: [Non-Fpo])
+08 8cd33bb4 93a51149 83fbd008 8267db00 96cd5008 srv!SrvSmbOpen2+0x93 (FPO: [Non-Fpo])
+09 8cd33bc8 93a521b8 93a1f6ec 83f73008 93a21000 srv!ExecuteTransaction+0x101 (FPO: [0,0,4])
+0a 8cd33c00 93a1b496 83f73008 85781058 85781020 srv!SrvSmbTransactionSecondary+0x2c5 (FPO: [Non-Fpo])
+0b 8cd33c28 93a2a922 00000000 85781688 00000000 srv!SrvProcessSmb+0x187 (FPO: [Non-Fpo])
+0c 8cd33c50 8284df5e 00781020 47f72758 00000000 srv!WorkerThread+0x15c (FPO: [Non-Fpo])
+0d 8cd33c90 826f5219 93a2a7c6 85781020 00000000 nt!PspSystemThreadStartup+0x9e
+0e 00000000 00000000 00000000 00000000 00000000 nt!KiThreadStartup+0x19
+kd> uf srv!SrvOs2FeaToNt+0x53
+srv!SrvOs2FeaToNt:
+93a3022b 8bff            mov     edi,edi
+93a3022d 55              push    ebp
+93a3022e 8bec            mov     ebp,esp
+93a30230 53              push    ebx
+93a30231 56              push    esi
+93a30232 8b7508          mov     esi,dword ptr [ebp+8]
+93a30235 57              push    edi
+93a30236 8b7d0c          mov     edi,dword ptr [ebp+0Ch]
+93a30239 8a07            mov     al,byte ptr [edi]
+93a3023b 884604          mov     byte ptr [esi+4],al
+93a3023e 8a4701          mov     al,byte ptr [edi+1]
+93a30241 884605          mov     byte ptr [esi+5],al
+93a30244 668b4702        mov     ax,word ptr [edi+2]
+93a30248 66894606        mov     word ptr [esi+6],ax
+93a3024c 0fb64701        movzx   eax,byte ptr [edi+1]
+93a30250 50              push    eax
+93a30251 8d4704          lea     eax,[edi+4]
+93a30254 50              push    eax
+93a30255 8d5e08          lea     ebx,[esi+8]
+93a30258 53              push    ebx
+93a30259 ff15e0f0a193    call    dword ptr [srv!_imp__memmove (93a1f0e0)]
+93a3025f 0fb64605        movzx   eax,byte ptr [esi+5]
+93a30263 03d8            add     ebx,eax
+93a30265 c60300          mov     byte ptr [ebx],0
+93a30268 0fb74606        movzx   eax,word ptr [esi+6]
+93a3026c 50              push    eax
+93a3026d 0fb64605        movzx   eax,byte ptr [esi+5]
+93a30271 8d443805        lea     eax,[eax+edi+5]
+93a30275 50              push    eax
+93a30276 43              inc     ebx
+93a30277 53              push    ebx
+93a30278 ff15e0f0a193    call    dword ptr [srv!_imp__memmove (93a1f0e0)]
+93a3027e 0fb74606        movzx   eax,word ptr [esi+6]
+93a30282 8d441803        lea     eax,[eax+ebx+3]
+93a30286 83e0fc          and     eax,0FFFFFFFCh
+93a30289 83c418          add     esp,18h
+93a3028c 8bc8            mov     ecx,eax
+93a3028e 2bce            sub     ecx,esi
+93a30290 5f              pop     edi
+93a30291 890e            mov     dword ptr [esi],ecx
+93a30293 5e              pop     esi
+93a30294 5b              pop     ebx
+93a30295 5d              pop     ebp
+93a30296 c20800          ret     8
+kd> dq
+826bf110  90c390cc`0004c2cc 8b909090`9090c3cc
+826bf120  db335351`ec8b55ff 07748276`dd271d38
+826bf130  88000000`d2e9c032 827a9d2c`1d38ff5d
+826bf140  57560000`00c0840f 45885300`002837e8
+826bf150  348dfffb`c753e8fe 3b068b82`7a9ca085
+826bf160  04e1c108`8b1a74c3 0189310f`08014c8d
+826bf170  00020841`c7045189 441d380c`59890000
+826bf180  e905c613`74827a9d 01ff45c6`01829b4f
+kd> !analyze -v
+*******************************************************************************
+*                                                                             *
+*                        Bugcheck Analysis                                    *
+*                                                                             *
+*******************************************************************************
+
+PAGE_FAULT_IN_NONPAGED_AREA (50)
+Invalid system memory was referenced.  This cannot be protected by try-except.
+Typically the address is just plain bad or it is pointing at freed memory.
+Arguments:
+Arg1: 96ce6000, memory referenced.
+Arg2: 00000000, value 0 = read operation, 1 = write operation.
+Arg3: 8267db90, If non-zero, the instruction address which referenced the bad memory
+	address.
+Arg4: 00000000, (reserved)
+
+Debugging Details:
+------------------
+
+
+DUMP_CLASS: 1
+
+DUMP_QUALIFIER: 0
+
+BUILD_VERSION_STRING:  7601.17514.x86fre.win7sp1_rtm.101119-1850
+
+DUMP_TYPE:  0
+
+BUGCHECK_P1: ffffffff96ce6000
+
+BUGCHECK_P2: 0
+
+BUGCHECK_P3: ffffffff8267db90
+
+BUGCHECK_P4: 0
+
+READ_ADDRESS:  96ce6000 Paged pool
+
+FAULTING_IP: 
+nt!memmove+90
+8267db90 f3a5            rep movs dword ptr es:[edi],dword ptr [esi]
+
+MM_INTERNAL_CODE:  0
+
+CPU_COUNT: 1
+
+CPU_MHZ: 6a0
+
+CPU_VENDOR:  GenuineIntel
+
+CPU_FAMILY: 6
+
+CPU_MODEL: 3a
+
+CPU_STEPPING: 9
+
+CPU_MICROCODE: 6,3a,9,0 (F,M,S,R)  SIG: FFFFFFFF'00000000 (cache) FFFFFFFF'00000000 (init)
+
+DEFAULT_BUCKET_ID:  WIN7_DRIVER_FAULT
+
+BUGCHECK_STR:  0x50
+
+PROCESS_NAME:  System
+
+CURRENT_IRQL:  2
+
+ANALYSIS_SESSION_HOST:  DESKTOP-LRP1ELD
+
+ANALYSIS_SESSION_TIME:  09-21-2017 17:33:42.0829
+
+ANALYSIS_VERSION: 10.0.15063.0 amd64fre
+
+TRAP_FRAME:  8cd33ab4 -- (.trap 0xffffffff8cd33ab4)
+ErrCode = 00000000
+eax=00000042 ebx=83fc901d ecx=00001f3a edx=00000001 esi=96ce6000 edi=83fcdf34
+eip=8267db90 esp=8cd33b28 ebp=8cd33b30 iopl=0         nv up ei pl nz na po nc
+cs=0008  ss=0010  ds=0023  es=0023  fs=0030  gs=0000             efl=00010202
+nt!memmove+0x90:
+8267db90 f3a5            rep movs dword ptr es:[edi],dword ptr [esi]
+Resetting default scope
+
+LAST_CONTROL_TRANSFER:  from 82723083 to 826bf110
+
+STACK_TEXT:  
+8cd335fc 82723083 00000003 47f72d84 00000065 nt!RtlpBreakWithStatusInstruction
+8cd3364c 82723b81 00000003 85781688 00001b48 nt!KiBugCheckDebugBreak+0x1c
+8cd33a10 826d241b 00000050 96ce6000 00000000 nt!KeBugCheck2+0x68b
+8cd33a9c 826853d8 00000000 96ce6000 00000000 nt!MmAccessFault+0x106
+8cd33a9c 8267db90 00000000 96ce6000 00000000 nt!KiTrap0E+0xdc
+8cd33b30 93a3027e 83fc901d 96ce10e9 0000cc00 nt!memmove+0x90
+8cd33b5c 93a30603 83fc9014 96ce10e4 83f73008 srv!SrvOs2FeaToNt+0x53
+8cd33b7c 93a49602 83fc9014 8cd33bbc 8cd33ba8 srv!SrvOs2FeaListToNt+0x9e
+8cd33bb4 93a51149 83fbd008 8267db00 96cd5008 srv!SrvSmbOpen2+0x93
+8cd33bc8 93a521b8 93a1f6ec 83f73008 93a21000 srv!ExecuteTransaction+0x101
+8cd33c00 93a1b496 83f73008 85781058 85781020 srv!SrvSmbTransactionSecondary+0x2c5
+8cd33c28 93a2a922 00000000 85781688 00000000 srv!SrvProcessSmb+0x187
+8cd33c50 8284df5e 00781020 47f72758 00000000 srv!WorkerThread+0x15c
+8cd33c90 826f5219 93a2a7c6 85781020 00000000 nt!PspSystemThreadStartup+0x9e
+00000000 00000000 00000000 00000000 00000000 nt!KiThreadStartup+0x19
+
+
+STACK_COMMAND:  kb
+
+THREAD_SHA1_HASH_MOD_FUNC:  a9a8a5399299b8ebff890a7643f1e60a855071d2
+
+THREAD_SHA1_HASH_MOD_FUNC_OFFSET:  72c38b8bbeeb3a062f92b9ccac0806d4fd5fafd4
+
+THREAD_SHA1_HASH_MOD:  ac1a5d1a39094b9b6459217748c8fe13b5876638
+
+FOLLOWUP_IP: 
+srv!SrvOs2FeaToNt+53
+93a3027e 0fb74606        movzx   eax,word ptr [esi+6]
+
+FAULT_INSTR_CODE:  646b70f
+
+SYMBOL_STACK_INDEX:  6
+
+SYMBOL_NAME:  srv!SrvOs2FeaToNt+53
+
+FOLLOWUP_NAME:  MachineOwner
+
+MODULE_NAME: srv
+
+IMAGE_NAME:  srv.sys
+
+DEBUG_FLR_IMAGE_TIMESTAMP:  4ce78aa9
+
+FAILURE_BUCKET_ID:  0x50_srv!SrvOs2FeaToNt+53
+
+BUCKET_ID:  0x50_srv!SrvOs2FeaToNt+53
+
+PRIMARY_PROBLEM_CLASS:  0x50_srv!SrvOs2FeaToNt+53
+
+TARGET_TIME:  2017-09-21T23:52:20.000Z
+
+OSBUILD:  7601
+
+OSSERVICEPACK:  1000
+
+SERVICEPACK_NUMBER: 0
+
+OS_REVISION: 0
+
+SUITE_MASK:  272
+
+PRODUCT_TYPE:  1
+
+OSPLATFORM_TYPE:  x86
+
+OSNAME:  Windows 7
+
+OSEDITION:  Windows 7 WinNt (Service Pack 1) TerminalServer SingleUserTS
+
+OS_LOCALE:  
+
+USER_LCID:  0
+
+OSBUILD_TIMESTAMP:  2010-11-20 00:42:49
+
+BUILDDATESTAMP_STR:  101119-1850
+
+BUILDLAB_STR:  win7sp1_rtm
+
+BUILDOSVER_STR:  6.1.7601.17514.x86fre.win7sp1_rtm.101119-1850
+
+ANALYSIS_SESSION_ELAPSED_TIME:  849
+
+ANALYSIS_SOURCE:  KM
+
+FAILURE_ID_HASH_STRING:  km:0x50_srv!srvos2featont+53
+
+FAILURE_ID_HASH:  {f71acc46-b439-a0c9-4a90-99bdfd57cdf4}
+
+Followup:     MachineOwner
+---------
+
+kd> kv
+ # ChildEBP RetAddr  Args to Child              
+00 8cd335fc 82723083 00000003 47f72d84 00000065 nt!RtlpBreakWithStatusInstruction (FPO: [1,0,0])
+01 8cd3364c 82723b81 00000003 85781688 00001b48 nt!KiBugCheckDebugBreak+0x1c
+02 8cd33a10 826d241b 00000050 96ce6000 00000000 nt!KeBugCheck2+0x68b
+03 8cd33a9c 826853d8 00000000 96ce6000 00000000 nt!MmAccessFault+0x106
+04 8cd33a9c 8267db90 00000000 96ce6000 00000000 nt!KiTrap0E+0xdc (FPO: [0,0] TrapFrame @ 8cd33ab4)
+05 8cd33b30 93a3027e 83fc901d 96ce10e9 0000cc00 nt!memmove+0x90
+06 8cd33b5c 93a30603 83fc9014 96ce10e4 83f73008 srv!SrvOs2FeaToNt+0x53 (FPO: [Non-Fpo])
+07 8cd33b7c 93a49602 83fc9014 8cd33bbc 8cd33ba8 srv!SrvOs2FeaListToNt+0x9e (FPO: [Non-Fpo])
+08 8cd33bb4 93a51149 83fbd008 8267db00 96cd5008 srv!SrvSmbOpen2+0x93 (FPO: [Non-Fpo])
+09 8cd33bc8 93a521b8 93a1f6ec 83f73008 93a21000 srv!ExecuteTransaction+0x101 (FPO: [0,0,4])
+0a 8cd33c00 93a1b496 83f73008 85781058 85781020 srv!SrvSmbTransactionSecondary+0x2c5 (FPO: [Non-Fpo])
+0b 8cd33c28 93a2a922 00000000 85781688 00000000 srv!SrvProcessSmb+0x187 (FPO: [Non-Fpo])
+0c 8cd33c50 8284df5e 00781020 47f72758 00000000 srv!WorkerThread+0x15c (FPO: [Non-Fpo])
+0d 8cd33c90 826f5219 93a2a7c6 85781020 00000000 nt!PspSystemThreadStartup+0x9e
+0e 00000000 00000000 00000000 00000000 00000000 nt!KiThreadStartup+0x19
+kd> uf srv!SrvOs2FeaToNt+0x53
+srv!SrvOs2FeaToNt:
+93a3022b 8bff            mov     edi,edi
+93a3022d 55              push    ebp
+93a3022e 8bec            mov     ebp,esp
+93a30230 53              push    ebx
+93a30231 56              push    esi
+93a30232 8b7508          mov     esi,dword ptr [ebp+8]
+93a30235 57              push    edi
+93a30236 8b7d0c          mov     edi,dword ptr [ebp+0Ch]
+93a30239 8a07            mov     al,byte ptr [edi]
+93a3023b 884604          mov     byte ptr [esi+4],al
+93a3023e 8a4701          mov     al,byte ptr [edi+1]
+93a30241 884605          mov     byte ptr [esi+5],al
+93a30244 668b4702        mov     ax,word ptr [edi+2]
+93a30248 66894606        mov     word ptr [esi+6],ax
+93a3024c 0fb64701        movzx   eax,byte ptr [edi+1]
+93a30250 50              push    eax
+93a30251 8d4704          lea     eax,[edi+4]
+93a30254 50              push    eax
+93a30255 8d5e08          lea     ebx,[esi+8]
+93a30258 53              push    ebx
+93a30259 ff15e0f0a193    call    dword ptr [srv!_imp__memmove (93a1f0e0)]
+93a3025f 0fb64605        movzx   eax,byte ptr [esi+5]
+93a30263 03d8            add     ebx,eax
+93a30265 c60300          mov     byte ptr [ebx],0
+93a30268 0fb74606        movzx   eax,word ptr [esi+6]
+93a3026c 50              push    eax
+93a3026d 0fb64605        movzx   eax,byte ptr [esi+5]
+93a30271 8d443805        lea     eax,[eax+edi+5]
+93a30275 50              push    eax
+93a30276 43              inc     ebx
+93a30277 53              push    ebx
+93a30278 ff15e0f0a193    call    dword ptr [srv!_imp__memmove (93a1f0e0)]
+93a3027e 0fb74606        movzx   eax,word ptr [esi+6]
+93a30282 8d441803        lea     eax,[eax+ebx+3]
+93a30286 83e0fc          and     eax,0FFFFFFFCh
+93a30289 83c418          add     esp,18h
+93a3028c 8bc8            mov     ecx,eax
+93a3028e 2bce            sub     ecx,esi
+93a30290 5f              pop     edi
+93a30291 890e            mov     dword ptr [esi],ecx
+93a30293 5e              pop     esi
+93a30294 5b              pop     ebx
+93a30295 5d              pop     ebp
+93a30296 c20800          ret     8
+kd> !analyze -v
+*******************************************************************************
+*                                                                             *
+*                        Bugcheck Analysis                                    *
+*                                                                             *
+*******************************************************************************
+
+PAGE_FAULT_IN_NONPAGED_AREA (50)
+Invalid system memory was referenced.  This cannot be protected by try-except.
+Typically the address is just plain bad or it is pointing at freed memory.
+Arguments:
+Arg1: 96ce6000, memory referenced.
+Arg2: 00000000, value 0 = read operation, 1 = write operation.
+Arg3: 8267db90, If non-zero, the instruction address which referenced the bad memory
+	address.
+Arg4: 00000000, (reserved)
+
+Debugging Details:
+------------------
+
+
+DUMP_CLASS: 1
+
+DUMP_QUALIFIER: 0
+
+BUILD_VERSION_STRING:  7601.17514.x86fre.win7sp1_rtm.101119-1850
+
+DUMP_TYPE:  0
+
+BUGCHECK_P1: ffffffff96ce6000
+
+BUGCHECK_P2: 0
+
+BUGCHECK_P3: ffffffff8267db90
+
+BUGCHECK_P4: 0
+
+READ_ADDRESS:  96ce6000 Paged pool
+
+FAULTING_IP: 
+nt!memmove+90
+8267db90 f3a5            rep movs dword ptr es:[edi],dword ptr [esi]
+
+MM_INTERNAL_CODE:  0
+
+CPU_COUNT: 1
+
+CPU_MHZ: 6a0
+
+CPU_VENDOR:  GenuineIntel
+
+CPU_FAMILY: 6
+
+CPU_MODEL: 3a
+
+CPU_STEPPING: 9
+
+CPU_MICROCODE: 6,3a,9,0 (F,M,S,R)  SIG: FFFFFFFF'00000000 (cache) FFFFFFFF'00000000 (init)
+
+DEFAULT_BUCKET_ID:  WIN7_DRIVER_FAULT
+
+BUGCHECK_STR:  0x50
+
+PROCESS_NAME:  System
+
+CURRENT_IRQL:  2
+
+ANALYSIS_SESSION_HOST:  DESKTOP-LRP1ELD
+
+ANALYSIS_SESSION_TIME:  09-21-2017 17:36:16.0080
+
+ANALYSIS_VERSION: 10.0.15063.0 amd64fre
+
+TRAP_FRAME:  8cd33ab4 -- (.trap 0xffffffff8cd33ab4)
+ErrCode = 00000000
+eax=00000042 ebx=83fc901d ecx=00001f3a edx=00000001 esi=96ce6000 edi=83fcdf34
+eip=8267db90 esp=8cd33b28 ebp=8cd33b30 iopl=0         nv up ei pl nz na po nc
+cs=0008  ss=0010  ds=0023  es=0023  fs=0030  gs=0000             efl=00010202
+nt!memmove+0x90:
+8267db90 f3a5            rep movs dword ptr es:[edi],dword ptr [esi]
+Resetting default scope
+
+LAST_CONTROL_TRANSFER:  from 82723083 to 826bf110
+
+STACK_TEXT:  
+8cd335fc 82723083 00000003 47f72d84 00000065 nt!RtlpBreakWithStatusInstruction
+8cd3364c 82723b81 00000003 85781688 00001b48 nt!KiBugCheckDebugBreak+0x1c
+8cd33a10 826d241b 00000050 96ce6000 00000000 nt!KeBugCheck2+0x68b
+8cd33a9c 826853d8 00000000 96ce6000 00000000 nt!MmAccessFault+0x106
+8cd33a9c 8267db90 00000000 96ce6000 00000000 nt!KiTrap0E+0xdc
+8cd33b30 93a3027e 83fc901d 96ce10e9 0000cc00 nt!memmove+0x90
+8cd33b5c 93a30603 83fc9014 96ce10e4 83f73008 srv!SrvOs2FeaToNt+0x53
+8cd33b7c 93a49602 83fc9014 8cd33bbc 8cd33ba8 srv!SrvOs2FeaListToNt+0x9e
+8cd33bb4 93a51149 83fbd008 8267db00 96cd5008 srv!SrvSmbOpen2+0x93
+8cd33bc8 93a521b8 93a1f6ec 83f73008 93a21000 srv!ExecuteTransaction+0x101
+8cd33c00 93a1b496 83f73008 85781058 85781020 srv!SrvSmbTransactionSecondary+0x2c5
+8cd33c28 93a2a922 00000000 85781688 00000000 srv!SrvProcessSmb+0x187
+8cd33c50 8284df5e 00781020 47f72758 00000000 srv!WorkerThread+0x15c
+8cd33c90 826f5219 93a2a7c6 85781020 00000000 nt!PspSystemThreadStartup+0x9e
+00000000 00000000 00000000 00000000 00000000 nt!KiThreadStartup+0x19
+
+
+STACK_COMMAND:  kb
+
+THREAD_SHA1_HASH_MOD_FUNC:  a9a8a5399299b8ebff890a7643f1e60a855071d2
+
+THREAD_SHA1_HASH_MOD_FUNC_OFFSET:  72c38b8bbeeb3a062f92b9ccac0806d4fd5fafd4
+
+THREAD_SHA1_HASH_MOD:  ac1a5d1a39094b9b6459217748c8fe13b5876638
+
+FOLLOWUP_IP: 
+srv!SrvOs2FeaToNt+53
+93a3027e 0fb74606        movzx   eax,word ptr [esi+6]
+
+FAULT_INSTR_CODE:  646b70f
+
+SYMBOL_STACK_INDEX:  6
+
+SYMBOL_NAME:  srv!SrvOs2FeaToNt+53
+
+FOLLOWUP_NAME:  MachineOwner
+
+MODULE_NAME: srv
+
+IMAGE_NAME:  srv.sys
+
+DEBUG_FLR_IMAGE_TIMESTAMP:  4ce78aa9
+
+FAILURE_BUCKET_ID:  0x50_srv!SrvOs2FeaToNt+53
+
+BUCKET_ID:  0x50_srv!SrvOs2FeaToNt+53
+
+PRIMARY_PROBLEM_CLASS:  0x50_srv!SrvOs2FeaToNt+53
+
+TARGET_TIME:  2017-09-21T23:52:20.000Z
+
+OSBUILD:  7601
+
+OSSERVICEPACK:  1000
+
+SERVICEPACK_NUMBER: 0
+
+OS_REVISION: 0
+
+SUITE_MASK:  272
+
+PRODUCT_TYPE:  1
+
+OSPLATFORM_TYPE:  x86
+
+OSNAME:  Windows 7
+
+OSEDITION:  Windows 7 WinNt (Service Pack 1) TerminalServer SingleUserTS
+
+OS_LOCALE:  
+
+USER_LCID:  0
+
+OSBUILD_TIMESTAMP:  2010-11-20 00:42:49
+
+BUILDDATESTAMP_STR:  101119-1850
+
+BUILDLAB_STR:  win7sp1_rtm
+
+BUILDOSVER_STR:  6.1.7601.17514.x86fre.win7sp1_rtm.101119-1850
+
+ANALYSIS_SESSION_ELAPSED_TIME:  818
+
+ANALYSIS_SOURCE:  KM
+
+FAILURE_ID_HASH_STRING:  km:0x50_srv!srvos2featont+53
+
+FAILURE_ID_HASH:  {f71acc46-b439-a0c9-4a90-99bdfd57cdf4}
+
+Followup:     MachineOwner
+---------
+
+kd> kv
+ # ChildEBP RetAddr  Args to Child              
+00 8cd335fc 82723083 00000003 47f72d84 00000065 nt!RtlpBreakWithStatusInstruction (FPO: [1,0,0])
+01 8cd3364c 82723b81 00000003 85781688 00001b48 nt!KiBugCheckDebugBreak+0x1c
+02 8cd33a10 826d241b 00000050 96ce6000 00000000 nt!KeBugCheck2+0x68b
+03 8cd33a9c 826853d8 00000000 96ce6000 00000000 nt!MmAccessFault+0x106
+04 8cd33a9c 8267db90 00000000 96ce6000 00000000 nt!KiTrap0E+0xdc (FPO: [0,0] TrapFrame @ 8cd33ab4)
+05 8cd33b30 93a3027e 83fc901d 96ce10e9 0000cc00 nt!memmove+0x90
+06 8cd33b5c 93a30603 83fc9014 96ce10e4 83f73008 srv!SrvOs2FeaToNt+0x53 (FPO: [Non-Fpo])
+07 8cd33b7c 93a49602 83fc9014 8cd33bbc 8cd33ba8 srv!SrvOs2FeaListToNt+0x9e (FPO: [Non-Fpo])
+08 8cd33bb4 93a51149 83fbd008 8267db00 96cd5008 srv!SrvSmbOpen2+0x93 (FPO: [Non-Fpo])
+09 8cd33bc8 93a521b8 93a1f6ec 83f73008 93a21000 srv!ExecuteTransaction+0x101 (FPO: [0,0,4])
+0a 8cd33c00 93a1b496 83f73008 85781058 85781020 srv!SrvSmbTransactionSecondary+0x2c5 (FPO: [Non-Fpo])
+0b 8cd33c28 93a2a922 00000000 85781688 00000000 srv!SrvProcessSmb+0x187 (FPO: [Non-Fpo])
+0c 8cd33c50 8284df5e 00781020 47f72758 00000000 srv!WorkerThread+0x15c (FPO: [Non-Fpo])
+0d 8cd33c90 826f5219 93a2a7c6 85781020 00000000 nt!PspSystemThreadStartup+0x9e
+0e 00000000 00000000 00000000 00000000 00000000 nt!KiThreadStartup+0x19
+kd> uf srv!SrvOs2FeaToNt+0x53 
+srv!SrvOs2FeaToNt:
+93a3022b 8bff            mov     edi,edi
+93a3022d 55              push    ebp
+93a3022e 8bec            mov     ebp,esp
+93a30230 53              push    ebx
+93a30231 56              push    esi
+93a30232 8b7508          mov     esi,dword ptr [ebp+8]
+93a30235 57              push    edi
+93a30236 8b7d0c          mov     edi,dword ptr [ebp+0Ch]
+93a30239 8a07            mov     al,byte ptr [edi]
+93a3023b 884604          mov     byte ptr [esi+4],al
+93a3023e 8a4701          mov     al,byte ptr [edi+1]
+93a30241 884605          mov     byte ptr [esi+5],al
+93a30244 668b4702        mov     ax,word ptr [edi+2]
+93a30248 66894606        mov     word ptr [esi+6],ax
+93a3024c 0fb64701        movzx   eax,byte ptr [edi+1]
+93a30250 50              push    eax
+93a30251 8d4704          lea     eax,[edi+4]
+93a30254 50              push    eax
+93a30255 8d5e08          lea     ebx,[esi+8]
+93a30258 53              push    ebx
+93a30259 ff15e0f0a193    call    dword ptr [srv!_imp__memmove (93a1f0e0)]
+93a3025f 0fb64605        movzx   eax,byte ptr [esi+5]
+93a30263 03d8            add     ebx,eax
+93a30265 c60300          mov     byte ptr [ebx],0
+93a30268 0fb74606        movzx   eax,word ptr [esi+6]
+93a3026c 50              push    eax
+93a3026d 0fb64605        movzx   eax,byte ptr [esi+5]
+93a30271 8d443805        lea     eax,[eax+edi+5]
+93a30275 50              push    eax
+93a30276 43              inc     ebx
+93a30277 53              push    ebx
+93a30278 ff15e0f0a193    call    dword ptr [srv!_imp__memmove (93a1f0e0)]
+93a3027e 0fb74606        movzx   eax,word ptr [esi+6]
+93a30282 8d441803        lea     eax,[eax+ebx+3]
+93a30286 83e0fc          and     eax,0FFFFFFFCh
+93a30289 83c418          add     esp,18h
+93a3028c 8bc8            mov     ecx,eax
+93a3028e 2bce            sub     ecx,esi
+93a30290 5f              pop     edi
+93a30291 890e            mov     dword ptr [esi],ecx
+93a30293 5e              pop     esi
+93a30294 5b              pop     ebx
+93a30295 5d              pop     ebp
+93a30296 c20800          ret     8
+kd> !analyze -v
+*******************************************************************************
+*                                                                             *
+*                        Bugcheck Analysis                                    *
+*                                                                             *
+*******************************************************************************
+
+PAGE_FAULT_IN_NONPAGED_AREA (50)
+Invalid system memory was referenced.  This cannot be protected by try-except.
+Typically the address is just plain bad or it is pointing at freed memory.
+Arguments:
+Arg1: 96ce6000, memory referenced.
+Arg2: 00000000, value 0 = read operation, 1 = write operation.
+Arg3: 8267db90, If non-zero, the instruction address which referenced the bad memory
+	address.
+Arg4: 00000000, (reserved)
+
+Debugging Details:
+------------------
+
+
+DUMP_CLASS: 1
+
+DUMP_QUALIFIER: 0
+
+BUILD_VERSION_STRING:  7601.17514.x86fre.win7sp1_rtm.101119-1850
+
+DUMP_TYPE:  0
+
+BUGCHECK_P1: ffffffff96ce6000
+
+BUGCHECK_P2: 0
+
+BUGCHECK_P3: ffffffff8267db90
+
+BUGCHECK_P4: 0
+
+READ_ADDRESS:  96ce6000 Paged pool
+
+FAULTING_IP: 
+nt!memmove+90
+8267db90 f3a5            rep movs dword ptr es:[edi],dword ptr [esi]
+
+MM_INTERNAL_CODE:  0
+
+CPU_COUNT: 1
+
+CPU_MHZ: 6a0
+
+CPU_VENDOR:  GenuineIntel
+
+CPU_FAMILY: 6
+
+CPU_MODEL: 3a
+
+CPU_STEPPING: 9
+
+CPU_MICROCODE: 6,3a,9,0 (F,M,S,R)  SIG: FFFFFFFF'00000000 (cache) FFFFFFFF'00000000 (init)
+
+DEFAULT_BUCKET_ID:  WIN7_DRIVER_FAULT
+
+BUGCHECK_STR:  0x50
+
+PROCESS_NAME:  System
+
+CURRENT_IRQL:  2
+
+ANALYSIS_SESSION_HOST:  DESKTOP-LRP1ELD
+
+ANALYSIS_SESSION_TIME:  09-21-2017 17:37:07.0320
+
+ANALYSIS_VERSION: 10.0.15063.0 amd64fre
+
+TRAP_FRAME:  8cd33ab4 -- (.trap 0xffffffff8cd33ab4)
+ErrCode = 00000000
+eax=00000042 ebx=83fc901d ecx=00001f3a edx=00000001 esi=96ce6000 edi=83fcdf34
+eip=8267db90 esp=8cd33b28 ebp=8cd33b30 iopl=0         nv up ei pl nz na po nc
+cs=0008  ss=0010  ds=0023  es=0023  fs=0030  gs=0000             efl=00010202
+nt!memmove+0x90:
+8267db90 f3a5            rep movs dword ptr es:[edi],dword ptr [esi]
+Resetting default scope
+
+LAST_CONTROL_TRANSFER:  from 82723083 to 826bf110
+
+STACK_TEXT:  
+8cd335fc 82723083 00000003 47f72d84 00000065 nt!RtlpBreakWithStatusInstruction
+8cd3364c 82723b81 00000003 85781688 00001b48 nt!KiBugCheckDebugBreak+0x1c
+8cd33a10 826d241b 00000050 96ce6000 00000000 nt!KeBugCheck2+0x68b
+8cd33a9c 826853d8 00000000 96ce6000 00000000 nt!MmAccessFault+0x106
+8cd33a9c 8267db90 00000000 96ce6000 00000000 nt!KiTrap0E+0xdc
+8cd33b30 93a3027e 83fc901d 96ce10e9 0000cc00 nt!memmove+0x90
+8cd33b5c 93a30603 83fc9014 96ce10e4 83f73008 srv!SrvOs2FeaToNt+0x53
+8cd33b7c 93a49602 83fc9014 8cd33bbc 8cd33ba8 srv!SrvOs2FeaListToNt+0x9e
+8cd33bb4 93a51149 83fbd008 8267db00 96cd5008 srv!SrvSmbOpen2+0x93
+8cd33bc8 93a521b8 93a1f6ec 83f73008 93a21000 srv!ExecuteTransaction+0x101
+8cd33c00 93a1b496 83f73008 85781058 85781020 srv!SrvSmbTransactionSecondary+0x2c5
+8cd33c28 93a2a922 00000000 85781688 00000000 srv!SrvProcessSmb+0x187
+8cd33c50 8284df5e 00781020 47f72758 00000000 srv!WorkerThread+0x15c
+8cd33c90 826f5219 93a2a7c6 85781020 00000000 nt!PspSystemThreadStartup+0x9e
+00000000 00000000 00000000 00000000 00000000 nt!KiThreadStartup+0x19
+
+
+STACK_COMMAND:  kb
+
+THREAD_SHA1_HASH_MOD_FUNC:  a9a8a5399299b8ebff890a7643f1e60a855071d2
+
+THREAD_SHA1_HASH_MOD_FUNC_OFFSET:  72c38b8bbeeb3a062f92b9ccac0806d4fd5fafd4
+
+THREAD_SHA1_HASH_MOD:  ac1a5d1a39094b9b6459217748c8fe13b5876638
+
+FOLLOWUP_IP: 
+srv!SrvOs2FeaToNt+53
+93a3027e 0fb74606        movzx   eax,word ptr [esi+6]
+
+FAULT_INSTR_CODE:  646b70f
+
+SYMBOL_STACK_INDEX:  6
+
+SYMBOL_NAME:  srv!SrvOs2FeaToNt+53
+
+FOLLOWUP_NAME:  MachineOwner
+
+MODULE_NAME: srv
+
+IMAGE_NAME:  srv.sys
+
+DEBUG_FLR_IMAGE_TIMESTAMP:  4ce78aa9
+
+FAILURE_BUCKET_ID:  0x50_srv!SrvOs2FeaToNt+53
+
+BUCKET_ID:  0x50_srv!SrvOs2FeaToNt+53
+
+PRIMARY_PROBLEM_CLASS:  0x50_srv!SrvOs2FeaToNt+53
+
+TARGET_TIME:  2017-09-21T23:52:20.000Z
+
+OSBUILD:  7601
+
+OSSERVICEPACK:  1000
+
+SERVICEPACK_NUMBER: 0
+
+OS_REVISION: 0
+
+SUITE_MASK:  272
+
+PRODUCT_TYPE:  1
+
+OSPLATFORM_TYPE:  x86
+
+OSNAME:  Windows 7
+
+OSEDITION:  Windows 7 WinNt (Service Pack 1) TerminalServer SingleUserTS
+
+OS_LOCALE:  
+
+USER_LCID:  0
+
+OSBUILD_TIMESTAMP:  2010-11-20 00:42:49
+
+BUILDDATESTAMP_STR:  101119-1850
+
+BUILDLAB_STR:  win7sp1_rtm
+
+BUILDOSVER_STR:  6.1.7601.17514.x86fre.win7sp1_rtm.101119-1850
+
+ANALYSIS_SESSION_ELAPSED_TIME:  884
+
+ANALYSIS_SOURCE:  KM
+
+FAILURE_ID_HASH_STRING:  km:0x50_srv!srvos2featont+53
+
+FAILURE_ID_HASH:  {f71acc46-b439-a0c9-4a90-99bdfd57cdf4}
+
+Followup:     MachineOwner
+---------
+
+kd> kv
+ # ChildEBP RetAddr  Args to Child              
+00 8cd335fc 82723083 00000003 47f72d84 00000065 nt!RtlpBreakWithStatusInstruction (FPO: [1,0,0])
+01 8cd3364c 82723b81 00000003 85781688 00001b48 nt!KiBugCheckDebugBreak+0x1c
+02 8cd33a10 826d241b 00000050 96ce6000 00000000 nt!KeBugCheck2+0x68b
+03 8cd33a9c 826853d8 00000000 96ce6000 00000000 nt!MmAccessFault+0x106
+04 8cd33a9c 8267db90 00000000 96ce6000 00000000 nt!KiTrap0E+0xdc (FPO: [0,0] TrapFrame @ 8cd33ab4)
+05 8cd33b30 93a3027e 83fc901d 96ce10e9 0000cc00 nt!memmove+0x90
+06 8cd33b5c 93a30603 83fc9014 96ce10e4 83f73008 srv!SrvOs2FeaToNt+0x53 (FPO: [Non-Fpo])
+07 8cd33b7c 93a49602 83fc9014 8cd33bbc 8cd33ba8 srv!SrvOs2FeaListToNt+0x9e (FPO: [Non-Fpo])
+08 8cd33bb4 93a51149 83fbd008 8267db00 96cd5008 srv!SrvSmbOpen2+0x93 (FPO: [Non-Fpo])
+09 8cd33bc8 93a521b8 93a1f6ec 83f73008 93a21000 srv!ExecuteTransaction+0x101 (FPO: [0,0,4])
+0a 8cd33c00 93a1b496 83f73008 85781058 85781020 srv!SrvSmbTransactionSecondary+0x2c5 (FPO: [Non-Fpo])
+0b 8cd33c28 93a2a922 00000000 85781688 00000000 srv!SrvProcessSmb+0x187 (FPO: [Non-Fpo])
+0c 8cd33c50 8284df5e 00781020 47f72758 00000000 srv!WorkerThread+0x15c (FPO: [Non-Fpo])
+0d 8cd33c90 826f5219 93a2a7c6 85781020 00000000 nt!PspSystemThreadStartup+0x9e
+0e 00000000 00000000 00000000 00000000 00000000 nt!KiThreadStartup+0x19
+kd> uf srv!SrvOs2FeaToNt+0x53
+srv!SrvOs2FeaToNt:
+93a3022b 8bff            mov     edi,edi
+93a3022d 55              push    ebp
+93a3022e 8bec            mov     ebp,esp
+93a30230 53              push    ebx
+93a30231 56              push    esi
+93a30232 8b7508          mov     esi,dword ptr [ebp+8]
+93a30235 57              push    edi
+93a30236 8b7d0c          mov     edi,dword ptr [ebp+0Ch]
+93a30239 8a07            mov     al,byte ptr [edi]
+93a3023b 884604          mov     byte ptr [esi+4],al
+93a3023e 8a4701          mov     al,byte ptr [edi+1]
+93a30241 884605          mov     byte ptr [esi+5],al
+93a30244 668b4702        mov     ax,word ptr [edi+2]
+93a30248 66894606        mov     word ptr [esi+6],ax
+93a3024c 0fb64701        movzx   eax,byte ptr [edi+1]
+93a30250 50              push    eax
+93a30251 8d4704          lea     eax,[edi+4]
+93a30254 50              push    eax
+93a30255 8d5e08          lea     ebx,[esi+8]
+93a30258 53              push    ebx
+93a30259 ff15e0f0a193    call    dword ptr [srv!_imp__memmove (93a1f0e0)]
+93a3025f 0fb64605        movzx   eax,byte ptr [esi+5]
+93a30263 03d8            add     ebx,eax
+93a30265 c60300          mov     byte ptr [ebx],0
+93a30268 0fb74606        movzx   eax,word ptr [esi+6]
+93a3026c 50              push    eax
+93a3026d 0fb64605        movzx   eax,byte ptr [esi+5]
+93a30271 8d443805        lea     eax,[eax+edi+5]
+93a30275 50              push    eax
+93a30276 43              inc     ebx
+93a30277 53              push    ebx
+93a30278 ff15e0f0a193    call    dword ptr [srv!_imp__memmove (93a1f0e0)]
+93a3027e 0fb74606        movzx   eax,word ptr [esi+6]
+93a30282 8d441803        lea     eax,[eax+ebx+3]
+93a30286 83e0fc          and     eax,0FFFFFFFCh
+93a30289 83c418          add     esp,18h
+93a3028c 8bc8            mov     ecx,eax
+93a3028e 2bce            sub     ecx,esi
+93a30290 5f              pop     edi
+93a30291 890e            mov     dword ptr [esi],ecx
+93a30293 5e              pop     esi
+93a30294 5b              pop     ebx
+93a30295 5d              pop     ebp
+93a30296 c20800          ret     8
+kd> !analyze -v
+*******************************************************************************
+*                                                                             *
+*                        Bugcheck Analysis                                    *
+*                                                                             *
+*******************************************************************************
+
+PAGE_FAULT_IN_NONPAGED_AREA (50)
+Invalid system memory was referenced.  This cannot be protected by try-except.
+Typically the address is just plain bad or it is pointing at freed memory.
+Arguments:
+Arg1: 96ce6000, memory referenced.
+Arg2: 00000000, value 0 = read operation, 1 = write operation.
+Arg3: 8267db90, If non-zero, the instruction address which referenced the bad memory
+	address.
+Arg4: 00000000, (reserved)
+
+Debugging Details:
+------------------
+
+
+DUMP_CLASS: 1
+
+DUMP_QUALIFIER: 0
+
+BUILD_VERSION_STRING:  7601.17514.x86fre.win7sp1_rtm.101119-1850
+
+DUMP_TYPE:  0
+
+BUGCHECK_P1: ffffffff96ce6000
+
+BUGCHECK_P2: 0
+
+BUGCHECK_P3: ffffffff8267db90
+
+BUGCHECK_P4: 0
+
+READ_ADDRESS:  96ce6000 Paged pool
+
+FAULTING_IP: 
+nt!memmove+90
+8267db90 f3a5            rep movs dword ptr es:[edi],dword ptr [esi]
+
+MM_INTERNAL_CODE:  0
+
+CPU_COUNT: 1
+
+CPU_MHZ: 6a0
+
+CPU_VENDOR:  GenuineIntel
+
+CPU_FAMILY: 6
+
+CPU_MODEL: 3a
+
+CPU_STEPPING: 9
+
+CPU_MICROCODE: 6,3a,9,0 (F,M,S,R)  SIG: FFFFFFFF'00000000 (cache) FFFFFFFF'00000000 (init)
+
+DEFAULT_BUCKET_ID:  WIN7_DRIVER_FAULT
+
+BUGCHECK_STR:  0x50
+
+PROCESS_NAME:  System
+
+CURRENT_IRQL:  2
+
+ANALYSIS_SESSION_HOST:  DESKTOP-LRP1ELD
+
+ANALYSIS_SESSION_TIME:  09-21-2017 17:40:26.0572
+
+ANALYSIS_VERSION: 10.0.15063.0 amd64fre
+
+TRAP_FRAME:  8cd33ab4 -- (.trap 0xffffffff8cd33ab4)
+ErrCode = 00000000
+eax=00000042 ebx=83fc901d ecx=00001f3a edx=00000001 esi=96ce6000 edi=83fcdf34
+eip=8267db90 esp=8cd33b28 ebp=8cd33b30 iopl=0         nv up ei pl nz na po nc
+cs=0008  ss=0010  ds=0023  es=0023  fs=0030  gs=0000             efl=00010202
+nt!memmove+0x90:
+8267db90 f3a5            rep movs dword ptr es:[edi],dword ptr [esi]
+Resetting default scope
+
+LAST_CONTROL_TRANSFER:  from 82723083 to 826bf110
+
+STACK_TEXT:  
+8cd335fc 82723083 00000003 47f72d84 00000065 nt!RtlpBreakWithStatusInstruction
+8cd3364c 82723b81 00000003 85781688 00001b48 nt!KiBugCheckDebugBreak+0x1c
+8cd33a10 826d241b 00000050 96ce6000 00000000 nt!KeBugCheck2+0x68b
+8cd33a9c 826853d8 00000000 96ce6000 00000000 nt!MmAccessFault+0x106
+8cd33a9c 8267db90 00000000 96ce6000 00000000 nt!KiTrap0E+0xdc
+8cd33b30 93a3027e 83fc901d 96ce10e9 0000cc00 nt!memmove+0x90
+8cd33b5c 93a30603 83fc9014 96ce10e4 83f73008 srv!SrvOs2FeaToNt+0x53
+8cd33b7c 93a49602 83fc9014 8cd33bbc 8cd33ba8 srv!SrvOs2FeaListToNt+0x9e
+8cd33bb4 93a51149 83fbd008 8267db00 96cd5008 srv!SrvSmbOpen2+0x93
+8cd33bc8 93a521b8 93a1f6ec 83f73008 93a21000 srv!ExecuteTransaction+0x101
+8cd33c00 93a1b496 83f73008 85781058 85781020 srv!SrvSmbTransactionSecondary+0x2c5
+8cd33c28 93a2a922 00000000 85781688 00000000 srv!SrvProcessSmb+0x187
+8cd33c50 8284df5e 00781020 47f72758 00000000 srv!WorkerThread+0x15c
+8cd33c90 826f5219 93a2a7c6 85781020 00000000 nt!PspSystemThreadStartup+0x9e
+00000000 00000000 00000000 00000000 00000000 nt!KiThreadStartup+0x19
+
+
+STACK_COMMAND:  kb
+
+THREAD_SHA1_HASH_MOD_FUNC:  a9a8a5399299b8ebff890a7643f1e60a855071d2
+
+THREAD_SHA1_HASH_MOD_FUNC_OFFSET:  72c38b8bbeeb3a062f92b9ccac0806d4fd5fafd4
+
+THREAD_SHA1_HASH_MOD:  ac1a5d1a39094b9b6459217748c8fe13b5876638
+
+FOLLOWUP_IP: 
+srv!SrvOs2FeaToNt+53
+93a3027e 0fb74606        movzx   eax,word ptr [esi+6]
+
+FAULT_INSTR_CODE:  646b70f
+
+SYMBOL_STACK_INDEX:  6
+
+SYMBOL_NAME:  srv!SrvOs2FeaToNt+53
+
+FOLLOWUP_NAME:  MachineOwner
+
+MODULE_NAME: srv
+
+IMAGE_NAME:  srv.sys
+
+DEBUG_FLR_IMAGE_TIMESTAMP:  4ce78aa9
+
+FAILURE_BUCKET_ID:  0x50_srv!SrvOs2FeaToNt+53
+
+BUCKET_ID:  0x50_srv!SrvOs2FeaToNt+53
+
+PRIMARY_PROBLEM_CLASS:  0x50_srv!SrvOs2FeaToNt+53
+
+TARGET_TIME:  2017-09-21T23:52:20.000Z
+
+OSBUILD:  7601
+
+OSSERVICEPACK:  1000
+
+SERVICEPACK_NUMBER: 0
+
+OS_REVISION: 0
+
+SUITE_MASK:  272
+
+PRODUCT_TYPE:  1
+
+OSPLATFORM_TYPE:  x86
+
+OSNAME:  Windows 7
+
+OSEDITION:  Windows 7 WinNt (Service Pack 1) TerminalServer SingleUserTS
+
+OS_LOCALE:  
+
+USER_LCID:  0
+
+OSBUILD_TIMESTAMP:  2010-11-20 00:42:49
+
+BUILDDATESTAMP_STR:  101119-1850
+
+BUILDLAB_STR:  win7sp1_rtm
+
+BUILDOSVER_STR:  6.1.7601.17514.x86fre.win7sp1_rtm.101119-1850
+
+ANALYSIS_SESSION_ELAPSED_TIME:  818
+
+ANALYSIS_SOURCE:  KM
+
+FAILURE_ID_HASH_STRING:  km:0x50_srv!srvos2featont+53
+
+FAILURE_ID_HASH:  {f71acc46-b439-a0c9-4a90-99bdfd57cdf4}
+
+Followup:     MachineOwner
+---------
+
+kd> !analyze -v
+*******************************************************************************
+*                                                                             *
+*                        Bugcheck Analysis                                    *
+*                                                                             *
+*******************************************************************************
+
+PAGE_FAULT_IN_NONPAGED_AREA (50)
+Invalid system memory was referenced.  This cannot be protected by try-except.
+Typically the address is just plain bad or it is pointing at freed memory.
+Arguments:
+Arg1: 96ce6000, memory referenced.
+Arg2: 00000000, value 0 = read operation, 1 = write operation.
+Arg3: 8267db90, If non-zero, the instruction address which referenced the bad memory
+	address.
+Arg4: 00000000, (reserved)
+
+Debugging Details:
+------------------
+
+
+DUMP_CLASS: 1
+
+DUMP_QUALIFIER: 0
+
+BUILD_VERSION_STRING:  7601.17514.x86fre.win7sp1_rtm.101119-1850
+
+DUMP_TYPE:  0
+
+BUGCHECK_P1: ffffffff96ce6000
+
+BUGCHECK_P2: 0
+
+BUGCHECK_P3: ffffffff8267db90
+
+BUGCHECK_P4: 0
+
+READ_ADDRESS:  96ce6000 Paged pool
+
+FAULTING_IP: 
+nt!memmove+90
+8267db90 f3a5            rep movs dword ptr es:[edi],dword ptr [esi]
+
+MM_INTERNAL_CODE:  0
+
+CPU_COUNT: 1
+
+CPU_MHZ: 6a0
+
+CPU_VENDOR:  GenuineIntel
+
+CPU_FAMILY: 6
+
+CPU_MODEL: 3a
+
+CPU_STEPPING: 9
+
+CPU_MICROCODE: 6,3a,9,0 (F,M,S,R)  SIG: FFFFFFFF'00000000 (cache) FFFFFFFF'00000000 (init)
+
+DEFAULT_BUCKET_ID:  WIN7_DRIVER_FAULT
+
+BUGCHECK_STR:  0x50
+
+PROCESS_NAME:  System
+
+CURRENT_IRQL:  2
+
+ANALYSIS_SESSION_HOST:  DESKTOP-LRP1ELD
+
+ANALYSIS_SESSION_TIME:  09-21-2017 17:41:00.0227
+
+ANALYSIS_VERSION: 10.0.15063.0 amd64fre
+
+TRAP_FRAME:  8cd33ab4 -- (.trap 0xffffffff8cd33ab4)
+ErrCode = 00000000
+eax=00000042 ebx=83fc901d ecx=00001f3a edx=00000001 esi=96ce6000 edi=83fcdf34
+eip=8267db90 esp=8cd33b28 ebp=8cd33b30 iopl=0         nv up ei pl nz na po nc
+cs=0008  ss=0010  ds=0023  es=0023  fs=0030  gs=0000             efl=00010202
+nt!memmove+0x90:
+8267db90 f3a5            rep movs dword ptr es:[edi],dword ptr [esi]
+Resetting default scope
+
+LAST_CONTROL_TRANSFER:  from 82723083 to 826bf110
+
+STACK_TEXT:  
+8cd335fc 82723083 00000003 47f72d84 00000065 nt!RtlpBreakWithStatusInstruction
+8cd3364c 82723b81 00000003 85781688 00001b48 nt!KiBugCheckDebugBreak+0x1c
+8cd33a10 826d241b 00000050 96ce6000 00000000 nt!KeBugCheck2+0x68b
+8cd33a9c 826853d8 00000000 96ce6000 00000000 nt!MmAccessFault+0x106
+8cd33a9c 8267db90 00000000 96ce6000 00000000 nt!KiTrap0E+0xdc
+8cd33b30 93a3027e 83fc901d 96ce10e9 0000cc00 nt!memmove+0x90
+8cd33b5c 93a30603 83fc9014 96ce10e4 83f73008 srv!SrvOs2FeaToNt+0x53
+8cd33b7c 93a49602 83fc9014 8cd33bbc 8cd33ba8 srv!SrvOs2FeaListToNt+0x9e
+8cd33bb4 93a51149 83fbd008 8267db00 96cd5008 srv!SrvSmbOpen2+0x93
+8cd33bc8 93a521b8 93a1f6ec 83f73008 93a21000 srv!ExecuteTransaction+0x101
+8cd33c00 93a1b496 83f73008 85781058 85781020 srv!SrvSmbTransactionSecondary+0x2c5
+8cd33c28 93a2a922 00000000 85781688 00000000 srv!SrvProcessSmb+0x187
+8cd33c50 8284df5e 00781020 47f72758 00000000 srv!WorkerThread+0x15c
+8cd33c90 826f5219 93a2a7c6 85781020 00000000 nt!PspSystemThreadStartup+0x9e
+00000000 00000000 00000000 00000000 00000000 nt!KiThreadStartup+0x19
+
+
+STACK_COMMAND:  kb
+
+THREAD_SHA1_HASH_MOD_FUNC:  a9a8a5399299b8ebff890a7643f1e60a855071d2
+
+THREAD_SHA1_HASH_MOD_FUNC_OFFSET:  72c38b8bbeeb3a062f92b9ccac0806d4fd5fafd4
+
+THREAD_SHA1_HASH_MOD:  ac1a5d1a39094b9b6459217748c8fe13b5876638
+
+FOLLOWUP_IP: 
+srv!SrvOs2FeaToNt+53
+93a3027e 0fb74606        movzx   eax,word ptr [esi+6]
+
+FAULT_INSTR_CODE:  646b70f
+
+SYMBOL_STACK_INDEX:  6
+
+SYMBOL_NAME:  srv!SrvOs2FeaToNt+53
+
+FOLLOWUP_NAME:  MachineOwner
+
+MODULE_NAME: srv
+
+IMAGE_NAME:  srv.sys
+
+DEBUG_FLR_IMAGE_TIMESTAMP:  4ce78aa9
+
+FAILURE_BUCKET_ID:  0x50_srv!SrvOs2FeaToNt+53
+
+BUCKET_ID:  0x50_srv!SrvOs2FeaToNt+53
+
+PRIMARY_PROBLEM_CLASS:  0x50_srv!SrvOs2FeaToNt+53
+
+TARGET_TIME:  2017-09-21T23:52:20.000Z
+
+OSBUILD:  7601
+
+OSSERVICEPACK:  1000
+
+SERVICEPACK_NUMBER: 0
+
+OS_REVISION: 0
+
+SUITE_MASK:  272
+
+PRODUCT_TYPE:  1
+
+OSPLATFORM_TYPE:  x86
+
+OSNAME:  Windows 7
+
+OSEDITION:  Windows 7 WinNt (Service Pack 1) TerminalServer SingleUserTS
+
+OS_LOCALE:  
+
+USER_LCID:  0
+
+OSBUILD_TIMESTAMP:  2010-11-20 00:42:49
+
+BUILDDATESTAMP_STR:  101119-1850
+
+BUILDLAB_STR:  win7sp1_rtm
+
+BUILDOSVER_STR:  6.1.7601.17514.x86fre.win7sp1_rtm.101119-1850
+
+ANALYSIS_SESSION_ELAPSED_TIME:  821
+
+ANALYSIS_SOURCE:  KM
+
+FAILURE_ID_HASH_STRING:  km:0x50_srv!srvos2featont+53
+
+FAILURE_ID_HASH:  {f71acc46-b439-a0c9-4a90-99bdfd57cdf4}
+
+Followup:     MachineOwner
+---------
+
+kd> !analyze -v
+*******************************************************************************
+*                                                                             *
+*                        Bugcheck Analysis                                    *
+*                                                                             *
+*******************************************************************************
+
+PAGE_FAULT_IN_NONPAGED_AREA (50)
+Invalid system memory was referenced.  This cannot be protected by try-except.
+Typically the address is just plain bad or it is pointing at freed memory.
+Arguments:
+Arg1: 96ce6000, memory referenced.
+Arg2: 00000000, value 0 = read operation, 1 = write operation.
+Arg3: 8267db90, If non-zero, the instruction address which referenced the bad memory
+	address.
+Arg4: 00000000, (reserved)
+
+Debugging Details:
+------------------
+
+
+DUMP_CLASS: 1
+
+DUMP_QUALIFIER: 0
+
+BUILD_VERSION_STRING:  7601.17514.x86fre.win7sp1_rtm.101119-1850
+
+DUMP_TYPE:  0
+
+BUGCHECK_P1: ffffffff96ce6000
+
+BUGCHECK_P2: 0
+
+BUGCHECK_P3: ffffffff8267db90
+
+BUGCHECK_P4: 0
+
+READ_ADDRESS:  96ce6000 Paged pool
+
+FAULTING_IP: 
+nt!memmove+90
+8267db90 f3a5            rep movs dword ptr es:[edi],dword ptr [esi]
+
+MM_INTERNAL_CODE:  0
+
+CPU_COUNT: 1
+
+CPU_MHZ: 6a0
+
+CPU_VENDOR:  GenuineIntel
+
+CPU_FAMILY: 6
+
+CPU_MODEL: 3a
+
+CPU_STEPPING: 9
+
+CPU_MICROCODE: 6,3a,9,0 (F,M,S,R)  SIG: FFFFFFFF'00000000 (cache) FFFFFFFF'00000000 (init)
+
+DEFAULT_BUCKET_ID:  WIN7_DRIVER_FAULT
+
+BUGCHECK_STR:  0x50
+
+PROCESS_NAME:  System
+
+CURRENT_IRQL:  2
+
+ANALYSIS_SESSION_HOST:  DESKTOP-LRP1ELD
+
+ANALYSIS_SESSION_TIME:  09-21-2017 17:41:30.0534
+
+ANALYSIS_VERSION: 10.0.15063.0 amd64fre
+
+TRAP_FRAME:  8cd33ab4 -- (.trap 0xffffffff8cd33ab4)
+ErrCode = 00000000
+eax=00000042 ebx=83fc901d ecx=00001f3a edx=00000001 esi=96ce6000 edi=83fcdf34
+eip=8267db90 esp=8cd33b28 ebp=8cd33b30 iopl=0         nv up ei pl nz na po nc
+cs=0008  ss=0010  ds=0023  es=0023  fs=0030  gs=0000             efl=00010202
+nt!memmove+0x90:
+8267db90 f3a5            rep movs dword ptr es:[edi],dword ptr [esi]
+Resetting default scope
+
+LAST_CONTROL_TRANSFER:  from 82723083 to 826bf110
+
+STACK_TEXT:  
+8cd335fc 82723083 00000003 47f72d84 00000065 nt!RtlpBreakWithStatusInstruction
+8cd3364c 82723b81 00000003 85781688 00001b48 nt!KiBugCheckDebugBreak+0x1c
+8cd33a10 826d241b 00000050 96ce6000 00000000 nt!KeBugCheck2+0x68b
+8cd33a9c 826853d8 00000000 96ce6000 00000000 nt!MmAccessFault+0x106
+8cd33a9c 8267db90 00000000 96ce6000 00000000 nt!KiTrap0E+0xdc
+8cd33b30 93a3027e 83fc901d 96ce10e9 0000cc00 nt!memmove+0x90
+8cd33b5c 93a30603 83fc9014 96ce10e4 83f73008 srv!SrvOs2FeaToNt+0x53
+8cd33b7c 93a49602 83fc9014 8cd33bbc 8cd33ba8 srv!SrvOs2FeaListToNt+0x9e
+8cd33bb4 93a51149 83fbd008 8267db00 96cd5008 srv!SrvSmbOpen2+0x93
+8cd33bc8 93a521b8 93a1f6ec 83f73008 93a21000 srv!ExecuteTransaction+0x101
+8cd33c00 93a1b496 83f73008 85781058 85781020 srv!SrvSmbTransactionSecondary+0x2c5
+8cd33c28 93a2a922 00000000 85781688 00000000 srv!SrvProcessSmb+0x187
+8cd33c50 8284df5e 00781020 47f72758 00000000 srv!WorkerThread+0x15c
+8cd33c90 826f5219 93a2a7c6 85781020 00000000 nt!PspSystemThreadStartup+0x9e
+00000000 00000000 00000000 00000000 00000000 nt!KiThreadStartup+0x19
+
+
+STACK_COMMAND:  kb
+
+THREAD_SHA1_HASH_MOD_FUNC:  a9a8a5399299b8ebff890a7643f1e60a855071d2
+
+THREAD_SHA1_HASH_MOD_FUNC_OFFSET:  72c38b8bbeeb3a062f92b9ccac0806d4fd5fafd4
+
+THREAD_SHA1_HASH_MOD:  ac1a5d1a39094b9b6459217748c8fe13b5876638
+
+FOLLOWUP_IP: 
+srv!SrvOs2FeaToNt+53
+93a3027e 0fb74606        movzx   eax,word ptr [esi+6]
+
+FAULT_INSTR_CODE:  646b70f
+
+SYMBOL_STACK_INDEX:  6
+
+SYMBOL_NAME:  srv!SrvOs2FeaToNt+53
+
+FOLLOWUP_NAME:  MachineOwner
+
+MODULE_NAME: srv
+
+IMAGE_NAME:  srv.sys
+
+DEBUG_FLR_IMAGE_TIMESTAMP:  4ce78aa9
+
+FAILURE_BUCKET_ID:  0x50_srv!SrvOs2FeaToNt+53
+
+BUCKET_ID:  0x50_srv!SrvOs2FeaToNt+53
+
+PRIMARY_PROBLEM_CLASS:  0x50_srv!SrvOs2FeaToNt+53
+
+TARGET_TIME:  2017-09-21T23:52:20.000Z
+
+OSBUILD:  7601
+
+OSSERVICEPACK:  1000
+
+SERVICEPACK_NUMBER: 0
+
+OS_REVISION: 0
+
+SUITE_MASK:  272
+
+PRODUCT_TYPE:  1
+
+OSPLATFORM_TYPE:  x86
+
+OSNAME:  Windows 7
+
+OSEDITION:  Windows 7 WinNt (Service Pack 1) TerminalServer SingleUserTS
+
+OS_LOCALE:  
+
+USER_LCID:  0
+
+OSBUILD_TIMESTAMP:  2010-11-20 00:42:49
+
+BUILDDATESTAMP_STR:  101119-1850
+
+BUILDLAB_STR:  win7sp1_rtm
+
+BUILDOSVER_STR:  6.1.7601.17514.x86fre.win7sp1_rtm.101119-1850
+
+ANALYSIS_SESSION_ELAPSED_TIME:  83a
+
+ANALYSIS_SOURCE:  KM
+
+FAILURE_ID_HASH_STRING:  km:0x50_srv!srvos2featont+53
+
+FAILURE_ID_HASH:  {f71acc46-b439-a0c9-4a90-99bdfd57cdf4}
+
+Followup:     MachineOwner
+---------
+
+kd> kv
+ # ChildEBP RetAddr  Args to Child              
+00 8cd335fc 82723083 00000003 47f72d84 00000065 nt!RtlpBreakWithStatusInstruction (FPO: [1,0,0])
+01 8cd3364c 82723b81 00000003 85781688 00001b48 nt!KiBugCheckDebugBreak+0x1c
+02 8cd33a10 826d241b 00000050 96ce6000 00000000 nt!KeBugCheck2+0x68b
+03 8cd33a9c 826853d8 00000000 96ce6000 00000000 nt!MmAccessFault+0x106
+04 8cd33a9c 8267db90 00000000 96ce6000 00000000 nt!KiTrap0E+0xdc (FPO: [0,0] TrapFrame @ 8cd33ab4)
+05 8cd33b30 93a3027e 83fc901d 96ce10e9 0000cc00 nt!memmove+0x90
+06 8cd33b5c 93a30603 83fc9014 96ce10e4 83f73008 srv!SrvOs2FeaToNt+0x53 (FPO: [Non-Fpo])
+07 8cd33b7c 93a49602 83fc9014 8cd33bbc 8cd33ba8 srv!SrvOs2FeaListToNt+0x9e (FPO: [Non-Fpo])
+08 8cd33bb4 93a51149 83fbd008 8267db00 96cd5008 srv!SrvSmbOpen2+0x93 (FPO: [Non-Fpo])
+09 8cd33bc8 93a521b8 93a1f6ec 83f73008 93a21000 srv!ExecuteTransaction+0x101 (FPO: [0,0,4])
+0a 8cd33c00 93a1b496 83f73008 85781058 85781020 srv!SrvSmbTransactionSecondary+0x2c5 (FPO: [Non-Fpo])
+0b 8cd33c28 93a2a922 00000000 85781688 00000000 srv!SrvProcessSmb+0x187 (FPO: [Non-Fpo])
+0c 8cd33c50 8284df5e 00781020 47f72758 00000000 srv!WorkerThread+0x15c (FPO: [Non-Fpo])
+0d 8cd33c90 826f5219 93a2a7c6 85781020 00000000 nt!PspSystemThreadStartup+0x9e
+0e 00000000 00000000 00000000 00000000 00000000 nt!KiThreadStartup+0x19
+kd> uf srv!SrvOs2FeaToNt+0x53
+srv!SrvOs2FeaToNt:
+93a3022b 8bff            mov     edi,edi
+93a3022d 55              push    ebp
+93a3022e 8bec            mov     ebp,esp
+93a30230 53              push    ebx
+93a30231 56              push    esi
+93a30232 8b7508          mov     esi,dword ptr [ebp+8]
+93a30235 57              push    edi
+93a30236 8b7d0c          mov     edi,dword ptr [ebp+0Ch]
+93a30239 8a07            mov     al,byte ptr [edi]
+93a3023b 884604          mov     byte ptr [esi+4],al
+93a3023e 8a4701          mov     al,byte ptr [edi+1]
+93a30241 884605          mov     byte ptr [esi+5],al
+93a30244 668b4702        mov     ax,word ptr [edi+2]
+93a30248 66894606        mov     word ptr [esi+6],ax
+93a3024c 0fb64701        movzx   eax,byte ptr [edi+1]
+93a30250 50              push    eax
+93a30251 8d4704          lea     eax,[edi+4]
+93a30254 50              push    eax
+93a30255 8d5e08          lea     ebx,[esi+8]
+93a30258 53              push    ebx
+93a30259 ff15e0f0a193    call    dword ptr [srv!_imp__memmove (93a1f0e0)]
+93a3025f 0fb64605        movzx   eax,byte ptr [esi+5]
+93a30263 03d8            add     ebx,eax
+93a30265 c60300          mov     byte ptr [ebx],0
+93a30268 0fb74606        movzx   eax,word ptr [esi+6]
+93a3026c 50              push    eax
+93a3026d 0fb64605        movzx   eax,byte ptr [esi+5]
+93a30271 8d443805        lea     eax,[eax+edi+5]
+93a30275 50              push    eax
+93a30276 43              inc     ebx
+93a30277 53              push    ebx
+93a30278 ff15e0f0a193    call    dword ptr [srv!_imp__memmove (93a1f0e0)]
+93a3027e 0fb74606        movzx   eax,word ptr [esi+6]
+93a30282 8d441803        lea     eax,[eax+ebx+3]
+93a30286 83e0fc          and     eax,0FFFFFFFCh
+93a30289 83c418          add     esp,18h
+93a3028c 8bc8            mov     ecx,eax
+93a3028e 2bce            sub     ecx,esi
+93a30290 5f              pop     edi
+93a30291 890e            mov     dword ptr [esi],ecx
+93a30293 5e              pop     esi
+93a30294 5b              pop     ebx
+93a30295 5d              pop     ebp
+93a30296 c20800          ret     8
+kd> !anlyze -v
+No export anlyze found
+kd> !analyze -v
+*******************************************************************************
+*                                                                             *
+*                        Bugcheck Analysis                                    *
+*                                                                             *
+*******************************************************************************
+
+PAGE_FAULT_IN_NONPAGED_AREA (50)
+Invalid system memory was referenced.  This cannot be protected by try-except.
+Typically the address is just plain bad or it is pointing at freed memory.
+Arguments:
+Arg1: 96ce6000, memory referenced.
+Arg2: 00000000, value 0 = read operation, 1 = write operation.
+Arg3: 8267db90, If non-zero, the instruction address which referenced the bad memory
+	address.
+Arg4: 00000000, (reserved)
+
+Debugging Details:
+------------------
+
+
+DUMP_CLASS: 1
+
+DUMP_QUALIFIER: 0
+
+BUILD_VERSION_STRING:  7601.17514.x86fre.win7sp1_rtm.101119-1850
+
+DUMP_TYPE:  0
+
+BUGCHECK_P1: ffffffff96ce6000
+
+BUGCHECK_P2: 0
+
+BUGCHECK_P3: ffffffff8267db90
+
+BUGCHECK_P4: 0
+
+READ_ADDRESS:  96ce6000 Paged pool
+
+FAULTING_IP: 
+nt!memmove+90
+8267db90 f3a5            rep movs dword ptr es:[edi],dword ptr [esi]
+
+MM_INTERNAL_CODE:  0
+
+CPU_COUNT: 1
+
+CPU_MHZ: 6a0
+
+CPU_VENDOR:  GenuineIntel
+
+CPU_FAMILY: 6
+
+CPU_MODEL: 3a
+
+CPU_STEPPING: 9
+
+CPU_MICROCODE: 6,3a,9,0 (F,M,S,R)  SIG: FFFFFFFF'00000000 (cache) FFFFFFFF'00000000 (init)
+
+DEFAULT_BUCKET_ID:  WIN7_DRIVER_FAULT
+
+BUGCHECK_STR:  0x50
+
+PROCESS_NAME:  System
+
+CURRENT_IRQL:  2
+
+ANALYSIS_SESSION_HOST:  DESKTOP-LRP1ELD
+
+ANALYSIS_SESSION_TIME:  09-21-2017 17:43:15.0025
+
+ANALYSIS_VERSION: 10.0.15063.0 amd64fre
+
+TRAP_FRAME:  8cd33ab4 -- (.trap 0xffffffff8cd33ab4)
+ErrCode = 00000000
+eax=00000042 ebx=83fc901d ecx=00001f3a edx=00000001 esi=96ce6000 edi=83fcdf34
+eip=8267db90 esp=8cd33b28 ebp=8cd33b30 iopl=0         nv up ei pl nz na po nc
+cs=0008  ss=0010  ds=0023  es=0023  fs=0030  gs=0000             efl=00010202
+nt!memmove+0x90:
+8267db90 f3a5            rep movs dword ptr es:[edi],dword ptr [esi]
+Resetting default scope
+
+LAST_CONTROL_TRANSFER:  from 82723083 to 826bf110
+
+STACK_TEXT:  
+8cd335fc 82723083 00000003 47f72d84 00000065 nt!RtlpBreakWithStatusInstruction
+8cd3364c 82723b81 00000003 85781688 00001b48 nt!KiBugCheckDebugBreak+0x1c
+8cd33a10 826d241b 00000050 96ce6000 00000000 nt!KeBugCheck2+0x68b
+8cd33a9c 826853d8 00000000 96ce6000 00000000 nt!MmAccessFault+0x106
+8cd33a9c 8267db90 00000000 96ce6000 00000000 nt!KiTrap0E+0xdc
+8cd33b30 93a3027e 83fc901d 96ce10e9 0000cc00 nt!memmove+0x90
+8cd33b5c 93a30603 83fc9014 96ce10e4 83f73008 srv!SrvOs2FeaToNt+0x53
+8cd33b7c 93a49602 83fc9014 8cd33bbc 8cd33ba8 srv!SrvOs2FeaListToNt+0x9e
+8cd33bb4 93a51149 83fbd008 8267db00 96cd5008 srv!SrvSmbOpen2+0x93
+8cd33bc8 93a521b8 93a1f6ec 83f73008 93a21000 srv!ExecuteTransaction+0x101
+8cd33c00 93a1b496 83f73008 85781058 85781020 srv!SrvSmbTransactionSecondary+0x2c5
+8cd33c28 93a2a922 00000000 85781688 00000000 srv!SrvProcessSmb+0x187
+8cd33c50 8284df5e 00781020 47f72758 00000000 srv!WorkerThread+0x15c
+8cd33c90 826f5219 93a2a7c6 85781020 00000000 nt!PspSystemThreadStartup+0x9e
+00000000 00000000 00000000 00000000 00000000 nt!KiThreadStartup+0x19
+
+
+STACK_COMMAND:  kb
+
+THREAD_SHA1_HASH_MOD_FUNC:  a9a8a5399299b8ebff890a7643f1e60a855071d2
+
+THREAD_SHA1_HASH_MOD_FUNC_OFFSET:  72c38b8bbeeb3a062f92b9ccac0806d4fd5fafd4
+
+THREAD_SHA1_HASH_MOD:  ac1a5d1a39094b9b6459217748c8fe13b5876638
+
+FOLLOWUP_IP: 
+srv!SrvOs2FeaToNt+53
+93a3027e 0fb74606        movzx   eax,word ptr [esi+6]
+
+FAULT_INSTR_CODE:  646b70f
+
+SYMBOL_STACK_INDEX:  6
+
+SYMBOL_NAME:  srv!SrvOs2FeaToNt+53
+
+FOLLOWUP_NAME:  MachineOwner
+
+MODULE_NAME: srv
+
+IMAGE_NAME:  srv.sys
+
+DEBUG_FLR_IMAGE_TIMESTAMP:  4ce78aa9
+
+FAILURE_BUCKET_ID:  0x50_srv!SrvOs2FeaToNt+53
+
+BUCKET_ID:  0x50_srv!SrvOs2FeaToNt+53
+
+PRIMARY_PROBLEM_CLASS:  0x50_srv!SrvOs2FeaToNt+53
+
+TARGET_TIME:  2017-09-21T23:52:20.000Z
+
+OSBUILD:  7601
+
+OSSERVICEPACK:  1000
+
+SERVICEPACK_NUMBER: 0
+
+OS_REVISION: 0
+
+SUITE_MASK:  272
+
+PRODUCT_TYPE:  1
+
+OSPLATFORM_TYPE:  x86
+
+OSNAME:  Windows 7
+
+OSEDITION:  Windows 7 WinNt (Service Pack 1) TerminalServer SingleUserTS
+
+OS_LOCALE:  
+
+USER_LCID:  0
+
+OSBUILD_TIMESTAMP:  2010-11-20 00:42:49
+
+BUILDDATESTAMP_STR:  101119-1850
+
+BUILDLAB_STR:  win7sp1_rtm
+
+BUILDOSVER_STR:  6.1.7601.17514.x86fre.win7sp1_rtm.101119-1850
+
+ANALYSIS_SESSION_ELAPSED_TIME:  7ea
+
+ANALYSIS_SOURCE:  KM
+
+FAILURE_ID_HASH_STRING:  km:0x50_srv!srvos2featont+53
+
+FAILURE_ID_HASH:  {f71acc46-b439-a0c9-4a90-99bdfd57cdf4}
+
+Followup:     MachineOwner
+---------
+
+kd> kv
+ # ChildEBP RetAddr  Args to Child              
+00 8cd335fc 82723083 00000003 47f72d84 00000065 nt!RtlpBreakWithStatusInstruction (FPO: [1,0,0])
+01 8cd3364c 82723b81 00000003 85781688 00001b48 nt!KiBugCheckDebugBreak+0x1c
+02 8cd33a10 826d241b 00000050 96ce6000 00000000 nt!KeBugCheck2+0x68b
+03 8cd33a9c 826853d8 00000000 96ce6000 00000000 nt!MmAccessFault+0x106
+04 8cd33a9c 8267db90 00000000 96ce6000 00000000 nt!KiTrap0E+0xdc (FPO: [0,0] TrapFrame @ 8cd33ab4)
+05 8cd33b30 93a3027e 83fc901d 96ce10e9 0000cc00 nt!memmove+0x90
+06 8cd33b5c 93a30603 83fc9014 96ce10e4 83f73008 srv!SrvOs2FeaToNt+0x53 (FPO: [Non-Fpo])
+07 8cd33b7c 93a49602 83fc9014 8cd33bbc 8cd33ba8 srv!SrvOs2FeaListToNt+0x9e (FPO: [Non-Fpo])
+08 8cd33bb4 93a51149 83fbd008 8267db00 96cd5008 srv!SrvSmbOpen2+0x93 (FPO: [Non-Fpo])
+09 8cd33bc8 93a521b8 93a1f6ec 83f73008 93a21000 srv!ExecuteTransaction+0x101 (FPO: [0,0,4])
+0a 8cd33c00 93a1b496 83f73008 85781058 85781020 srv!SrvSmbTransactionSecondary+0x2c5 (FPO: [Non-Fpo])
+0b 8cd33c28 93a2a922 00000000 85781688 00000000 srv!SrvProcessSmb+0x187 (FPO: [Non-Fpo])
+0c 8cd33c50 8284df5e 00781020 47f72758 00000000 srv!WorkerThread+0x15c (FPO: [Non-Fpo])
+0d 8cd33c90 826f5219 93a2a7c6 85781020 00000000 nt!PspSystemThreadStartup+0x9e
+0e 00000000 00000000 00000000 00000000 00000000 nt!KiThreadStartup+0x19
+kd> u srv!SrvOs2FeaToNt+0x53
+srv!SrvOs2FeaToNt+0x53:
+93a3027e 0fb74606        movzx   eax,word ptr [esi+6]
+93a30282 8d441803        lea     eax,[eax+ebx+3]
+93a30286 83e0fc          and     eax,0FFFFFFFCh
+93a30289 83c418          add     esp,18h
+93a3028c 8bc8            mov     ecx,eax
+93a3028e 2bce            sub     ecx,esi
+93a30290 5f              pop     edi
+93a30291 890e            mov     dword ptr [esi],ecx
+kd> kv
+ # ChildEBP RetAddr  Args to Child              
+00 8cd335fc 82723083 00000003 47f72d84 00000065 nt!RtlpBreakWithStatusInstruction (FPO: [1,0,0])
+01 8cd3364c 82723b81 00000003 85781688 00001b48 nt!KiBugCheckDebugBreak+0x1c
+02 8cd33a10 826d241b 00000050 96ce6000 00000000 nt!KeBugCheck2+0x68b
+03 8cd33a9c 826853d8 00000000 96ce6000 00000000 nt!MmAccessFault+0x106
+04 8cd33a9c 8267db90 00000000 96ce6000 00000000 nt!KiTrap0E+0xdc (FPO: [0,0] TrapFrame @ 8cd33ab4)
+05 8cd33b30 93a3027e 83fc901d 96ce10e9 0000cc00 nt!memmove+0x90
+06 8cd33b5c 93a30603 83fc9014 96ce10e4 83f73008 srv!SrvOs2FeaToNt+0x53 (FPO: [Non-Fpo])
+07 8cd33b7c 93a49602 83fc9014 8cd33bbc 8cd33ba8 srv!SrvOs2FeaListToNt+0x9e (FPO: [Non-Fpo])
+08 8cd33bb4 93a51149 83fbd008 8267db00 96cd5008 srv!SrvSmbOpen2+0x93 (FPO: [Non-Fpo])
+09 8cd33bc8 93a521b8 93a1f6ec 83f73008 93a21000 srv!ExecuteTransaction+0x101 (FPO: [0,0,4])
+0a 8cd33c00 93a1b496 83f73008 85781058 85781020 srv!SrvSmbTransactionSecondary+0x2c5 (FPO: [Non-Fpo])
+0b 8cd33c28 93a2a922 00000000 85781688 00000000 srv!SrvProcessSmb+0x187 (FPO: [Non-Fpo])
+0c 8cd33c50 8284df5e 00781020 47f72758 00000000 srv!WorkerThread+0x15c (FPO: [Non-Fpo])
+0d 8cd33c90 826f5219 93a2a7c6 85781020 00000000 nt!PspSystemThreadStartup+0x9e
+0e 00000000 00000000 00000000 00000000 00000000 nt!KiThreadStartup+0x19
+kd> uf srv!SrvOs2FeaToNt
+srv!SrvOs2FeaToNt:
+93a3022b 8bff            mov     edi,edi
+93a3022d 55              push    ebp
+93a3022e 8bec            mov     ebp,esp
+93a30230 53              push    ebx
+93a30231 56              push    esi
+93a30232 8b7508          mov     esi,dword ptr [ebp+8]
+93a30235 57              push    edi
+93a30236 8b7d0c          mov     edi,dword ptr [ebp+0Ch]
+93a30239 8a07            mov     al,byte ptr [edi]
+93a3023b 884604          mov     byte ptr [esi+4],al
+93a3023e 8a4701          mov     al,byte ptr [edi+1]
+93a30241 884605          mov     byte ptr [esi+5],al
+93a30244 668b4702        mov     ax,word ptr [edi+2]
+93a30248 66894606        mov     word ptr [esi+6],ax
+93a3024c 0fb64701        movzx   eax,byte ptr [edi+1]
+93a30250 50              push    eax
+93a30251 8d4704          lea     eax,[edi+4]
+93a30254 50              push    eax
+93a30255 8d5e08          lea     ebx,[esi+8]
+93a30258 53              push    ebx
+93a30259 ff15e0f0a193    call    dword ptr [srv!_imp__memmove (93a1f0e0)]
+93a3025f 0fb64605        movzx   eax,byte ptr [esi+5]
+93a30263 03d8            add     ebx,eax
+93a30265 c60300          mov     byte ptr [ebx],0
+93a30268 0fb74606        movzx   eax,word ptr [esi+6]
+93a3026c 50              push    eax
+93a3026d 0fb64605        movzx   eax,byte ptr [esi+5]
+93a30271 8d443805        lea     eax,[eax+edi+5]
+93a30275 50              push    eax
+93a30276 43              inc     ebx
+93a30277 53              push    ebx
+93a30278 ff15e0f0a193    call    dword ptr [srv!_imp__memmove (93a1f0e0)]
+93a3027e 0fb74606        movzx   eax,word ptr [esi+6]
+93a30282 8d441803        lea     eax,[eax+ebx+3]
+93a30286 83e0fc          and     eax,0FFFFFFFCh
+93a30289 83c418          add     esp,18h
+93a3028c 8bc8            mov     ecx,eax
+93a3028e 2bce            sub     ecx,esi
+93a30290 5f              pop     edi
+93a30291 890e            mov     dword ptr [esi],ecx
+93a30293 5e              pop     esi
+93a30294 5b              pop     ebx
+93a30295 5d              pop     ebp
+93a30296 c20800          ret     8
+kd> !analyze -v
+*******************************************************************************
+*                                                                             *
+*                        Bugcheck Analysis                                    *
+*                                                                             *
+*******************************************************************************
+
+PAGE_FAULT_IN_NONPAGED_AREA (50)
+Invalid system memory was referenced.  This cannot be protected by try-except.
+Typically the address is just plain bad or it is pointing at freed memory.
+Arguments:
+Arg1: 96ce6000, memory referenced.
+Arg2: 00000000, value 0 = read operation, 1 = write operation.
+Arg3: 8267db90, If non-zero, the instruction address which referenced the bad memory
+	address.
+Arg4: 00000000, (reserved)
+
+Debugging Details:
+------------------
+
+
+DUMP_CLASS: 1
+
+DUMP_QUALIFIER: 0
+
+BUILD_VERSION_STRING:  7601.17514.x86fre.win7sp1_rtm.101119-1850
+
+DUMP_TYPE:  0
+
+BUGCHECK_P1: ffffffff96ce6000
+
+BUGCHECK_P2: 0
+
+BUGCHECK_P3: ffffffff8267db90
+
+BUGCHECK_P4: 0
+
+READ_ADDRESS:  96ce6000 Paged pool
+
+FAULTING_IP: 
+nt!memmove+90
+8267db90 f3a5            rep movs dword ptr es:[edi],dword ptr [esi]
+
+MM_INTERNAL_CODE:  0
+
+CPU_COUNT: 1
+
+CPU_MHZ: 6a0
+
+CPU_VENDOR:  GenuineIntel
+
+CPU_FAMILY: 6
+
+CPU_MODEL: 3a
+
+CPU_STEPPING: 9
+
+CPU_MICROCODE: 6,3a,9,0 (F,M,S,R)  SIG: FFFFFFFF'00000000 (cache) FFFFFFFF'00000000 (init)
+
+DEFAULT_BUCKET_ID:  WIN7_DRIVER_FAULT
+
+BUGCHECK_STR:  0x50
+
+PROCESS_NAME:  System
+
+CURRENT_IRQL:  2
+
+ANALYSIS_SESSION_HOST:  DESKTOP-LRP1ELD
+
+ANALYSIS_SESSION_TIME:  09-21-2017 17:48:53.0912
+
+ANALYSIS_VERSION: 10.0.15063.0 amd64fre
+
+TRAP_FRAME:  8cd33ab4 -- (.trap 0xffffffff8cd33ab4)
+ErrCode = 00000000
+eax=00000042 ebx=83fc901d ecx=00001f3a edx=00000001 esi=96ce6000 edi=83fcdf34
+eip=8267db90 esp=8cd33b28 ebp=8cd33b30 iopl=0         nv up ei pl nz na po nc
+cs=0008  ss=0010  ds=0023  es=0023  fs=0030  gs=0000             efl=00010202
+nt!memmove+0x90:
+8267db90 f3a5            rep movs dword ptr es:[edi],dword ptr [esi]
+Resetting default scope
+
+LAST_CONTROL_TRANSFER:  from 82723083 to 826bf110
+
+STACK_TEXT:  
+8cd335fc 82723083 00000003 47f72d84 00000065 nt!RtlpBreakWithStatusInstruction
+8cd3364c 82723b81 00000003 85781688 00001b48 nt!KiBugCheckDebugBreak+0x1c
+8cd33a10 826d241b 00000050 96ce6000 00000000 nt!KeBugCheck2+0x68b
+8cd33a9c 826853d8 00000000 96ce6000 00000000 nt!MmAccessFault+0x106
+8cd33a9c 8267db90 00000000 96ce6000 00000000 nt!KiTrap0E+0xdc
+8cd33b30 93a3027e 83fc901d 96ce10e9 0000cc00 nt!memmove+0x90
+8cd33b5c 93a30603 83fc9014 96ce10e4 83f73008 srv!SrvOs2FeaToNt+0x53
+8cd33b7c 93a49602 83fc9014 8cd33bbc 8cd33ba8 srv!SrvOs2FeaListToNt+0x9e
+8cd33bb4 93a51149 83fbd008 8267db00 96cd5008 srv!SrvSmbOpen2+0x93
+8cd33bc8 93a521b8 93a1f6ec 83f73008 93a21000 srv!ExecuteTransaction+0x101
+8cd33c00 93a1b496 83f73008 85781058 85781020 srv!SrvSmbTransactionSecondary+0x2c5
+8cd33c28 93a2a922 00000000 85781688 00000000 srv!SrvProcessSmb+0x187
+8cd33c50 8284df5e 00781020 47f72758 00000000 srv!WorkerThread+0x15c
+8cd33c90 826f5219 93a2a7c6 85781020 00000000 nt!PspSystemThreadStartup+0x9e
+00000000 00000000 00000000 00000000 00000000 nt!KiThreadStartup+0x19
+
+
+STACK_COMMAND:  kb
+
+THREAD_SHA1_HASH_MOD_FUNC:  a9a8a5399299b8ebff890a7643f1e60a855071d2
+
+THREAD_SHA1_HASH_MOD_FUNC_OFFSET:  72c38b8bbeeb3a062f92b9ccac0806d4fd5fafd4
+
+THREAD_SHA1_HASH_MOD:  ac1a5d1a39094b9b6459217748c8fe13b5876638
+
+FOLLOWUP_IP: 
+srv!SrvOs2FeaToNt+53
+93a3027e 0fb74606        movzx   eax,word ptr [esi+6]
+
+FAULT_INSTR_CODE:  646b70f
+
+SYMBOL_STACK_INDEX:  6
+
+SYMBOL_NAME:  srv!SrvOs2FeaToNt+53
+
+FOLLOWUP_NAME:  MachineOwner
+
+MODULE_NAME: srv
+
+IMAGE_NAME:  srv.sys
+
+DEBUG_FLR_IMAGE_TIMESTAMP:  4ce78aa9
+
+FAILURE_BUCKET_ID:  0x50_srv!SrvOs2FeaToNt+53
+
+BUCKET_ID:  0x50_srv!SrvOs2FeaToNt+53
+
+PRIMARY_PROBLEM_CLASS:  0x50_srv!SrvOs2FeaToNt+53
+
+TARGET_TIME:  2017-09-21T23:52:20.000Z
+
+OSBUILD:  7601
+
+OSSERVICEPACK:  1000
+
+SERVICEPACK_NUMBER: 0
+
+OS_REVISION: 0
+
+SUITE_MASK:  272
+
+PRODUCT_TYPE:  1
+
+OSPLATFORM_TYPE:  x86
+
+OSNAME:  Windows 7
+
+OSEDITION:  Windows 7 WinNt (Service Pack 1) TerminalServer SingleUserTS
+
+OS_LOCALE:  
+
+USER_LCID:  0
+
+OSBUILD_TIMESTAMP:  2010-11-20 00:42:49
+
+BUILDDATESTAMP_STR:  101119-1850
+
+BUILDLAB_STR:  win7sp1_rtm
+
+BUILDOSVER_STR:  6.1.7601.17514.x86fre.win7sp1_rtm.101119-1850
+
+ANALYSIS_SESSION_ELAPSED_TIME:  823
+
+ANALYSIS_SOURCE:  KM
+
+FAILURE_ID_HASH_STRING:  km:0x50_srv!srvos2featont+53
+
+FAILURE_ID_HASH:  {f71acc46-b439-a0c9-4a90-99bdfd57cdf4}
+
+Followup:     MachineOwner
+---------
+
+kd> kv
+ # ChildEBP RetAddr  Args to Child              
+00 8cd335fc 82723083 00000003 47f72d84 00000065 nt!RtlpBreakWithStatusInstruction (FPO: [1,0,0])
+01 8cd3364c 82723b81 00000003 85781688 00001b48 nt!KiBugCheckDebugBreak+0x1c
+02 8cd33a10 826d241b 00000050 96ce6000 00000000 nt!KeBugCheck2+0x68b
+03 8cd33a9c 826853d8 00000000 96ce6000 00000000 nt!MmAccessFault+0x106
+04 8cd33a9c 8267db90 00000000 96ce6000 00000000 nt!KiTrap0E+0xdc (FPO: [0,0] TrapFrame @ 8cd33ab4)
+05 8cd33b30 93a3027e 83fc901d 96ce10e9 0000cc00 nt!memmove+0x90
+06 8cd33b5c 93a30603 83fc9014 96ce10e4 83f73008 srv!SrvOs2FeaToNt+0x53 (FPO: [Non-Fpo])
+07 8cd33b7c 93a49602 83fc9014 8cd33bbc 8cd33ba8 srv!SrvOs2FeaListToNt+0x9e (FPO: [Non-Fpo])
+08 8cd33bb4 93a51149 83fbd008 8267db00 96cd5008 srv!SrvSmbOpen2+0x93 (FPO: [Non-Fpo])
+09 8cd33bc8 93a521b8 93a1f6ec 83f73008 93a21000 srv!ExecuteTransaction+0x101 (FPO: [0,0,4])
+0a 8cd33c00 93a1b496 83f73008 85781058 85781020 srv!SrvSmbTransactionSecondary+0x2c5 (FPO: [Non-Fpo])
+0b 8cd33c28 93a2a922 00000000 85781688 00000000 srv!SrvProcessSmb+0x187 (FPO: [Non-Fpo])
+0c 8cd33c50 8284df5e 00781020 47f72758 00000000 srv!WorkerThread+0x15c (FPO: [Non-Fpo])
+0d 8cd33c90 826f5219 93a2a7c6 85781020 00000000 nt!PspSystemThreadStartup+0x9e
+0e 00000000 00000000 00000000 00000000 00000000 nt!KiThreadStartup+0x19
+kd> uf srv!SrvOs2FeaToNt+0x53
+srv!SrvOs2FeaToNt:
+93a3022b 8bff            mov     edi,edi
+93a3022d 55              push    ebp
+93a3022e 8bec            mov     ebp,esp
+93a30230 53              push    ebx
+93a30231 56              push    esi
+93a30232 8b7508          mov     esi,dword ptr [ebp+8]
+93a30235 57              push    edi
+93a30236 8b7d0c          mov     edi,dword ptr [ebp+0Ch]
+93a30239 8a07            mov     al,byte ptr [edi]
+93a3023b 884604          mov     byte ptr [esi+4],al
+93a3023e 8a4701          mov     al,byte ptr [edi+1]
+93a30241 884605          mov     byte ptr [esi+5],al
+93a30244 668b4702        mov     ax,word ptr [edi+2]
+93a30248 66894606        mov     word ptr [esi+6],ax
+93a3024c 0fb64701        movzx   eax,byte ptr [edi+1]
+93a30250 50              push    eax
+93a30251 8d4704          lea     eax,[edi+4]
+93a30254 50              push    eax
+93a30255 8d5e08          lea     ebx,[esi+8]
+93a30258 53              push    ebx
+93a30259 ff15e0f0a193    call    dword ptr [srv!_imp__memmove (93a1f0e0)]
+93a3025f 0fb64605        movzx   eax,byte ptr [esi+5]
+93a30263 03d8            add     ebx,eax
+93a30265 c60300          mov     byte ptr [ebx],0
+93a30268 0fb74606        movzx   eax,word ptr [esi+6]
+93a3026c 50              push    eax
+93a3026d 0fb64605        movzx   eax,byte ptr [esi+5]
+93a30271 8d443805        lea     eax,[eax+edi+5]
+93a30275 50              push    eax
+93a30276 43              inc     ebx
+93a30277 53              push    ebx
+93a30278 ff15e0f0a193    call    dword ptr [srv!_imp__memmove (93a1f0e0)]
+93a3027e 0fb74606        movzx   eax,word ptr [esi+6]
+93a30282 8d441803        lea     eax,[eax+ebx+3]
+93a30286 83e0fc          and     eax,0FFFFFFFCh
+93a30289 83c418          add     esp,18h
+93a3028c 8bc8            mov     ecx,eax
+93a3028e 2bce            sub     ecx,esi
+93a30290 5f              pop     edi
+93a30291 890e            mov     dword ptr [esi],ecx
+93a30293 5e              pop     esi
+93a30294 5b              pop     ebx
+93a30295 5d              pop     ebp
+93a30296 c20800          ret     8
+kd> u srv!SrvOs2FeaListToNt+0x9e
+srv!SrvOs2FeaListToNt+0x9e:
+93a30603 0fb65601        movzx   edx,byte ptr [esi+1]
+93a30607 0fb74e02        movzx   ecx,word ptr [esi+2]
+93a3060b 03d6            add     edx,esi
+93a3060d 8d740a05        lea     esi,[edx+ecx+5]
+93a30611 3bf3            cmp     esi,ebx
+93a30613 76dc            jbe     srv!SrvOs2FeaListToNt+0x8c (93a305f1)
+93a30615 8b4508          mov     eax,dword ptr [ebp+8]
+93a30618 8b0f            mov     ecx,dword ptr [edi]
+kd> uf srv!SrvOs2FeaListToNt+0x9e
+srv!SrvOs2FeaListToNt:
+93a30565 8bff            mov     edi,edi
+93a30567 55              push    ebp
+93a30568 8bec            mov     ebp,esp
+93a3056a 51              push    ecx
+93a3056b 8365fc00        and     dword ptr [ebp-4],0
+93a3056f 56              push    esi
+93a30570 57              push    edi
+93a30571 8b7d08          mov     edi,dword ptr [ebp+8]
+93a30574 57              push    edi
+93a30575 e82effffff      call    srv!SrvOs2FeaListSizeToNt (93a304a8)
+93a3057a 8b7510          mov     esi,dword ptr [ebp+10h]
+93a3057d 8906            mov     dword ptr [esi],eax
+93a3057f 85c0            test    eax,eax
+93a30581 7510            jne     srv!SrvOs2FeaListToNt+0x2e (93a30593)  Branch
+
+srv!SrvOs2FeaListToNt+0x1e:
+93a30583 8b4d14          mov     ecx,dword ptr [ebp+14h]
+93a30586 668901          mov     word ptr [ecx],ax
+93a30589 b8fff098c0      mov     eax,0C098F0FFh
+93a3058e e9c0000000      jmp     srv!SrvOs2FeaListToNt+0xee (93a30653)  Branch
+
+srv!SrvOs2FeaListToNt+0x2e:
+93a30593 6a15            push    15h
+93a30595 5a              pop     edx
+93a30596 8bc8            mov     ecx,eax
+93a30598 e85125feff      call    srv!SrvAllocateNonPagedPool (93a12aee)
+93a3059d 8b4d0c          mov     ecx,dword ptr [ebp+0Ch]
+93a305a0 8901            mov     dword ptr [ecx],eax
+93a305a2 85c0            test    eax,eax
+93a305a4 753d            jne     srv!SrvOs2FeaListToNt+0x7e (93a305e3)  Branch
+
+srv!SrvOs2FeaListToNt+0x41:
+93a305a6 a10010a293      mov     eax,dword ptr [srv!WPP_GLOBAL_Control (93a21000)]
+93a305ab 80781d02        cmp     byte ptr [eax+1Dh],2
+93a305af 722b            jb      srv!SrvOs2FeaListToNt+0x77 (93a305dc)  Branch
+
+srv!SrvOs2FeaListToNt+0x4c:
+93a305b1 f6402001        test    byte ptr [eax+20h],1
+93a305b5 7425            je      srv!SrvOs2FeaListToNt+0x77 (93a305dc)  Branch
+
+srv!SrvOs2FeaListToNt+0x52:
+93a305b7 ff1570f3a193    call    dword ptr [srv!_imp__KeGetCurrentIrql (93a1f370)]
+93a305bd 3c02            cmp     al,2
+93a305bf 731b            jae     srv!SrvOs2FeaListToNt+0x77 (93a305dc)  Branch
+
+srv!SrvOs2FeaListToNt+0x5c:
+93a305c1 6a00            push    0
+93a305c3 ff36            push    dword ptr [esi]
+93a305c5 684241a293      push    offset srv! ?? ::NNGAKEGL::`string' (93a24142)
+93a305ca e8c0d7feff      call    srv!DbgPrint (93a1dd8f)
+93a305cf 68b238a293      push    offset srv! ?? ::NNGAKEGL::`string' (93a238b2)
+93a305d4 e8b6d7feff      call    srv!DbgPrint (93a1dd8f)
+93a305d9 83c410          add     esp,10h
+
+srv!SrvOs2FeaListToNt+0x77:
+93a305dc b8050200c0      mov     eax,0C0000205h
+93a305e1 eb70            jmp     srv!SrvOs2FeaListToNt+0xee (93a30653)  Branch
+
+srv!SrvOs2FeaListToNt+0x7e:
+93a305e3 8b0f            mov     ecx,dword ptr [edi]
+93a305e5 53              push    ebx
+93a305e6 8d5c39fb        lea     ebx,[ecx+edi-5]
+93a305ea 8d7704          lea     esi,[edi+4]
+93a305ed 3bf3            cmp     esi,ebx
+93a305ef 7727            ja      srv!SrvOs2FeaListToNt+0xb3 (93a30618)  Branch
+
+srv!SrvOs2FeaListToNt+0x8c:
+93a305f1 f6067f          test    byte ptr [esi],7Fh
+93a305f4 753c            jne     srv!SrvOs2FeaListToNt+0xcd (93a30632)  Branch
+
+srv!SrvOs2FeaListToNt+0x91:
+93a305f6 56              push    esi
+93a305f7 50              push    eax
+93a305f8 894508          mov     dword ptr [ebp+8],eax
+93a305fb 8975fc          mov     dword ptr [ebp-4],esi
+93a305fe e828fcffff      call    srv!SrvOs2FeaToNt (93a3022b)
+93a30603 0fb65601        movzx   edx,byte ptr [esi+1]
+93a30607 0fb74e02        movzx   ecx,word ptr [esi+2]
+93a3060b 03d6            add     edx,esi
+93a3060d 8d740a05        lea     esi,[edx+ecx+5]
+93a30611 3bf3            cmp     esi,ebx
+93a30613 76dc            jbe     srv!SrvOs2FeaListToNt+0x8c (93a305f1)  Branch
+
+srv!SrvOs2FeaListToNt+0xb0:
+93a30615 8b4508          mov     eax,dword ptr [ebp+8]
+
+srv!SrvOs2FeaListToNt+0xb3:
+93a30618 8b0f            mov     ecx,dword ptr [edi]
+93a3061a 03cf            add     ecx,edi
+93a3061c 3bf1            cmp     esi,ecx
+93a3061e 742d            je      srv!SrvOs2FeaListToNt+0xe8 (93a3064d)  Branch
+
+srv!SrvOs2FeaListToNt+0xbb:
+93a30620 8b45fc          mov     eax,dword ptr [ebp-4]
+93a30623 8b4d14          mov     ecx,dword ptr [ebp+14h]
+93a30626 2bc7            sub     eax,edi
+93a30628 668901          mov     word ptr [ecx],ax
+93a3062b be010000c0      mov     esi,0C0000001h
+93a30630 eb0d            jmp     srv!SrvOs2FeaListToNt+0xda (93a3063f)  Branch
+
+srv!SrvOs2FeaListToNt+0xcd:
+93a30632 8b4514          mov     eax,dword ptr [ebp+14h]
+93a30635 2bf7            sub     esi,edi
+93a30637 668930          mov     word ptr [eax],si
+93a3063a be0d0000c0      mov     esi,0C000000Dh
+
+srv!SrvOs2FeaListToNt+0xda:
+93a3063f 8b450c          mov     eax,dword ptr [ebp+0Ch]
+93a30642 8b08            mov     ecx,dword ptr [eax]
+93a30644 e84f24feff      call    srv!SrvFreeNonPagedPool (93a12a98)
+93a30649 8bc6            mov     eax,esi
+93a3064b eb05            jmp     srv!SrvOs2FeaListToNt+0xed (93a30652)  Branch
+
+srv!SrvOs2FeaListToNt+0xe8:
+93a3064d 832000          and     dword ptr [eax],0
+93a30650 33c0            xor     eax,eax
+
+srv!SrvOs2FeaListToNt+0xed:
+93a30652 5b              pop     ebx
+
+srv!SrvOs2FeaListToNt+0xee:
+93a30653 5f              pop     edi
+93a30654 5e              pop     esi
+93a30655 c9              leave
+93a30656 c21000          ret     10h
