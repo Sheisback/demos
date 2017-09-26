@@ -1,0 +1,162 @@
+
+Microsoft (R) Windows Debugger Version 10.0.15063.0 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Waiting for pipe \\.\pipe\dbg
+Waiting to reconnect...
+Connected to Windows 7 7601 x86 compatible target at (Mon Sep 25 12:24:47.439 2017 (UTC - 7:00)), ptr64 FALSE
+Kernel Debugger connection established.
+Symbol search path is: srv*
+Executable search path is: 
+Windows 7 Kernel Version 7601 MP (1 procs) Free x86 compatible
+Built by: 7601.17514.x86fre.win7sp1_rtm.101119-1850
+Machine Name:
+Kernel base = 0x8264f000 PsLoadedModuleList = 0x82799850
+System Uptime: not available
+Break instruction exception - code 80000003 (first chance)
+*******************************************************************************
+*                                                                             *
+*   You are seeing this message because you pressed either                    *
+*       CTRL+C (if you run console kernel debugger) or,                       *
+*       CTRL+BREAK (if you run GUI kernel debugger),                          *
+*   on your debugger machine's keyboard.                                      *
+*                                                                             *
+*                   THIS IS NOT A BUG OR A SYSTEM CRASH                       *
+*                                                                             *
+* If you did not intend to break into the debugger, press the "g" key, then   *
+* press the "Enter" key now.  This message might immediately reappear.  If it *
+* does, press "g" and "Enter" again.                                          *
+*                                                                             *
+*******************************************************************************
+nt!RtlpBreakWithStatusInstruction:
+826ca110 cc              int     3
+kd> g
+
+*** Fatal System Error: 0x000000d1
+                       (0xFFE00000,0x00000002,0x00000008,0xFFDFFFFF)
+
+Break instruction exception - code 80000003 (first chance)
+
+A fatal system error has occurred.
+Debugger entered on first try; Bugcheck callbacks have not been invoked.
+
+A fatal system error has occurred.
+
+Connected to Windows 7 7601 x86 compatible target at (Mon Sep 25 13:25:04.920 2017 (UTC - 7:00)), ptr64 FALSE
+Loading Kernel Symbols
+...............................................................
+................................................................
+....
+Loading User Symbols
+
+Loading unloaded module list
+......Unable to enumerate user-mode unloaded modules, Win32 error 0n30
+*******************************************************************************
+*                                                                             *
+*                        Bugcheck Analysis                                    *
+*                                                                             *
+*******************************************************************************
+
+Use !analyze -v to get detailed debugging information.
+
+BugCheck D1, {ffe00000, 2, 8, ffdfffff}
+
+Probably caused by : srvnet.sys ( srvnet!SrvNetCommonReceiveHandler+94 )
+
+Followup:     MachineOwner
+---------
+
+nt!RtlpBreakWithStatusInstruction:
+826ca110 cc              int     3
+kd> kv
+ # ChildEBP RetAddr  Args to Child              
+00 82776d54 8272e083 00000003 c2e93594 00000065 nt!RtlpBreakWithStatusInstruction (FPO: [1,0,0])
+01 82776da4 8272eb81 00000003 ffe00000 ffdfffff nt!KiBugCheckDebugBreak+0x1c
+02 82777168 826905cb 0000000a ffe00000 00000002 nt!KeBugCheck2+0x68b
+03 82777168 ffdfffff 0000000a ffe00000 00000002 nt!KiTrap0E+0x2cf (FPO: [0,0] TrapFrame @ 82777188)
+WARNING: Frame IP not in any known module. Following frames may be wrong.
+04 827771f8 8c3bc290 00000000 00000000 00000420 0xffdfffff
+05 82777248 8c3ba204 ffdff020 00000273 00000273 srvnet!SrvNetCommonReceiveHandler+0x94 (FPO: [Non-Fpo])
+06 82777288 8c3bb5db ffdff020 00000001 84047c3b srvnet!SrvNetIndicateData+0x73 (FPO: [Non-Fpo])
+07 827772a4 826c7933 00000000 02000000 010cc010 srvnet!SrvNetWskReceiveComplete+0x72 (FPO: [Non-Fpo])
+08 827772ec 8b8fcb84 85811068 82777370 86e618b2 nt!IopfCompleteRequest+0x128
+09 827772f8 86e618b2 84047bc8 00000000 00000273 afd!WskProTLReceiveComplete+0x5e (FPO: [Non-Fpo])
+0a 82777370 86e4d417 85811068 00000000 83f4a270 tcpip!TcpCompleteClientReceiveRequest+0x1c (FPO: [Non-Fpo])
+0b 827773dc 86e4d49c 83f4a270 83f4a368 00000000 tcpip!TcpFlushTcbDelivery+0x1f6 (FPO: [Non-Fpo])
+0c 827773f8 86e5aa97 83f4a270 00000000 83f4a270 tcpip!TcpFlushRequestReceive+0x1c (FPO: [Non-Fpo])
+0d 82777434 86e78069 83f4a270 84b20410 83f4a270 tcpip!TcpDeliverFinToClient+0x37 (FPO: [Non-Fpo])
+0e 82777474 86eab700 83f4a270 83f4a368 85174628 tcpip!TcpDeliverReceive+0xf9 (FPO: [Non-Fpo])
+0f 8277750c 86ea9c9e 84b38d90 83f4a270 82777534 tcpip!TcpTcbCarefulDatagram+0x1738 (FPO: [Non-Fpo])
+10 82777578 86e8d2d8 84b38d90 83f4a270 007775ec tcpip!TcpTcbReceive+0x228 (FPO: [Non-Fpo])
+11 827775e0 86e8db0a 84b1c3a8 84b3600c 00000000 tcpip!TcpMatchReceive+0x237 (FPO: [Non-Fpo])
+12 82777630 86e5d878 84b38d90 84b3600c 000006f4 tcpip!TcpPreValidatedReceive+0x293 (FPO: [Non-Fpo])
+13 82777644 86e92c13 82777660 00000001 84b36008 tcpip!TcpNlClientReceivePreValidatedDatagrams+0x15 (FPO: [Non-Fpo])
+14 82777668 86e9315a 82777674 00000000 00000001 tcpip!IppDeliverPreValidatedListToProtocol+0x33 (FPO: [Non-Fpo])
+15 82777704 86e982dc 853df848 00000000 82784380 tcpip!IpFlcReceivePreValidatedPackets+0x479 (FPO: [Non-Fpo])
+16 8277772c 826d8654 00000000 c2e92fa4 84b1e2d8 tcpip!FlReceiveNetBufferListChainCalloutRoutine+0xfc (FPO: [Non-Fpo])
+17 82777794 86e9846c 86e981e0 827777bc 00000000 nt!KeExpandKernelStackAndCalloutEx+0x132
+18 827777d0 86cff18d 853eb802 85174600 00000000 tcpip!FlReceiveNetBufferListChain+0x7c (FPO: [Non-Fpo])
+19 82777808 86ced5be 853eb2e0 85174628 00000000 ndis!ndisMIndicateNetBufferListsToOpen+0x188 (FPO: [Non-Fpo])
+1a 82777830 86ced4b2 00000000 85174628 84d370e0 ndis!ndisIndicateSortedNetBufferLists+0x4a (FPO: [Non-Fpo])
+1b 827779ac 86c98c1d 84d370e0 00000000 00000000 ndis!ndisMDispatchReceiveNetBufferLists+0x129 (FPO: [Non-Fpo])
+1c 827779c8 86ced553 84d370e0 85174628 00000000 ndis!ndisMTopReceiveNetBufferLists+0x2d (FPO: [Non-Fpo])
+1d 827779f0 86c98c78 84d370e0 85174628 00000000 ndis!ndisMIndicateReceiveNetBufferListsInternal+0x62 (FPO: [Non-Fpo])
+1e 82777a18 8bbd4bf9 84d370e0 85174628 00000000 ndis!NdisMIndicateReceiveNetBufferLists+0x52 (FPO: [Non-Fpo])
+1f 82777a58 8bbd4d63 84e38000 85138480 00000000 netvsc60!ReceivePacketMessage+0x139 (FPO: [Non-Fpo])
+20 82777a80 8bbc8c9a 84e38000 85174730 851e8c48 netvsc60!RndisMIndicateReceive+0xe7 (FPO: [Non-Fpo])
+21 82777aa8 8bbc618f 84e3bcc0 851e8050 00000020 netvsc60!NvscVersion1HandleRndisSendMessage+0x6e (FPO: [Non-Fpo])
+22 82777ac8 8bbcc2a7 84d73018 851e8050 00000020 netvsc60!NvscKmclParseOtherPacket+0x4b (FPO: [Non-Fpo])
+23 82777af8 8bbcbe58 84d73018 84d5d8d8 00000002 netvsc60!IncomingDefaultParseOtherPacketBatch+0x30 (FPO: [Non-Fpo])
+24 82777b24 8bbcc378 84d7345c 84d73018 84d73018 netvsc60!IncomingParsePackets+0x216 (FPO: [Non-Fpo])
+25 82777b3c 8bbcc53d 00d73018 0000001e 00000000 netvsc60!IncomingStateMachine+0x84 (FPO: [Non-Fpo])
+26 82777b50 8bbccc41 84d73018 0000001e 00000001 netvsc60!IncomingPollForWork+0xc1 (FPO: [Non-Fpo])
+27 82777b78 826c71b5 84d7315c 84d73018 00000001 netvsc60!PollingDpcRoutine+0xdb (FPO: [Non-Fpo])
+28 82777bd4 826c7018 8277ad20 82784380 00000000 nt!KiExecuteAllDpcs+0xf9
+29 82777c20 826c6e38 00000000 0000000e 00000000 nt!KiRetireDpcList+0xd5
+2a 82777c24 00000000 0000000e 00000000 00000000 nt!KiIdleLoop+0x38 (FPO: [0,0,0])
+kd> kvnf
+ #   Memory  ChildEBP RetAddr  Args to Child              
+00           82776d54 8272e083 00000003 c2e93594 00000065 nt!RtlpBreakWithStatusInstruction (FPO: [1,0,0])
+01        50 82776da4 8272eb81 00000003 ffe00000 ffdfffff nt!KiBugCheckDebugBreak+0x1c
+02       3c4 82777168 826905cb 0000000a ffe00000 00000002 nt!KeBugCheck2+0x68b
+03         0 82777168 ffdfffff 0000000a ffe00000 00000002 nt!KiTrap0E+0x2cf (FPO: [0,0] TrapFrame @ 82777188)
+WARNING: Frame IP not in any known module. Following frames may be wrong.
+04        90 827771f8 8c3bc290 00000000 00000000 00000420 0xffdfffff
+05        50 82777248 8c3ba204 ffdff020 00000273 00000273 srvnet!SrvNetCommonReceiveHandler+0x94 (FPO: [Non-Fpo])
+06        40 82777288 8c3bb5db ffdff020 00000001 84047c3b srvnet!SrvNetIndicateData+0x73 (FPO: [Non-Fpo])
+07        1c 827772a4 826c7933 00000000 02000000 010cc010 srvnet!SrvNetWskReceiveComplete+0x72 (FPO: [Non-Fpo])
+08        48 827772ec 8b8fcb84 85811068 82777370 86e618b2 nt!IopfCompleteRequest+0x128
+09         c 827772f8 86e618b2 84047bc8 00000000 00000273 afd!WskProTLReceiveComplete+0x5e (FPO: [Non-Fpo])
+0a        78 82777370 86e4d417 85811068 00000000 83f4a270 tcpip!TcpCompleteClientReceiveRequest+0x1c (FPO: [Non-Fpo])
+0b        6c 827773dc 86e4d49c 83f4a270 83f4a368 00000000 tcpip!TcpFlushTcbDelivery+0x1f6 (FPO: [Non-Fpo])
+0c        1c 827773f8 86e5aa97 83f4a270 00000000 83f4a270 tcpip!TcpFlushRequestReceive+0x1c (FPO: [Non-Fpo])
+0d        3c 82777434 86e78069 83f4a270 84b20410 83f4a270 tcpip!TcpDeliverFinToClient+0x37 (FPO: [Non-Fpo])
+0e        40 82777474 86eab700 83f4a270 83f4a368 85174628 tcpip!TcpDeliverReceive+0xf9 (FPO: [Non-Fpo])
+0f        98 8277750c 86ea9c9e 84b38d90 83f4a270 82777534 tcpip!TcpTcbCarefulDatagram+0x1738 (FPO: [Non-Fpo])
+10        6c 82777578 86e8d2d8 84b38d90 83f4a270 007775ec tcpip!TcpTcbReceive+0x228 (FPO: [Non-Fpo])
+11        68 827775e0 86e8db0a 84b1c3a8 84b3600c 00000000 tcpip!TcpMatchReceive+0x237 (FPO: [Non-Fpo])
+12        50 82777630 86e5d878 84b38d90 84b3600c 000006f4 tcpip!TcpPreValidatedReceive+0x293 (FPO: [Non-Fpo])
+13        14 82777644 86e92c13 82777660 00000001 84b36008 tcpip!TcpNlClientReceivePreValidatedDatagrams+0x15 (FPO: [Non-Fpo])
+14        24 82777668 86e9315a 82777674 00000000 00000001 tcpip!IppDeliverPreValidatedListToProtocol+0x33 (FPO: [Non-Fpo])
+15        9c 82777704 86e982dc 853df848 00000000 82784380 tcpip!IpFlcReceivePreValidatedPackets+0x479 (FPO: [Non-Fpo])
+16        28 8277772c 826d8654 00000000 c2e92fa4 84b1e2d8 tcpip!FlReceiveNetBufferListChainCalloutRoutine+0xfc (FPO: [Non-Fpo])
+17        68 82777794 86e9846c 86e981e0 827777bc 00000000 nt!KeExpandKernelStackAndCalloutEx+0x132
+18        3c 827777d0 86cff18d 853eb802 85174600 00000000 tcpip!FlReceiveNetBufferListChain+0x7c (FPO: [Non-Fpo])
+19        38 82777808 86ced5be 853eb2e0 85174628 00000000 ndis!ndisMIndicateNetBufferListsToOpen+0x188 (FPO: [Non-Fpo])
+1a        28 82777830 86ced4b2 00000000 85174628 84d370e0 ndis!ndisIndicateSortedNetBufferLists+0x4a (FPO: [Non-Fpo])
+1b       17c 827779ac 86c98c1d 84d370e0 00000000 00000000 ndis!ndisMDispatchReceiveNetBufferLists+0x129 (FPO: [Non-Fpo])
+1c        1c 827779c8 86ced553 84d370e0 85174628 00000000 ndis!ndisMTopReceiveNetBufferLists+0x2d (FPO: [Non-Fpo])
+1d        28 827779f0 86c98c78 84d370e0 85174628 00000000 ndis!ndisMIndicateReceiveNetBufferListsInternal+0x62 (FPO: [Non-Fpo])
+1e        28 82777a18 8bbd4bf9 84d370e0 85174628 00000000 ndis!NdisMIndicateReceiveNetBufferLists+0x52 (FPO: [Non-Fpo])
+1f        40 82777a58 8bbd4d63 84e38000 85138480 00000000 netvsc60!ReceivePacketMessage+0x139 (FPO: [Non-Fpo])
+20        28 82777a80 8bbc8c9a 84e38000 85174730 851e8c48 netvsc60!RndisMIndicateReceive+0xe7 (FPO: [Non-Fpo])
+21        28 82777aa8 8bbc618f 84e3bcc0 851e8050 00000020 netvsc60!NvscVersion1HandleRndisSendMessage+0x6e (FPO: [Non-Fpo])
+22        20 82777ac8 8bbcc2a7 84d73018 851e8050 00000020 netvsc60!NvscKmclParseOtherPacket+0x4b (FPO: [Non-Fpo])
+23        30 82777af8 8bbcbe58 84d73018 84d5d8d8 00000002 netvsc60!IncomingDefaultParseOtherPacketBatch+0x30 (FPO: [Non-Fpo])
+24        2c 82777b24 8bbcc378 84d7345c 84d73018 84d73018 netvsc60!IncomingParsePackets+0x216 (FPO: [Non-Fpo])
+25        18 82777b3c 8bbcc53d 00d73018 0000001e 00000000 netvsc60!IncomingStateMachine+0x84 (FPO: [Non-Fpo])
+26        14 82777b50 8bbccc41 84d73018 0000001e 00000001 netvsc60!IncomingPollForWork+0xc1 (FPO: [Non-Fpo])
+27        28 82777b78 826c71b5 84d7315c 84d73018 00000001 netvsc60!PollingDpcRoutine+0xdb (FPO: [Non-Fpo])
+28        5c 82777bd4 826c7018 8277ad20 82784380 00000000 nt!KiExecuteAllDpcs+0xf9
+29        4c 82777c20 826c6e38 00000000 0000000e 00000000 nt!KiRetireDpcList+0xd5
+2a         4 82777c24 00000000 0000000e 00000000 00000000 nt!KiIdleLoop+0x38 (FPO: [0,0,0])
