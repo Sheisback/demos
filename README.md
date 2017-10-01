@@ -86,7 +86,9 @@ Software:<br>
 
 # Other:
 * <html><a href="http://processhacker.sourceforge.net/doc/struct___p_r_o_c_e_s_s___h_a_n_d_l_e___t_a_b_l_e___e_n_t_r_y___i_n_f_o.html">data struct</a></html>.<br>
+* <html><a href="https://www.zynamics.com/software.html">diffing (bindiff)</a></html>.<br>
 * <html><a href="https://github.com/joxeankoret/diaphora">diffing (diaphora)</a></html>.<br>
+
 
 # See Also:
 * <html><a href="https://github.com/akayn/demos/tree/master/Win10/SmepByPassWin10x64build.16281Rs3">Smep PoC</a></html>.<br>
