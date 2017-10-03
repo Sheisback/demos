@@ -3,13 +3,13 @@
 
 	LeakPal.cc
   
-  This module is a gdi port of arbitrary r/w to rs3, for more information reffer to:
-  https://github.com/akayn/demos/blob/master/Win10/BitMap_Win_10_15063.0.amd64fre.rs2_release.170317-1834/GdiExp.cc
+  	This module is a gdi port of arbitrary r/w to rs3, for more information reffer to:
+  	https://github.com/akayn/demos/blob/master/Win10/BitMap_Win_10_15063.0.amd64fre.rs2_release.170317-1834/GdiExp.cc
   
-  ! See The Offsets....
+  	! See The Offsets....
 	
 	ref: https://labs.bluefrostsecurity.de/files/Abusing_GDI_for_ring0_exploit_primitives_Evolution_Slides.pdf
-	
+	https://github.com/sensepost/gdi-palettes-exp/
 <---- 
  
 	Copy & usage of this software are allowed without any restrictions.
@@ -26,14 +26,10 @@
 
 
 #pragma once
-#include "stdafx.h"
 #include <Windows.h>
 #include <stdio.h>
 #include <cstdint>
 #include <conio.h>
-
-int count = 0;
-
 
 #pragma comment(lib, "Gdi32.lib")
 
