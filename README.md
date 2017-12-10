@@ -1,4 +1,4 @@
-for Q/A:
+
 twitter: @_akayn
 
 # Windows Kernel Exploitation.
@@ -28,31 +28,12 @@ Mitigations Bypass:<br>
 <html><a href="https://github.com/akayn/demos/tree/master/Win10">Click Here!</a></html><br>
 * [RS3-Compatible] ROP Based SMEP Bypass including Gadgets & full debugging info: <html><a href="https://github.com/akayn/demos/blob/master/Win10/SmepByPassWin10x64build.16281Rs3/SmepBypassX64Win10RS3.c">SmepBypassX64Win10RS3.c</a></html><br>
 * [<= RS2-Compatible] BitMap Arbitrary OverWrite: <html><a href="https://github.com/akayn/demos/blob/master/Win10/BitMap_Win_10_15063.0.amd64fre.rs2_release.170317-1834/GdiExp.cc">GdiExp.cc</a></html><br>
-* [!] NOTE: the above is not stable & will work 1/3 in the good case...
-	i will fix in the future.
+
 	
 # tutorial:
 * Rop tutorial: <html><a href="https://github.com/akayn/demos/tree/master/Tutorials">Click Here!</a></html><br>
 
-# Case Studies
-Re & exploits:<br>
-* Study Case's:<br>
-	RCE:<br>
-	[+] <html><a href="https://github.com/akayn/demos/tree/master/TestCases/MS17-010">MS17-010</a></html><br>
-	[^] Under Construction<br>
-	Other Bug Classes:<br>
-	TODO<br>
-	...<br>
-	...<br><br>
-
 # External Resources:
-* Memory-Management:<br>
-	[+] <html><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-088-introduction-to-c-memory-management-and-c-object-oriented-programming-january-iap-2010/lecture-notes/">MIT</a></html>.<br>
-* C programming:<br>
-	[+] <html><a href="https://github.com/jamesroutley/write-a-hash-table">HASH TABLE</a></html>.<br>
-* asseambly:<br>
-	[+] <html><a href="https://www-s.acm.illinois.edu/sigwin/old/workshops/winasmtut.pdf">TUT</a></html>.<br>
-
 * HEVD & Basics:<br>
 	[+] <html><a href="https://github.com/hacksysteam/HackSysExtremeVulnerableDriver">HackSysExtremeVulnerableDriver</a></html>.<br>
 	[+] <html><a href="http://www.fuzzysecurity.com/tutorials.html">B33F tuto</a></html>.<br>
@@ -69,13 +50,6 @@ Re & exploits:<br>
 		* <html><a href="https://github.com/MortenSchenk/BHUSA2017">Morten Schenk</a></html>.<br>
 	[+] ReadWrite Primitives: <br>
 		* <html><a href="https://sensepost.com/blog/2017/abusing-gdi-objects-for-ring0-primitives-revolution/">abusing gdi objects</a></html>.<br>
-
-Tools:<br>
-* <html><a href="https://github.com/CoreSecurity/Agafi">gadget finder</a></html>.<br>
-* <html><a href="https://github.com/akayn/GDIObjDump">gdi-dump windbg extension</a></html>.<br>
-* <html><a href="http://www.iceswordlab.com/2017/06/14/Automatically-Discovering-Windows-Kernel-Information-Leak-Vulnerabilities_en/">digtool fuzzer</a></html>.<br>
-* <html><a href="https://github.com/akayn/winafl">winafl</a></html>.<br>
-
 
 Software:<br>
 * <html><a href="https://developer.microsoft.com/en-us/windows/hardware/windows-driver-kit">kd</a></html>.<br>
