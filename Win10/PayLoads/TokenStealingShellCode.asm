@@ -1,5 +1,6 @@
 ; compie with nasm:
 ; nasm.exe sc.asm
+; open with Hxd to get the bytes sequence (e.g the shellcode..).
 ;
 ;	Token Stealing Payload
 ;	Win10 x64 RS3 16281.
