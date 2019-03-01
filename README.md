@@ -71,5 +71,5 @@ many tnx to all the great ppl b4 me that did much work already!<br>
 
 about author:
 
-twitter: @_akayn
-
+twitter: @_akayn<br>
+paypal.me/theakayn<br>
