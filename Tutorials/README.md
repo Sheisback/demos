@@ -25,7 +25,7 @@ Well if you can simply write the shellcode as is then it is far easy to do that,
 so if we will simply try to exploit a stack overflow like we did on windows 7, we will get this outcome:<br>
 ![](/Tutorials/SMEPDEBUG/bsod.PNG)
 
-so the main idea in rop is to make the execution flow throw a kernel executable address that can pass the check until we can execute our own payload.<br>
+so the main purpose in this exampled rop chain is to make the execution flow throw a kernel executable address that can pass the check until we can execute our own payload.<br>
 # enough talk lets debug!!!
 assuming that you have set up the environment as stated above, and you have a working machine, then open an administrator command, and type as follow:
 ![](/Tutorials/SMEPDEBUG/load.PNG)
